@@ -1,0 +1,31 @@
+
+
+.comment{
+    background-color: lightgray;
+    height: auto;
+    min-height: 70px;
+    padding: 4px;
+    border: 1px solid;
+    margin-top: 5px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.commentHeader{
+    height: auto;
+    font-weight: bold;
+    padding: 3px 3px;
+}
+.commentHeader span{
+    margin-top: -2;
+    margin-left: 5px;
+}
+.comment p{
+    margin-top: 5px;
+}
+
+.delete{
+    width: 40px;
+    height: 40px;
+    margin-left: 80%;  
+}

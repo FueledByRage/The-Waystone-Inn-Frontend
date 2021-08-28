@@ -1,0 +1,74 @@
+.logon-div{
+    width: 100%;
+    max-width: 1120px;
+    height: 100vh;
+
+
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logon-div section.form{
+    border-radius: 20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    justify-content: space-around;
+
+    height: auto;
+    min-height: 70%;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.logon-div section.form div.text{
+
+    margin-top: 5%;
+    margin-bottom: 3%;
+    top: 30%;
+
+}
+
+.logon-div section.form form input{
+    width: 90%;
+    padding: 14px 10px;
+    text-align: left;
+    font-size: 15px;
+    margin: 20px auto;
+    border: none;
+    border-bottom: 2px solid silver;
+}
+
+.logon-div section.form form label{
+
+    color: #F33850;
+    top: 29%;
+    left: 45px;
+    position: absolute;
+    pointer-events: none;
+    transform-origin: 0 0;
+}
+
+.logon-div section.form form label.password{
+
+    color: #F33850;
+    position: absolute;
+    pointer-events: none;
+    transform-origin: 0 0;
+    top: 48%;
+    left: 45px;
+}
+
+.logon-div section.form form input:focus + label, input:not(:placeholder-shown) + label{
+    transform: translateY(-22px) scale(0.8);
+}
+
+.logon-div section.form form input::placeholder{
+    color: transparent;
+}

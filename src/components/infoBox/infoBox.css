@@ -1,0 +1,19 @@
+.communityInfo{
+    background-color: white;
+    width: 20%;
+    height: auto;
+    min-height: 150px;
+    position: absolute;
+    padding: 15px;
+    margin-left: 70%;
+    margin-top: 5%;
+}
+
+.date{
+    font-weight: bold;
+    margin-top: 10px;
+}
+.date span{
+    size: 2px;
+    margin-left: 2px;
+}

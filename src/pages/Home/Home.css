@@ -1,0 +1,6 @@
+.home-div {
+    display: grid;
+    text-align: center;
+    margin-top: 0px;
+    align-content: space-between;
+}
