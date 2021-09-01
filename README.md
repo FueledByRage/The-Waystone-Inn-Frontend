@@ -12,6 +12,11 @@ Instead of making a simpler CRUD for my portfolio this is my attempt to a more i
 It's UI is quite poor since frontend is not my comfort zone and it's in a early development stage.
 
 
+# Screens
+![Login screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/login.png)
+![Community screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/community.png)
+![Post screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/post.png)
+
 By: [Erik](https://www.linkedin.com/in/erik-natan-moreira-santos-983865195/)
 
 
