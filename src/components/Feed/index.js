@@ -1,31 +1,42 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, Navigate, Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import api from '../../services/api'
-import privateRoute from '../../services/private'
-import { getToken, isLogged, getSubs } from '../../storage/utils'
+import { getSubs } from '../../storage/utils'
 import './Feed.css'
 
 
-export default function Feed(){
+export default function Feed(props){
 
     const [ posts, setPosts ] = useState({})
     const [ error, setError ] = useState(null)
-
-    const subs = getSubs()
+    const subs = Array.from(JSON.parse(getSubs()))
+    let  isLastPage = false
+    const { pageCount } = props
+    const [ page, setPage ] = useState(parseInt(pageCount))
 
     useEffect( async ()=>{
 
         let isCancelled = false
 
-        const subs = Array.from(JSON.parse(getSubs()))
-        api.post('/posts', { subs }).then((response) => {
-            console.log(response.data)
-            if(!isCancelled) setPosts(response.data)}
-            ).catch((error)=>setError(error.response.data.message))
+            api.post(`/posts/`, { subs, page }).then((response) => {
+                if(!isCancelled) setPosts(response.data['docs'])}
+                ).catch((error)=>setError(error.response.data.message))
             return () => {
                 isCancelled = true
             }
     },[])
+
+    async function handlePosts(nextMod){
+
+        api.post(`/posts/`, { subs, page, nextMod }).then((response) => {
+            setPosts(response.data['docs'])
+            setPage(response.data['page'])
+            console.log(response.data['lastPage'])
+            isLastPage = response.data['lastPage']
+        }
+        ).catch((error)=>setError(error.message))
+    }
+
 
 
     return(
@@ -42,6 +53,7 @@ export default function Feed(){
                     </li>
                 ))}
             </ul>}
+            <footer className='buttons'><button disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handlePosts(1)} >Next</button> </footer>
         </div>
     )
 }

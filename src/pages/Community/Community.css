@@ -73,3 +73,12 @@ button{
     font-size: small;
     text-align: end;
 }
+
+.buttons{
+    margin-top: 10px;
+    display: flex;
+}
+
+.buttons .next{
+    margin-left: 65%;
+}

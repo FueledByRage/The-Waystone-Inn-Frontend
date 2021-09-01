@@ -26,7 +26,6 @@ export default function Register(){
 
         try {
             if(email == '' || user == '' || email || '' || password == '' || confirmPassword == '') return setError('Missing data!')
-            if(email == '' || user == '' || email || '' || password == '' || confirmPassword == '') console.log(email, user, name, password, confirmPassword)
             
             const response = await api.post('/user/register', {name, user, email, password})
 

@@ -9,7 +9,7 @@ export default function HomePage(){
         <div className='home-div'>
             <section>
             <h1> Home page here!</h1>
-            <Feed />
+            <Feed pageCount={1}/>
             </section>
 
         </div>

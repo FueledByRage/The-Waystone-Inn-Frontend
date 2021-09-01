@@ -21,7 +21,7 @@ export default function RoutesList(){
                 <PrivateRoute path='/' element={<HomePage />} />               
                 <Route path="/register" element={<Register />}/>
                 <PrivateRoute path="/register/community" element={<RegisterCommunity />}/>
-                <Route path='/community/:id' element={<Community/>}/>
+                <Route path='/community/:id/:page' element={<Community/>}/>
                 <Route path='/post/:id' element={<Post />}/>
 
 

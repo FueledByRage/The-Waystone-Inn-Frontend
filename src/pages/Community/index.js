@@ -10,19 +10,19 @@ import './Community.css'
 
 export default function Community(props){
 
-
-    const [ logged, setLogged ] = useState(false)
     const [ error, setError ] = useState(null)
     const [ errorData, setErrorData ] = useState(null)
     const [ errorPosts, setErrorPosts ] = useState(null)
     const [ data, setData ] = useState({})
     const [ posts, setPosts ] = useState({})
     const [ subscribed, setSub] = useState(false)
-    const { id } = useParams()
+    const { id, page } = useParams()
     const token = getToken()
     const  [ title, setTitle ] = useState('')
     const  [ body, setBody ] = useState('')
     const navigate = useNavigate()
+    let isLastPage
+    let parsePage = parseInt(page)
 
 
      useEffect(async ()=>{
@@ -31,11 +31,12 @@ export default function Community(props){
         
         if(token) setSub(subs.includes(id))
 
-        await api.get(`community/${id}`).then((response)=>{
+        await api.get(`/community/${id}/${parsePage}`).then((response)=>{
             
             if(!isCancelled){
-                setData(response.data["Community"])
+                setData(response.data['Community'])
                 setPosts(response.data['Posts'])
+                isLastPage = response.data['lastPage']
             }
 
         }).catch((error) => setErrorData(error.response.data.message))
@@ -45,7 +46,6 @@ export default function Community(props){
     }, [])
 
     async function sub(){
-        console.log('here')
         
         api.post('/community/sub',{ token, id }).then((response) => {
             setSubs(response.data.subs)
@@ -59,13 +59,19 @@ export default function Community(props){
 
         e.preventDefault()
 
-        if(token == null) setError("You must be logged to post something!")
+        if(!isLogged()) setError("You must be logged to post something!")
         try {
             await api.post('/post/register', { title, body, token, id  })
             navigate('/')
         } catch (e) {
-            setError(e.response.data.message)
+            setError(e.message)
         }
+    }
+
+    function handleNavegate(c){
+        parsePage += c
+        navigate(`/community/${id}/${parsePage}`)
+        window.location.reload()
     }
 
     if(errorData) return( <h1>{errorData}</h1> )
@@ -75,6 +81,7 @@ export default function Community(props){
 
         return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`
     }
+    
 
     return(
         <div className='communityBody'>
@@ -115,6 +122,7 @@ export default function Community(props){
                         </div>
                     ))
                 }
+                <footer className='buttons'><button disabled = { parsePage == 1 } onClick={() => handleNavegate(-1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handleNavegate(1)} >Next</button> </footer>
             </div>
             <InfoBox community={data}/>
                    
