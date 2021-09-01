@@ -14,10 +14,8 @@ export default function Comments(props){
     useEffect(async () =>{
         let isCancelled = false
 
-        await api.get(`/comments/${props.id}`).then((response) => {
-        
-        if(!isCancelled) setData(response.data) }).catch((error) => setError(error.message))
-
+        const response = await api.get(`/comments/${props.id}`).catch((error) => setError(error.message))
+        if(!isCancelled) setData(response.data) 
         return () => {
             isCancelled = true
         }
@@ -26,12 +24,11 @@ export default function Comments(props){
 
     async function handleDelete(id){
 
-            await api.delete(`/comment/deleteComment/${id}`).then((response) =>{
-                window.location.reload()
-            }).catch((error) =>{
+            await api.delete(`/comment/deleteComment/${id}`).catch((error) =>{
                 setError(error.message)
             })
-        
+            window.location.reload()
+            
     }
 
     return(

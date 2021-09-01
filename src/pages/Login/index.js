@@ -41,9 +41,7 @@ export default function Login(){
         navigate('/')
         window.location.reload()
         }catch(error){
-
-            setError(error.response.data.message)
-
+            setError(error.message)
         }
     }
     return(

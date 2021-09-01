@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import  InfoBox  from '../../components/infoBox'
 import { useParams } from 'react-router-dom'
 import api from '../../services/api'
-import { getToken, getSubs, isLogged, getUser } from '../../storage/utils'
+import { getToken, getUser } from '../../storage/utils'
 import Comments from '../../components/Comments'
 import { FiTrash } from 'react-icons/fi'
 import './Post.css'
@@ -24,31 +24,25 @@ export default function Post(props){
 
     useEffect(async ()=>{
         let isCancelled = false
-        await api.get(`/post/${id}`).then((response) => {
-            
-            if(!isCancelled){            
-                setData(response.data)
-                setDate(new Date(response.data.communityId.date))
-            }
-
+        const response = await api.get(`/post/${id}`).catch((error)=> {
+            setError(error.message)})
+        if(!isCancelled){            
+            setData(response.data)
+            setDate(new Date(response.data.communityId.date))}
         return () => {
             isCancelled = true
         }
-
-        }).catch((error)=> {
-                setError(error.message)} )
     }, [])
 
     async function handleSubmit(){
-        await api.post('/comment/register', { token, id, comment }).then((response) => window.location.reload()).catch((e)=>setError(e.response.data.message))
+        await api.post('/comment/register', { token, id, comment }).catch((error)=>setError(error.message))
+        window.location.reload()
     }
 
     async function handleDelete(){
 
-        await api.delete(`/post/deletePost/${id}`).then((response) => navigate(`/${response.data.id}`))
-        .catch((error) =>{
-            setError(error)
-        })
+       const response = await api.delete(`/post/deletePost/${id}`).catch((error) =>{ setError(error.message)})
+        navigate(`/${response.data.id}`)
     }
 
     if(!data || !date) return(<h1>{error}</h1>)

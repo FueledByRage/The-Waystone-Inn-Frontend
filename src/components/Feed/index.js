@@ -18,9 +18,8 @@ export default function Feed(props){
 
         let isCancelled = false
 
-            api.post(`/posts/`, { subs, page }).then((response) => {
-                if(!isCancelled) setPosts(response.data['docs'])}
-                ).catch((error)=>setError(error.response.data.message))
+            const response = await api.post(`/posts/`, { subs, page }).catch((error)=>setError(error.response.data.message))
+            if(!isCancelled) setPosts(response.data['docs'])
             return () => {
                 isCancelled = true
             }
@@ -28,14 +27,11 @@ export default function Feed(props){
 
     async function handlePosts(nextMod){
 
-        api.post(`/posts/`, { subs, page, nextMod }).then((response) => {
-            setPosts(response.data['docs'])
-            setPage(response.data['page'])
-            console.log(response.data['lastPage'])
-            isLastPage = response.data['lastPage']
-        }
-        ).catch((error)=>setError(error.message))
-    }
+    const response = await api.post(`/posts/`, { subs, page, nextMod }).catch((error)=>setError(error.message))
+    setPosts(response.data['docs'])
+    setPage(response.data['page'])
+    isLastPage = response.data['lastPage']
+}
 
 
 

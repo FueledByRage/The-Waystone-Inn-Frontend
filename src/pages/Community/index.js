@@ -63,8 +63,8 @@ export default function Community(props){
         try {
             await api.post('/post/register', { title, body, token, id  })
             navigate('/')
-        } catch (e) {
-            setError(e.message)
+        } catch (error) {
+            setError(error.message)
         }
     }
 
