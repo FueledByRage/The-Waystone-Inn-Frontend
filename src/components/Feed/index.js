@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import api from '../../services/api'
 import { getSubs } from '../../storage/utils'
-import './Feed.css'
+import StyledLink from '../Link/Link'
 
+import './Feed.css'
 
 export default function Feed(props){
 
@@ -28,6 +29,7 @@ export default function Feed(props){
     async function handlePosts(nextMod){
 
     const response = await api.post(`/posts/`, { subs, page, nextMod }).catch((error)=>setError(error.message))
+    console.log(response)
     setPosts(response.data['docs'])
     setPage(response.data['page'])
     isLastPage = response.data['lastPage']
@@ -43,9 +45,9 @@ export default function Feed(props){
                 {
                 Array.from(posts).map( post => (
                     <li key={post.id}>
-                        <div className='title'><Link to={`/post/${post._id}`}><h3>{post.title}</h3></Link></div>
+                        <div className='title'><StyledLink to={`/post/${post._id}`}><h3>{post.title}</h3></StyledLink></div>
                         <p>{post.body}</p>
-                        <div className='footer'> { post.authorId.user } </div>
+                        <div className='footer'> <StyledLink to = {`/profile/${post.authorId.user}`}> { post.authorId.user } </StyledLink></div>
                     </li>
                 ))}
             </ul>}

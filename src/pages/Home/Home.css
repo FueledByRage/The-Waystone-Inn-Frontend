@@ -1,6 +1,36 @@
 .home-div {
-    display: grid;
+    display: flex;
+    margin-left: 20%;
     text-align: center;
     margin-top: 0px;
-    align-content: space-between;
+
+}
+
+aside{
+    margin-left: 10%;
+    margin-top: 6%;
+    width: 20%;
+}
+
+.communities{
+    background-color: white;
+    padding: 5px;
+    width: 100%;
+    height: 30%;
+    display: grid;
+    border-radius: 4px;
+}
+.community{
+    margin-top: 1px;
+    display: flex;
+
+}
+.community h3{
+
+    margin-left: 10%;
+}
+.icon{
+
+    width: 10%;
+    margin-left: 0px;
 }

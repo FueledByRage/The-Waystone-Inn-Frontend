@@ -1,0 +1,15 @@
+.profile{
+    margin-top: 5%;
+    margin-left: 35%;
+    background-color:whitesmoke;
+    max-width: 40%;
+    padding: 10px;
+}
+
+.profile h3{
+    color: rgb(148, 143, 143);
+}
+
+.created{
+    margin-top: 2%;
+}

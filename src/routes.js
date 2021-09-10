@@ -10,6 +10,7 @@ import { isLogged } from './storage/utils'
 import Community from './pages/Community/'
 import ErrorPage from './pages/ErrorPage'
 import Post from './pages/Post/'
+import ProfilePage from './pages/Profile'
 
 
 export default function RoutesList(){
@@ -23,7 +24,7 @@ export default function RoutesList(){
                 <PrivateRoute path="/register/community" element={<RegisterCommunity />}/>
                 <Route path='/community/:id/:page' element={<Community/>}/>
                 <Route path='/post/:id' element={<Post />}/>
-
+                <PrivateRoute path='/profile/:user' element={<ProfilePage />}/>
 
             </Routes>
         </BrowserRouter>

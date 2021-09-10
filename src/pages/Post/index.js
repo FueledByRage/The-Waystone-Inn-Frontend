@@ -1,11 +1,12 @@
-import React, { useEffect, useState, setState }from 'react'
+import React, { useEffect, useState }from 'react'
 import { useNavigate } from 'react-router'
 import  InfoBox  from '../../components/infoBox'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import api from '../../services/api'
 import { getToken, getUser } from '../../storage/utils'
 import Comments from '../../components/Comments'
 import { FiTrash } from 'react-icons/fi'
+import StyledLink from '../../components/Link/Link'
 import './Post.css'
 
 
@@ -16,7 +17,6 @@ export default function Post(props){
     const [ errorSubmit, setErrorSubmit ] = useState(null)
     const [ errorComments, setErrorComments ] = useState(null)
     const { id } = useParams()
-    const [ comments, setComments ] = useState(null)
     const [ comment, setComment ] = useState('')
     const token = getToken()
     const navigate = useNavigate()
@@ -26,6 +26,7 @@ export default function Post(props){
         let isCancelled = false
         const response = await api.get(`/post/${id}`).catch((error)=> {
             setError(error.message)})
+
         if(!isCancelled){            
             setData(response.data)
             setDate(new Date(response.data.communityId.date))}
@@ -54,11 +55,13 @@ export default function Post(props){
                     <div className='postBody'>
                         <div> 
                             <div className='header'>
-                                <h3>{data.title}</h3>
+                                <h2>{data.title}</h2>
                                 { toString(data.authorId.user) == toString(getUser()) ? <button onClick={handleDelete} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
                             </div>
                             <span>{data.body}</span>
+
                         </div>
+                        <div className='author'> <StyledLink to={`/profile/${data.authorId.user}`} ><span>{data.authorId.user}</span></StyledLink></div>
                     </div>
 
                 }
@@ -79,7 +82,7 @@ export default function Post(props){
                 </div>
                 <div className='commentsBox'>
                 {
-                    comments ? <h1>{'Theres no comments'}</h1> : 
+                   
                     <div className='comment'>
                         <Comments id={id}/>
                     </div>  

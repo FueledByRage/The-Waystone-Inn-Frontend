@@ -2,7 +2,7 @@ import React, { useEffect, useState }from 'react'
 import { useNavigate } from 'react-router'
 import { useParams, Link } from 'react-router-dom'
 import api from '../../services/api'
-import { getToken, getSubs, isLogged, removeSub, setSubs } from '../../storage/utils'
+import { getToken, getSubs, isLogged, setSubs } from '../../storage/utils'
 import InfoBox from '../../components/infoBox'
 import './Community.css'
 

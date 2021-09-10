@@ -25,7 +25,7 @@ export default function Register(){
         if(password != confirmPassword) return setError('The passwords must be the same')
 
         try {
-            if(email == '' || user == '' || email || '' || password == '' || confirmPassword == '') return setError('Missing data!')
+            if(email == '' || user == '' || email == '' || password == '' || confirmPassword == '') return setError('Missing data!')
             
             const response = await api.post('/user/register', {name, user, email, password})
 
