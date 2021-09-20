@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../../services/api";
 import { FiCalendar } from 'react-icons/fi'
+import { StyledAvatar } from "../../components/UploadAvatar/StyledAvatar";
+import StyledLink from '../../components/Link/Link'
 import './Profile.css'
+
 
 
 export default function ProfilePage(props){
@@ -13,7 +16,6 @@ export default function ProfilePage(props){
 
     useEffect(async ()=>{
         const response = await api.get(`/user/get/${user}`).catch((error)=>{ setError(error) })
-        console.log(response)
         setData(response.data)
     },[])
 
@@ -29,6 +31,8 @@ export default function ProfilePage(props){
             {
                 error || !data ? <h1>{error}</h1> : 
                 <div className = 'profile'>
+                    <StyledAvatar src={data.profileURL}/> 
+                    <StyledLink to={`/${data.user}/edit`}><p>Editar</p></StyledLink>
                     <h1>{data.user}</h1>
                     <h3>{data.name}</h3>
                     <div className = 'created'><span><FiCalendar /> Joined: {getDate(data.date)}</span></div>

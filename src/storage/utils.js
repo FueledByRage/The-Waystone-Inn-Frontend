@@ -26,7 +26,7 @@ export const removeUserSession = () => {
 
 export const setUserSession = (token, user, subs) => {
     sessionStorage.setItem('token', token)
-    sessionStorage.setItem('user', JSON.stringify(user))
+    sessionStorage.setItem('user', user)
     sessionStorage.setItem('subs', JSON.stringify(subs))
   }
 

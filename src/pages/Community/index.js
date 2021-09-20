@@ -5,6 +5,8 @@ import api from '../../services/api'
 import { getToken, getSubs, isLogged, setSubs } from '../../storage/utils'
 import InfoBox from '../../components/infoBox'
 import './Community.css'
+import Upload from '../../components/Upload'
+import { DropContainer } from '../../components/Upload/DropContainer'
 
 
 
@@ -20,6 +22,8 @@ export default function Community(props){
     const token = getToken()
     const  [ title, setTitle ] = useState('')
     const  [ body, setBody ] = useState('')
+    const [file, setFile ] = useState(null)
+    const [loading, setLoading ] = useState(null)
     const navigate = useNavigate()
     let isLastPage
     let parsePage = parseInt(page)
@@ -55,14 +59,23 @@ export default function Community(props){
 
     async function handleSubmit(e){
 
+
         if(title == '' || body == '') return setError('Post fields cannot be empty!')
 
+
+
         e.preventDefault()
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('body', body)
+        formData.append('token', token)
+        formData.append('id', id)
+        formData.append('file', file)
 
         if(!isLogged()) setError("You must be logged to post something!")
         try {
-            await api.post('/post/register', { title, body, token, id  })
-            navigate('/')
+            const response = await api.post('/post/register', formData).catch((error) =>{ throw error })
+            navigate(`/post/${response.data._id}`)
         } catch (error) {
             setError(error.message)
         }
@@ -82,6 +95,9 @@ export default function Community(props){
         return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`
     }
     
+    function handleFile(files){ setFile(files[0]) }
+
+
 
     return(
         <div className='communityBody'>
@@ -99,13 +115,15 @@ export default function Community(props){
             placeholder='Title'
             onChange = {e => setTitle(e.target.value)}
             />
-            <textarea 
+            <textarea
+            disabled={file}
             rows='5'
             value={body}
             placeholder='Body'
             onChange = { e => setBody(e.target.value) }
             />
-            <button  disabled={isLogged()}>Post</button>
+            {file ? <DropContainer> { file.name } </DropContainer> : <Upload onUpload={handleFile}/>}
+            <button disabled={isLogged() || loading}>Post</button>
             </form>
             {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
             
@@ -114,7 +132,7 @@ export default function Community(props){
                   errorPosts ? <h1>{errorPosts}</h1> : Array.from(posts).map((post) => (
                         <div key={post._id} className='post'>
                             <Link to={`/post/${post._id}`}><span>{post.title}</span></Link>
-                            <p>{post.body}</p>
+                            { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
                             <footer>
                                 <span>by {post.authorId.user} </span>
                                 <span> at {getDate(post.date)}</span>

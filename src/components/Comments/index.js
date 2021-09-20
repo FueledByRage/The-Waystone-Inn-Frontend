@@ -3,11 +3,12 @@ import api from '../../services/api'
 import { FiUser } from 'react-icons/fi'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { getUser } from '../../storage/utils'
+import { getToken, getUser } from '../../storage/utils'
 import { FiTrash } from 'react-icons/fi'
 import StyledLink from '../Link/Link'
 
 import './Comments.css'
+import Avatar from 'react-avatar'
 
 export default function Comments(props){
     const [ error, setError ] = useState(null) 
@@ -26,7 +27,7 @@ export default function Comments(props){
 
     async function handleDelete(id){
 
-            await api.delete(`/comment/deleteComment/${id}`).catch((error) =>{
+            await api.post(`/comment/deleteComment`,{ id, token: getToken() }).catch((error) =>{
                 setError(error.message)
             })
             window.location.reload()
@@ -41,9 +42,9 @@ export default function Comments(props){
                             c => (
                                 <div key={c._id} className = 'comment'>
                                     <div className = 'commentHeader'>
-                                        <FiUser size={20}/> 
+                                        <FiUser />
                                         <StyledLink to={`/profile/${c.authorId.user}`}> <span>{c.authorId.user}</span> </StyledLink> 
-                                        { toString(c.authorId.user) == toString(getUser()) ? <button className='delete' onClick={() => { handleDelete(c._id) }} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
+                                        {c.authorId.user == getUser() ? <button className='delete' onClick={() => { handleDelete(c._id) }} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
                                         </div>
                                     <p>{c.comment}</p>
                                 </div>

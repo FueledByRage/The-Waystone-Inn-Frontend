@@ -15,6 +15,7 @@ header div{
     display: flex;
     margin-left: 20%;
 }
+
 button{
     margin-left: 20px;
     width: 80px;
@@ -26,6 +27,7 @@ button{
 }
 .postForm button{
     margin-left: 85%;
+    margin-top: 5px;
 }
 
 .postForm{
@@ -69,6 +71,7 @@ button{
 .post p{
     margin-top: 5px;
 }
+
 .post footer{
     font-size: small;
     text-align: end;

@@ -1,9 +1,9 @@
 .profile{
     margin-top: 5%;
-    margin-left: 35%;
+    margin-left: 32%;
     background-color:whitesmoke;
     max-width: 40%;
-    padding: 10px;
+    padding: 15px;
 }
 
 .profile h3{
@@ -12,4 +12,8 @@
 
 .created{
     margin-top: 2%;
+}
+
+.avatarIcon{
+    border-radius: 100px;
 }

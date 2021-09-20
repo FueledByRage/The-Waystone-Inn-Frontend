@@ -44,7 +44,7 @@ export default function Feed(props){
             <ul>
                 {
                 Array.from(posts).map( post => (
-                    <li key={post.id}>
+                    <li key={post._id}>
                         <div className='title'><StyledLink to={`/post/${post._id}`}><h3>{post.title}</h3></StyledLink></div>
                         <p>{post.body}</p>
                         <div className='footer'> <StyledLink to = {`/profile/${post.authorId.user}`}> { post.authorId.user } </StyledLink></div>

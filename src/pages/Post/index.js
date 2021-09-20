@@ -1,7 +1,7 @@
 import React, { useEffect, useState }from 'react'
 import { useNavigate } from 'react-router'
 import  InfoBox  from '../../components/infoBox'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import api from '../../services/api'
 import { getToken, getUser } from '../../storage/utils'
 import Comments from '../../components/Comments'
@@ -24,10 +24,12 @@ export default function Post(props){
 
     useEffect(async ()=>{
         let isCancelled = false
+        console.log(token)
         const response = await api.get(`/post/${id}`).catch((error)=> {
             setError(error.message)})
-
-        if(!isCancelled){            
+            
+        if(!isCancelled){
+            console.log(response.data.authorId.user.length)         
             setData(response.data)
             setDate(new Date(response.data.communityId.date))}
         return () => {
@@ -37,13 +39,14 @@ export default function Post(props){
 
     async function handleSubmit(){
         await api.post('/comment/register', { token, id, comment }).catch((error)=>setError(error.message))
+        .catch((error) =>{ setErrorSubmit(error.message) })
         window.location.reload()
     }
 
     async function handleDelete(){
 
-       const response = await api.delete(`/post/deletePost/${id}`).catch((error) =>{ setError(error.message)})
-        navigate(`/${response.data.id}`)
+       const response = await api.post(`/post/deletePost`, {id, token}).catch((error) =>{ setError(error.message)})
+        navigate(`/community/${response.data.id}/1`)
     }
 
     if(!data || !date) return(<h1>{error}</h1>)
@@ -53,21 +56,21 @@ export default function Post(props){
             <div className='postDiv'>
                 {  
                     <div className='postBody'>
-                        <div> 
+                        
                             <div className='header'>
                                 <h2>{data.title}</h2>
-                                { toString(data.authorId.user) == toString(getUser()) ? <button onClick={handleDelete} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
+                                { data.authorId.user == getUser() ? <button onClick={handleDelete} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
                             </div>
-                            <span>{data.body}</span>
+                            { !data.url ? <span>{data.body}</span> : <img className='postImg' src={data.url} />}
 
-                        </div>
+                       
                         <div className='author'> <StyledLink to={`/profile/${data.authorId.user}`} ><span>{data.authorId.user}</span></StyledLink></div>
                     </div>
 
                 }
                 <div className='commentForm'>
                     <form onSubmit={handleSubmit}>
-                        <textarea 
+                        <textarea
                             id="comment"
                             rows='5'
                             type="textarea"

@@ -11,6 +11,7 @@ import Community from './pages/Community/'
 import ErrorPage from './pages/ErrorPage'
 import Post from './pages/Post/'
 import ProfilePage from './pages/Profile'
+import { EditProfile } from './pages/EditProfile'
 
 
 export default function RoutesList(){
@@ -25,6 +26,7 @@ export default function RoutesList(){
                 <Route path='/community/:id/:page' element={<Community/>}/>
                 <Route path='/post/:id' element={<Post />}/>
                 <PrivateRoute path='/profile/:user' element={<ProfilePage />}/>
+                <PrivateRoute path='/:user/edit' element={<EditProfile />} />
 
             </Routes>
         </BrowserRouter>
