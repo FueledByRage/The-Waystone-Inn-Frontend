@@ -16,6 +16,7 @@ It's UI is quite poor since frontend is not my comfort zone and it's in a early 
 ![Login screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/login.png)
 ![Community screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/community.png)
 ![Post screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/post.png)
+![Post with image](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/postImage.png)
 
 By: [Erik](https://www.linkedin.com/in/erik-natan-moreira-santos-983865195/)
 
