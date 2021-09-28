@@ -9,7 +9,7 @@ The name and color palett have been choosen afte one of my favourites fantasy li
 Instead of making a simpler CRUD for my portfolio this is my attempt to a more interesting and challeging aplication.
 
 # Observation
-It's UI is quite poor since frontend is not my comfort zone and it's in a early development stage.
+It's UI is quite poor yet since frontend is not my comfort zone and it's in a early development stage.
 
 
 # Screens
