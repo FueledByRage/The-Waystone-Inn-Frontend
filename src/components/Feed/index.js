@@ -3,8 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import api from '../../services/api'
 import { getSubs } from '../../storage/utils'
 import StyledLink from '../Link/Link'
-
-import './Feed.css'
+import { Container, PostBox, PostsContainer, StyledFooter } from './style'
 
 export default function Feed(props){
 
@@ -38,20 +37,28 @@ export default function Feed(props){
 
 
     return(
-        <div className='feed-div'>
+        
+        <Container>
             {
-            error ? <h1> {error} </h1> :        
-            <ul>
-                {
-                Array.from(posts).map( post => (
-                    <li key={post._id}>
-                        <div className='title'><StyledLink to={`/post/${post._id}`}><h3>{post.title}</h3></StyledLink></div>
-                        <p>{post.body}</p>
-                        <div className='footer'> <StyledLink to = {`/profile/${post.authorId.user}`}> { post.authorId.user } </StyledLink></div>
-                    </li>
-                ))}
-            </ul>}
-            <footer className='buttons'><button disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handlePosts(1)} >Next</button> </footer>
-        </div>
+                error ? <h1>{error.message}</h1> : Array.from(posts).map((post) => 
+                        <PostBox>
+                            <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink>
+                            
+                            <div className='postBody' >
+                                {
+                                    post.url ? <img src={post.url} /> :
+                                    <p>
+                                        { post.body }
+                                    </p>
+                                }
+                            </div>
+
+                            <div className='footer' > <StyledLink  to={`/post/${post._id}`} >{post.authorId.user}</StyledLink> </div>
+                        </PostBox>
+                )
+            }
+            <StyledFooter><button disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handlePosts(1)} >Next</button> </StyledFooter>
+        </Container>
+
     )
 }

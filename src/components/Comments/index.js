@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import api from '../../services/api'
 import { FiUser } from 'react-icons/fi'
 import { useNavigate } from 'react-router'
-import { Link } from 'react-router-dom'
 import { getToken, getUser } from '../../storage/utils'
 import { FiTrash } from 'react-icons/fi'
 import StyledLink from '../Link/Link'
-
 import './Comments.css'
-import Avatar from 'react-avatar'
+
 
 export default function Comments(props){
     const [ error, setError ] = useState(null) 
@@ -42,8 +40,10 @@ export default function Comments(props){
                             c => (
                                 <div key={c._id} className = 'comment'>
                                     <div className = 'commentHeader'>
-                                        <FiUser />
-                                        <StyledLink to={`/profile/${c.authorId.user}`}> <span>{c.authorId.user}</span> </StyledLink> 
+                                        <div>
+                                            <FiUser />
+                                            <StyledLink to={`/profile/${c.authorId.user}`}> <span>{c.authorId.user}</span> </StyledLink> 
+                                        </div>
                                         {c.authorId.user == getUser() ? <button className='delete' onClick={() => { handleDelete(c._id) }} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
                                         </div>
                                     <p>{c.comment}</p>

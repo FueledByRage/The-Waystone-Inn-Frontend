@@ -13,7 +13,15 @@
     height: auto;
     font-weight: bold;
     padding: 3px 3px;
+    display: flex;
+    justify-content: space-between;
 }
+
+.commentHeader button{
+    width: 30px;
+    height: 30px;
+}
+
 .commentHeader span{
     margin-top: -2;
     margin-left: 5px;

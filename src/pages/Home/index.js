@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from "react";
 import  Feed  from '../../components/Feed'
 import { FiArrowRight } from 'react-icons/fi'
 import api from '../../services/api'
 import { getToken } from '../../storage/utils'
-import StyledLink from '../../components/Link/Link'
+import { Aside, BoxCommunities, Container, Header, Main, StyledLink } from "./style";
 
-import './Home.css'
 
-export default function HomePage(){
+
+export default function HomePage(props){
 
     const [ data, setData ] = useState([])
 
@@ -22,22 +22,28 @@ export default function HomePage(){
 
     },[])
 
+    return(
+        <Container>
+            <Header>
+                <h1>The Waystone Inn</h1>
+            </Header>
+            <Main>
+                <Feed pageCount={1} />
+            </Main>
+            <Aside>
+                <BoxCommunities>
+                    <h3>Communities:</h3>
 
-    return (
-        <div className='home-div'>
-            <section>
-            <h1> Home page here!</h1>
-            <Feed pageCount={1}/>
-            </section>
-            <aside>
-                <ul className='communities'>
-                <h3>Communities:</h3>   
-                {
-                data.map(community => (
-                    <div className='community'> <div className='icon'><FiArrowRight /></div> <StyledLink to={`/community/${community._id}/1`}><h3> {community.name}</h3> </StyledLink>  </div>
-                ))}
-                </ul>
-            </aside>
-        </div>
+                        {
+                            data.map(community => (
+                            <div> <div className='icon'><FiArrowRight /></div> <StyledLink to={`/community/${community._id}/1`}><h3> {community.name}</h3> </StyledLink>  </div>
+                            ))
+                        }
+  
+                </BoxCommunities>
+            </Aside>
+        </Container>
     )
+
+
 }

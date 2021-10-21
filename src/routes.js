@@ -14,16 +14,19 @@ import ProfilePage from './pages/Profile'
 import { EditProfile } from './pages/EditProfile'
 
 
+
+
 export default function RoutesList(){
 
     return(
         <BrowserRouter>
             <Routes>
                 <PublicRoute path='/login' element={<Login />}/>
-                <PrivateRoute path='/' element={<HomePage />} />               
+
+                <PrivateRoute path='/' element={<HomePage />} />              
+                <Route path='/community/:id/:page' element={<Community/>}/>
                 <Route path="/register" element={<Register />}/>
                 <PrivateRoute path="/register/community" element={<RegisterCommunity />}/>
-                <Route path='/community/:id/:page' element={<Community/>}/>
                 <Route path='/post/:id' element={<Post />}/>
                 <PrivateRoute path='/profile/:user' element={<ProfilePage />}/>
                 <PrivateRoute path='/:user/edit' element={<EditProfile />} />

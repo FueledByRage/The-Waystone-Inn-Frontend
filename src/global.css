@@ -10,21 +10,18 @@ input, button, textarea {
 }
 
 body {
-    display: block;
+    /*display: block;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     font: 400 14px Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;*/
     background: #dddcdc;
-    -webkit-font-smoothing: antialiased;
 }
 
-.button{
-    width: 70%;
-    height: 50px;
+button{
     background-color: #F33850;
     font-size: 16px;
-    margin-top: 30px;
     border: 0;
     border-radius: 8px;
     font-weight: 700;   

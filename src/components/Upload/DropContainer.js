@@ -3,6 +3,7 @@ import styled,{ css } from "styled-components";
 export const DropContainer = styled.div.attrs({
     className: 'dropZone'
 })`
+    width: 90%;
     margin-top: 5px;
     background-color: #bfbfbf;
     height: 15%;
@@ -10,17 +11,16 @@ export const DropContainer = styled.div.attrs({
     padding: 5px;
     border-radius: 4px;
     justify-content: center;
-    align-itens: center;
+
 
 `
 
 const messageColors = {
-    default: "#999",
+    default: "black",
     error: "#e57878",
     success: "#78e5d5"
   };
 
 export const UploadMessage = styled.p`
-    color: ${props => messageColors[props.type || 'default']}
-    background-color: whitesmoke;
+    color: ${props => messageColors[props.type || 'default']};
 `

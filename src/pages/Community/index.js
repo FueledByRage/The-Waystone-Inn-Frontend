@@ -4,9 +4,12 @@ import { useParams, Link } from 'react-router-dom'
 import api from '../../services/api'
 import { getToken, getSubs, isLogged, setSubs } from '../../storage/utils'
 import InfoBox from '../../components/infoBox'
-import './Community.css'
+import StyledLink from '../../components/Link/Link'
 import Upload from '../../components/Upload'
 import { DropContainer } from '../../components/Upload/DropContainer'
+import  { PostBox }  from '../../components/PostBox'
+import { Container, Main, Aside, Header, Section, StyledForm, StyledInput, PostsContainer, StyledButton } from './style'
+
 
 
 
@@ -28,8 +31,7 @@ export default function Community(props){
     let isLastPage
     let parsePage = parseInt(page)
 
-
-     useEffect(async ()=>{
+    useEffect(async ()=>{
         let isCancelled = false
         const subs = getSubs()
         
@@ -59,10 +61,7 @@ export default function Community(props){
 
     async function handleSubmit(e){
 
-
         if(title == '' || body == '') return setError('Post fields cannot be empty!')
-
-
 
         e.preventDefault()
         const formData = new FormData()
@@ -81,71 +80,63 @@ export default function Community(props){
         }
     }
 
-    function handleNavegate(c){
-        parsePage += c
-        navigate(`/community/${id}/${parsePage}`)
-        window.location.reload()
-    }
-
-    if(errorData) return( <h1>{errorData}</h1> )
-
     function getDate(date){
         const newDate = new Date(date)
 
         return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`
     }
-    
+
     function handleFile(files){ setFile(files[0]) }
 
-
-
     return(
-        <div className='communityBody'>
-            <header>
-                <div>
-                    <h1>{data.name}</h1>
-                    <button disabled={isLogged()} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</button>
-                </div>
-            </header>
-            
-            <form className = 'postForm' onSubmit={handleSubmit}>
-            <input 
-            type='text'
-            value={title}
-            placeholder='Title'
-            onChange = {e => setTitle(e.target.value)}
-            />
-            <textarea
-            disabled={file}
-            rows='5'
-            value={body}
-            placeholder='Body'
-            onChange = { e => setBody(e.target.value) }
-            />
-            {file ? <DropContainer> { file.name } </DropContainer> : <Upload onUpload={handleFile}/>}
-            <button disabled={isLogged() || loading}>Post</button>
-            </form>
-            {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
-            
-            <div className='posts'>
-                { 
-                  errorPosts ? <h1>{errorPosts}</h1> : Array.from(posts).map((post) => (
-                        <div key={post._id} className='post'>
-                            <Link to={`/post/${post._id}`}><span>{post.title}</span></Link>
-                            { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
-                            <footer>
-                                <span>by {post.authorId.user} </span>
-                                <span> at {getDate(post.date)}</span>
-                            </footer>
-                        </div>
-                    ))
-                }
-                <footer className='buttons'><button disabled = { parsePage == 1 } onClick={() => handleNavegate(-1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handleNavegate(1)} >Next</button> </footer>
-            </div>
-            <InfoBox community={data}/>
-                   
-        </div>
-        
-    )
+        <div>
+            <Header>
+                <h1>{data.name}</h1>
+                <StyledButton disabled={isLogged()} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
+           </Header>
+           <Container>
+            <Main>
+                <StyledForm onSubmit={handleSubmit}>
+                    <StyledInput 
+                    type='text'
+                    placeholder='Title'
+                    onChange = {(e) => setTitle(e.target.value)}
+                    />
 
+                    <StyledInput
+                    rows='5'
+                    placeholder='Body'
+                    onChange = { (e)=>setBody(e.target.value)}
+                    />
+                    
+                    {file ? <DropContainer> { file.name } </DropContainer> : <Upload onUpload={handleFile}/>}
+                    
+                    <StyledButton>Post</StyledButton>
+                </StyledForm>
+                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
+                <PostsContainer>
+                    {
+                        error ? <h1>{error.message}</h1> : Array.from(posts).map((post)=>(
+                            <PostBox>
+                                <StyledLink to={`/post/${post._id}`}><span>{post.title}</span></StyledLink>
+                                <div className='postBody' >
+                                    { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
+                                </div>
+                                <div className='footer'>
+                                    <span>By {post.authorId.user } </span>
+                                    <span> at {getDate(post.date)}</span>
+                                </div>
+                            </PostBox>
+                        )
+                        )
+                    }
+                </PostsContainer>
+            </Main>
+            <Aside>
+                <InfoBox community={data}/>
+            </Aside>
+        </Container>
+        </div>
+
+    )
 }

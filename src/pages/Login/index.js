@@ -10,16 +10,10 @@ import './Login.css'
 export default function Login(){
     const navigate = useNavigate()
 
-
-
     const [ email, setEmail] = useState('')
     const [ password, setPassword ] = useState('')
     const [ loading, setLoading ] = useState(false)
     const [ error, setError ] = useState(null) 
-    
-
-
-
 
     async function handleSubmit(event){
         event.preventDefault()
@@ -46,13 +40,14 @@ export default function Login(){
     }
     return(
         
-        <div className='logon-div'>
-            <section className='form'>
+
+            <div className='container'>
 
             <form onSubmit={handleSubmit}>
 
             <img src={logo}/>
 
+            
             <input
                 id="email"
                 type="text"
@@ -77,9 +72,9 @@ export default function Login(){
             <div className='text'> <Link to='/register' >Register</Link> </div>
 
             {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
-            </section>
+            </div>
             
-        </div>
+
 
     )
 }
