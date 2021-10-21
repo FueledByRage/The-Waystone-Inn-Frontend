@@ -80,6 +80,7 @@ export const PostsContainer = styled.div`
     width: 40vw;
     min-width: 400px;
     align-items: center;
+    margin-left: 7vw;
 `
 
 

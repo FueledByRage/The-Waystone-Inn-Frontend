@@ -7,6 +7,7 @@ import { getToken, getUser } from '../../storage/utils'
 import Comments from '../../components/Comments'
 import  { PostBox }  from '../../components/PostBox'
 import { CommentsBox, Container, StyledLink, StyledForm } from './style'
+import { FiTrash } from 'react-icons/fi'
 
 
 
@@ -36,6 +37,7 @@ export default function Post(props){
     }, [])
 
     async function handleSubmit(){
+        
         await api.post('/comment/register', { token, id, comment }).catch((error)=>setError(error.message))
         .catch((error) =>{ setErrorSubmit(error.message) })
         window.location.reload()
@@ -52,12 +54,17 @@ export default function Post(props){
     return(
         <Container>
             <PostBox>
-                <h1>{data.title}</h1>
+                <div style={{display: 'flex',
+                justifyContent: 'space-between'
+            }} >
+                    <h1>{data.title}</h1>
+                    {data.authorId.user == getUser() ? <button style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
+                </div>
                 <div className='postBody' > { data.url ? <img src={data.url} /> : <span>{data.body}</span> } </div>
                 <div className='footer' > <StyledLink  to={`/profile/${data.authorId.user}`} > {data.authorId.user} </StyledLink> </div>
             </PostBox>
             <CommentsBox>
-                <StyledForm>
+                <StyledForm onSubmit={handleSubmit}>
                 <textarea
                     id="comment"
                     rows='5'
