@@ -9,7 +9,7 @@ The name and color palett have been choosen afte one of my favourites fantasy li
 Instead of making a simpler CRUD for my portfolio this is my attempt to a more interesting and challeging aplication.
 
 # Observation
-It's UI is quite poor since frontend is not my comfort zone and it's in a early development stage.
+It's UI is quite poor yet since frontend is not my comfort zone and it's in a early development stage.
 
 
 # Screens
@@ -17,6 +17,7 @@ It's UI is quite poor since frontend is not my comfort zone and it's in a early 
 ![Community screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/community.png)
 ![Post screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/post.png)
 ![Post with image](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/postImage.png)
+![Profile Screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/profileScreen.png)
 
 By: [Erik](https://www.linkedin.com/in/erik-natan-moreira-santos-983865195/)
 
