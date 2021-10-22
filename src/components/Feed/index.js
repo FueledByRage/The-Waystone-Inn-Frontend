@@ -13,16 +13,24 @@ export default function Feed(props){
     let  isLastPage = false
     const { pageCount } = props
     const [ page, setPage ] = useState(parseInt(pageCount))
+    const [ loading, setLoading ] = useState(true)
 
     useEffect( async ()=>{
+        try {
+            let isCancelled = false
+    
+                const response = await api.post(`/posts/`, { subs, page }).catch((error)=>{
+                    throw Error(error.response.data)
+                })
+                if(!isCancelled) setPosts(response.data['docs'])
+                return () => {
+                    setLoading(false)
+                    isCancelled = true
+                }
+        } catch (error) {
+            setError(error.message)
+        }
 
-        let isCancelled = false
-
-            const response = await api.post(`/posts/`, { subs, page }).catch((error)=>setError(error.response.data.message))
-            if(!isCancelled) setPosts(response.data['docs'])
-            return () => {
-                isCancelled = true
-            }
     },[])
 
     async function handlePosts(nextMod){
@@ -37,10 +45,10 @@ export default function Feed(props){
 
 
     return(
-        
+        loading ?
         <Container>
             {
-                error ? <h1>{error.message}</h1> : Array.from(posts).map((post) => 
+                error ? <h1>{error}</h1> : Array.from(posts).map((post) => 
                         <PostBox>
                             <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink>
                             
@@ -58,7 +66,7 @@ export default function Feed(props){
                 )
             }
             <StyledFooter><button disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handlePosts(1)} >Next</button> </StyledFooter>
-        </Container>
+        </Container> : <h1> 'Loading...' </h1>
 
     )
 }

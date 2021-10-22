@@ -22,7 +22,6 @@ export default function RoutesList(){
         <BrowserRouter>
             <Routes>
                 <PublicRoute path='/login' element={<Login />}/>
-
                 <PrivateRoute path='/' element={<HomePage />} />              
                 <Route path='/community/:id/:page' element={<Community/>}/>
                 <Route path="/register" element={<Register />}/>
@@ -30,7 +29,6 @@ export default function RoutesList(){
                 <Route path='/post/:id' element={<Post />}/>
                 <PrivateRoute path='/profile/:user' element={<ProfilePage />}/>
                 <PrivateRoute path='/:user/edit' element={<EditProfile />} />
-
             </Routes>
         </BrowserRouter>
     )

@@ -28,9 +28,9 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
-    color: black;
+    color: #262627;
     :hover{
-        color: #262627;
+        color: black;  
     }
 `
 export const CommentsBox = styled.div`

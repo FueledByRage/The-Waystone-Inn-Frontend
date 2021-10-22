@@ -42,10 +42,14 @@ export default function Community(props){
             if(!isCancelled){
                 setData(response.data['Community'])
                 setPosts(response.data['Posts'])
+                setLoading(false)
                 isLastPage = response.data['lastPage']
             }
 
-        }).catch((error) => setErrorData(error.response.data.message))
+        }).catch((error) =>{
+            setLoading(false)    
+            setErrorData(error.response.data)}
+        )
         return () => {
             isCancelled = true
         }
@@ -56,7 +60,9 @@ export default function Community(props){
         api.post('/community/sub',{ token, id }).then((response) => {
             setSubs(response.data.subs)
             setSub(!subscribed)
-        }).catch((e)=>{setError(e)})        
+        }).catch((e)=>{
+            alert(e.response.data)
+        })        
     }
 
     async function handleSubmit(e){
@@ -76,7 +82,7 @@ export default function Community(props){
             const response = await api.post('/post/register', formData).catch((error) =>{ throw error })
             navigate(`/post/${response.data._id}`)
         } catch (error) {
-            setError(error.message)
+            setError(error.response)
         }
     }
 
@@ -89,9 +95,10 @@ export default function Community(props){
     function handleFile(files){ setFile(files[0]) }
 
     return(
+        loading ? <span></span> :
         <div>
             <Header>
-                <h1>{data.name}</h1>
+                {errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1>}
                 <StyledButton disabled={isLogged()} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
            </Header>
            <Container>
@@ -116,7 +123,7 @@ export default function Community(props){
                 {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
                 <PostsContainer>
                     {
-                        error ? <h1>{error.message}</h1> : Array.from(posts).map((post)=>(
+                        errorData ? <h1>{errorData}</h1> : Array.from(posts).map((post)=>(
                             <PostBox>
                                 <StyledLink to={`/post/${post._id}`}><span>{post.title}</span></StyledLink>
                                 <div className='postBody' >
@@ -137,6 +144,5 @@ export default function Community(props){
             </Aside>
         </Container>
         </div>
-
     )
 }

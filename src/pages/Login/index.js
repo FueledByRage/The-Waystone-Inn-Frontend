@@ -35,12 +35,10 @@ export default function Login(){
         navigate('/')
         window.location.reload()
         }catch(error){
-            setError(error.message)
+            setError(error.response.data.message)
         }
     }
     return(
-        
-
             <div className='container'>
 
             <form onSubmit={handleSubmit}>
@@ -73,8 +71,5 @@ export default function Login(){
 
             {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
             </div>
-            
-
-
     )
 }

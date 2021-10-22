@@ -10,14 +10,24 @@ import { Aside, BoxCommunities, Container, Header, Main, StyledLink } from "./st
 export default function HomePage(props){
 
     const [ data, setData ] = useState([])
+    const [ loading, setLoading ] = useState(true);
+    const [ error, setError ] = useState(null)
 
     useEffect(async ()=>{
-        const token = getToken()
-        const communities = await api.post(`/communities`, { token })
-        const communitiesArray = Array.from(communities.data) 
-        
-        if(communitiesArray.length >= 4 )setData(communitiesArray.slice(0, 3))
-        else setData(communitiesArray)
+        try {
+            const token = getToken()
+            const communities = await api.post(`/communities`, { token }).catch((error)=>{
+                throw Error(error.response.data)
+            })
+            const communitiesArray = Array.from(communities.data) 
+            if(communitiesArray.length >= 4 )setData(communitiesArray.slice(0, 3))
+            else setData(communitiesArray)
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            setError(error.message)
+        }
+
         
 
     },[])
@@ -31,16 +41,23 @@ export default function HomePage(props){
                 <Feed pageCount={1} />
             </Main>
             <Aside>
-                <BoxCommunities>
-                    <h3>Communities:</h3>
 
-                        {
-                            data.map(community => (
-                            <div> <div className='icon'><FiArrowRight /></div> <StyledLink to={`/community/${community._id}/1`}><h3> {community.name}</h3> </StyledLink>  </div>
-                            ))
-                        }
-  
-                </BoxCommunities>
+                {
+                    !loading ?
+                        <BoxCommunities>
+                        
+                            <h3>Communities:</h3>
+                                {   !error ?
+                                    data.map(community => (
+                                    <div> <div className='icon'><FiArrowRight /></div> <StyledLink to={`/community/${community._id}/1`}><h3> {community.name}</h3> </StyledLink>  </div>
+                                    )) : <h2>{error}</h2> 
+                                }
+    
+                        </BoxCommunities> : 
+                    <div>
+                        <h1>Loading...</h1>
+                    </div>
+                }
             </Aside>
         </Container>
     )

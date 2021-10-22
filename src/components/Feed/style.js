@@ -9,7 +9,6 @@ export const Container = styled.div`
     margin-left: 10vw;
     align-items: center;
     justify-items: center;
-    //background-color: blueviolet;
 `
 
 

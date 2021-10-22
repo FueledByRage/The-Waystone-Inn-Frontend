@@ -13,11 +13,17 @@ export default function ProfilePage(props){
     const { user } = useParams()
     const [ error, setError ] = useState(null)
     const [ data, setData ] = useState(null)
+    const [ loading, setLoading ] = useState(false)
 
     useEffect(async ()=>{
-        const response = await api.get(`/user/get/${user}`).catch((error)=>{ setError(error) })
-        setData(response.data)
-    },[])
+
+        try {
+            const response = await api.get(`/user/get/${user}`)
+            setData(response.data)
+        } catch (error) {
+            setError('Error reaching data!')   
+        }
+    }, [])
 
     function getDate(date){
         const newDate = new Date(date)
@@ -27,6 +33,7 @@ export default function ProfilePage(props){
 
 
     return(
+        loading ? <h1>Loading...</h1> :
         <div>
             {
                 error || !data ? <h1>{error}</h1> : 
