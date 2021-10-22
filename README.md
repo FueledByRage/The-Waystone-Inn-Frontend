@@ -18,6 +18,8 @@ It's UI is quite poor yet since frontend is not my comfort zone and it's in a ea
 ![Post screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/post.png)
 ![Post with image](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/postImage.png)
 ![Profile Screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/profileScreen.png)
+![Home Page Screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/HomePage.png)
+
 
 By: [Erik](https://www.linkedin.com/in/erik-natan-moreira-santos-983865195/)
 
