@@ -22,14 +22,11 @@ export default function RegisterCommunity(){
             setLoading(true)
 
             const response = await api.post('/register/community', { token, name, description })
-
-            //Gotta redirect to the just created community
-
             navigate(`/community/${response.data.id}`)
 
 
         } catch (error) {
-            setError(error.response.data.message)
+            setError(error.response.data)
         }
 
     }

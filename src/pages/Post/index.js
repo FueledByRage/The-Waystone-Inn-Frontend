@@ -75,7 +75,7 @@ export default function Post(props){
                         {error ? <span>error</span> : data.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
                     </div>
                     <div className='postBody' > {error ? <h1>{error}</h1> : data.url ? <img src={data.url} /> : <span>{data.body}</span> } </div>
-                    <div className='footer' >{error ? <span>{error}</span> : <StyledLink  to={`/profile/${data.authorId.user}`} > {data.authorId.user} </StyledLink> }</div>
+                    <div className='footer'><StyledLink to={`/community/${data.communityId._id}/1`}> {data.communityId.name} </StyledLink> {error ? <span>{error}</span> : <StyledLink  to={`/profile/${data.authorId.user}`} > {data.authorId.user} </StyledLink> }</div>
                 </PostBox> : <h1>Loading...</h1>
             }
             <CommentsBox>

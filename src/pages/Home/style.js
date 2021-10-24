@@ -15,18 +15,7 @@ export const Container = styled.div`
                             "m m";
     }
 `
-export const Header = styled.div`
-    background-color: whitesmoke;
-    height: 10vh;
-    grid-area: h;
-    display: flex;
-    padding: 10px;
-    background-color: #262627;
-    align-content: end;
-    h1{
-        color: white;
-    }
-`
+
 export const Main = styled.div`
     grid-area: m;
     display: flex;

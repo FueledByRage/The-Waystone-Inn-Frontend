@@ -9,6 +9,7 @@ import Upload from '../../components/Upload'
 import { DropContainer } from '../../components/Upload/DropContainer'
 import  { PostBox }  from '../../components/PostBox'
 import { Container, Main, Aside, Header, Section, StyledForm, StyledInput, PostsContainer, StyledButton } from './style'
+import { StyledFooter } from '../../components/Feed/style'
 
 
 
@@ -94,6 +95,11 @@ export default function Community(props){
 
     function handleFile(files){ setFile(files[0]) }
 
+    function handleNavigate(next){
+        navigate(`/community/${id}/${next}`)
+        window.location.reload()
+    }
+
     return(
         loading ? <span></span> :
         <div>
@@ -130,14 +136,15 @@ export default function Community(props){
                                     { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
                                 </div>
                                 <div className='footer'>
-                                    <span>By {post.authorId.user } </span>
-                                    <span> at {getDate(post.date)}</span>
+                                    <StyledLink to={`/profile/${post.authorId.user}`} > {post.authorId.user } </StyledLink >
+                                    <span>  {getDate(post.date)}</span>
                                 </div>
                             </PostBox>
                         )
                         )
                     }
                 </PostsContainer>
+                <div className='footerButtons' ><button disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
             </Main>
             <Aside>
                 <InfoBox community={data}/>

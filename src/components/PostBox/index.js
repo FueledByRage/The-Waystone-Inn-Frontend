@@ -16,7 +16,7 @@ export const PostBox = styled.div`
 
     .postBody{
         padding: 5px;
-
+        word-break: break-word;
         img{
             max-height: 500px;
             width: 100%;
@@ -25,7 +25,8 @@ export const PostBox = styled.div`
     }
     .footer{
         margin-top: 5px;
-        align-self: flex-end;
-        text-align: end;
+        display: flex;
+
+        justify-content: space-between;
     }
 `

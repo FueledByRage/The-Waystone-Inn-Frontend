@@ -3,7 +3,7 @@ import  Feed  from '../../components/Feed'
 import { FiArrowRight } from 'react-icons/fi'
 import api from '../../services/api'
 import { getToken } from '../../storage/utils'
-import { Aside, BoxCommunities, Container, Header, Main, StyledLink } from "./style";
+import { Aside, BoxCommunities, Container, Main, StyledLink } from "./style";
 
 
 
@@ -34,9 +34,6 @@ export default function HomePage(props){
 
     return(
         <Container>
-            <Header>
-                <h1>The Waystone Inn</h1>
-            </Header>
             <Main>
                 <Feed pageCount={1} />
             </Main>

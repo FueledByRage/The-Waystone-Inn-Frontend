@@ -6,12 +6,11 @@ import PrivateRoute from './services/private'
 import Register from './pages/register/Register'
 import RegisterCommunity from './pages/register/RegisterCommunity'
 import PublicRoute from './services/public'
-import { isLogged } from './storage/utils'
 import Community from './pages/Community/'
-import ErrorPage from './pages/ErrorPage'
 import Post from './pages/Post/'
 import ProfilePage from './pages/Profile'
 import { EditProfile } from './pages/EditProfile'
+import  Header  from './components/Header/index.js'
 
 
 
@@ -20,6 +19,11 @@ export default function RoutesList(){
 
     return(
         <BrowserRouter>
+            <Header>
+                <h1>
+                    The Waystone Inn
+                </h1>
+            </Header>
             <Routes>
                 <PublicRoute path='/login' element={<Login />}/>
                 <PrivateRoute path='/' element={<HomePage />} />              

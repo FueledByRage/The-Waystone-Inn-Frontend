@@ -35,7 +35,7 @@ export default function Register(){
             setUserSession(token, username, subs)  
             navigate('/')
         } catch (error) {
-            setError(error.response.data.message)
+            setError(error.response.data)
         }
 
 
@@ -44,7 +44,6 @@ export default function Register(){
     
     return(
         <div className='register-div'>
-        <section>
         <form onSubmit={handleSubmit}>
             <input 
             id='name'
@@ -97,7 +96,6 @@ export default function Register(){
             
         </form>
         {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
-        </section>
         </div>
 
     )

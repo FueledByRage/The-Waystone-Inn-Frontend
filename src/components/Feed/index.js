@@ -61,7 +61,7 @@ export default function Feed(props){
                                 }
                             </div>
 
-                            <div className='footer' > <StyledLink  to={`/post/${post._id}`} >{post.authorId.user}</StyledLink> </div>
+                            <div className='footer' ><StyledLink to={`/community/${post.communityId._id}/1`}> {post.communityId.name} </StyledLink> <StyledLink  to={`/post/${post._id}`} >{post.authorId.user}</StyledLink> </div>
                         </PostBox>
                 )
             }

@@ -38,6 +38,17 @@ export const Main = styled.div`
     align-items: center;
     justify-content: center;
     padding-top: 20vh;
+
+    .footerButtons{
+        display: flex;
+        justify-content: space-between;
+        margin-left: 14.5vw;
+        width: 40vw;
+        min-width: 400px;
+        button{
+            max-width: 100px;
+        }
+    }
 `
 export const Aside = styled.div`
 

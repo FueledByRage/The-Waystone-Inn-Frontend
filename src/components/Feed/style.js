@@ -31,10 +31,11 @@ export const PostBox = styled.div`
     }
     .footer{
         padding: 5px;
-        text-align: end;
         bottom: 0;
+        display: flex;
+        justify-content: space-between;
         span{
-            font-size: 12px;
+            font-size: 5px;
             font-weight: 600;
         }
     }

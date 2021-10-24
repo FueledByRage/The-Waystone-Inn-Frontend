@@ -63,5 +63,4 @@ export const StyledForm = styled.form`
         margin-top: 10px;
         align-self: flex-end;
     }
-    
 `
