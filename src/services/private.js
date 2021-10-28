@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, Route} from 'react-router-dom'
 import { getToken, isLogged } from '../storage/utils'
-import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login'
 import { Header } from '../pages/Home/style'
 

@@ -10,7 +10,7 @@ export default function Feed(props){
     const [ posts, setPosts ] = useState({})
     const [ error, setError ] = useState(null)
     const subs = Array.from(JSON.parse(getSubs()))
-    let  isLastPage = false
+    const [ lastPage, setLastPage ] = useState(false)
     const { pageCount } = props
     const [ page, setPage ] = useState(parseInt(pageCount))
     const [ loading, setLoading ] = useState(true)
@@ -22,7 +22,11 @@ export default function Feed(props){
                 const response = await api.post(`/posts/`, { subs, page }).catch((error)=>{
                     throw Error(error.response.data)
                 })
-                if(!isCancelled) setPosts(response.data['docs'])
+                if(!isCancelled) {
+                    setLastPage(response.data['lastPage'])
+                    setPosts(response.data['docs'])
+                }
+
                 return () => {
                     setLoading(false)
                     isCancelled = true
@@ -34,12 +38,10 @@ export default function Feed(props){
     },[])
 
     async function handlePosts(nextMod){
-
     const response = await api.post(`/posts/`, { subs, page, nextMod }).catch((error)=>setError(error.message))
-    console.log(response)
     setPosts(response.data['docs'])
     setPage(response.data['page'])
-    isLastPage = response.data['lastPage']
+    setLastPage(response.data['lastPage'])
 }
 
 
@@ -65,7 +67,7 @@ export default function Feed(props){
                         </PostBox>
                 )
             }
-            <StyledFooter><button disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handlePosts(1)} >Next</button> </StyledFooter>
+            <StyledFooter><button disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='next' disabled = { lastPage == page } onClick={() => handlePosts(1)} >Next</button> </StyledFooter>
         </Container> : <h1> 'Loading...' </h1>
 
     )

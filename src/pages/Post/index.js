@@ -7,7 +7,7 @@ import { getToken, getUser } from '../../storage/utils'
 import Comments from '../../components/Comments'
 import  { PostBox }  from '../../components/PostBox'
 import { CommentsBox, Container, StyledLink, StyledForm } from './style'
-import { FiTrash } from 'react-icons/fi'
+import { FiArrowDown, FiArrowUp, FiTrash } from 'react-icons/fi'
 
 
 

@@ -9,7 +9,6 @@ import Upload from '../../components/Upload'
 import { DropContainer } from '../../components/Upload/DropContainer'
 import  { PostBox }  from '../../components/PostBox'
 import { Container, Main, Aside, Header, Section, StyledForm, StyledInput, PostsContainer, StyledButton } from './style'
-import { StyledFooter } from '../../components/Feed/style'
 
 
 
@@ -18,7 +17,6 @@ export default function Community(props){
 
     const [ error, setError ] = useState(null)
     const [ errorData, setErrorData ] = useState(null)
-    const [ errorPosts, setErrorPosts ] = useState(null)
     const [ data, setData ] = useState({})
     const [ posts, setPosts ] = useState({})
     const [ subscribed, setSub] = useState(false)
@@ -29,7 +27,7 @@ export default function Community(props){
     const [file, setFile ] = useState(null)
     const [loading, setLoading ] = useState(null)
     const navigate = useNavigate()
-    let isLastPage
+    const [lastPage, setLastPage ] = useState(false)
     let parsePage = parseInt(page)
 
     useEffect(async ()=>{
@@ -43,8 +41,8 @@ export default function Community(props){
             if(!isCancelled){
                 setData(response.data['Community'])
                 setPosts(response.data['Posts'])
+                setLastPage(response.data['lastPage'] == parseInt(page))
                 setLoading(false)
-                isLastPage = response.data['lastPage']
             }
 
         }).catch((error) =>{
@@ -144,7 +142,7 @@ export default function Community(props){
                         )
                     }
                 </PostsContainer>
-                <div className='footerButtons' ><button disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='next' disabled = { isLastPage } onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
+                <div className='footerButtons' ><button disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='next' disabled = {lastPage} onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
             </Main>
             <Aside>
                 <InfoBox community={data}/>

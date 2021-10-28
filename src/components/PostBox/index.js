@@ -10,13 +10,14 @@ export const PostBox = styled.div`
     margin-left: 15vw;
     padding: 10px;
     border-radius: 8px;
+    
     h1{
         color: #262627;
     }
 
     .postBody{
         padding: 5px;
-        word-break: break-word;
+        white-space: pre-wrap;
         img{
             max-height: 500px;
             width: 100%;
