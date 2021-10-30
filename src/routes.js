@@ -11,6 +11,8 @@ import Post from './pages/Post/'
 import ProfilePage from './pages/Profile'
 import { EditProfile } from './pages/EditProfile'
 import  Header  from './components/Header/index.js'
+import { Search } from './components/SearchBar/styled'
+import SearchBar from './components/SearchBar'
 
 
 
@@ -23,6 +25,7 @@ export default function RoutesList(){
                 <h1>
                     The Waystone Inn
                 </h1>
+                <SearchBar />
             </Header>
             <Routes>
                 <PublicRoute path='/login' element={<Login />}/>
