@@ -28,6 +28,9 @@ export const Search = styled.div`
             padding-top: 10px;
 
             border-top: 0.01rem solid black;
+            a{
+                text-decoration: none;
+            }
         }
     }
 

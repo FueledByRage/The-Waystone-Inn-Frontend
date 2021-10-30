@@ -37,11 +37,13 @@ export default function SearchBar(){
                             data.slice(0, 3).map((community)=>{
                                 return(
                             
-                                    <div className="dataIten">
-                                        <p>
-                                            {community.name}
-                                        </p>
-                                    </div>
+                                    <a href={`/community/${community._id}/1`}>
+                                        <div className="dataIten">
+                                            <p>
+                                                    {community.name}
+                                            </p>
+                                         </div>
+                                    </a>
                                 )
                             })
                         }
