@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import api from '../../services/api'
 import { getSubs } from '../../storage/utils'
+import { AlertBox } from '../Alert'
 import StyledLink from '../Link/Link'
 import { Container, PostBox, PostsContainer, StyledFooter } from './style'
 
@@ -16,41 +17,34 @@ export default function Feed(props){
     const [ loading, setLoading ] = useState(true)
 
     useEffect( async ()=>{
-        try {
-            let isCancelled = false
-    
-                const response = await api.post(`/posts/`, { subs, page }).catch((error)=>{
-                    throw Error(error.response.data)
-                })
-                if(!isCancelled) {
-                    setLastPage(response.data['lastPage'])
-                    setPosts(response.data['docs'])
-                }
-
-                return () => {
-                    setLoading(false)
-                    isCancelled = true
-                }
+        try {    
+            const response = await api.post(`/posts/`, { subs, page }).catch((error)=>{
+                throw Error(error.response.data)
+            })
+            setLastPage(response.data['lastPage'])
+            setPosts(response.data['docs'])
+            setLoading(false)
         } catch (error) {
             setError(error.message)
+            setLoading(false)
         }
 
     },[])
 
     async function handlePosts(nextMod){
-    const response = await api.post(`/posts/`, { subs, page, nextMod }).catch((error)=>setError(error.message))
-    setPosts(response.data['docs'])
-    setPage(response.data['page'])
-    setLastPage(response.data['lastPage'])
+        const response = await api.post(`/posts/`, { subs, page, nextMod }).catch((error)=>setError(error.message))
+        setPosts(response.data['docs'])
+        setPage(response.data['page'])
+        setLastPage(response.data['lastPage'])
 }
 
 
 
     return(
-        loading ?
+        !loading ?
         <Container>
             {
-                error ? <h1>{error}</h1> : Array.from(posts).map((post) => 
+                error ?<AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
                         <PostBox>
                             <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink>
                             
@@ -63,7 +57,7 @@ export default function Feed(props){
                                 }
                             </div>
 
-                            <div className='footer' ><StyledLink to={`/community/${post.communityId._id}/1`}> {post.communityId.name} </StyledLink> <StyledLink  to={`/post/${post._id}`} >{post.authorId.user}</StyledLink> </div>
+                            <div className='footer' ><StyledLink to={`/community/${post.communityId._id}/1`}> {post.communityId.name} </StyledLink> <StyledLink  to={`/profile/${post.authorId.user}`} >{post.authorId.user}</StyledLink> </div>
                         </PostBox>
                 )
             }

@@ -104,3 +104,8 @@ export const StyledInput = styled.textarea`
     margin-top: 20px;
     
 `
+
+export const ErrorBox = styled.div`
+    margin-top: 20px;
+    margin-left: 5vw;
+`

@@ -7,6 +7,7 @@ import { getToken, getUser } from '../../storage/utils'
 import Comments from '../../components/Comments'
 import  { PostBox }  from '../../components/PostBox'
 import { CommentsBox, Container, StyledLink, StyledForm } from './style'
+import { AlertBox } from '../../components/Alert'
 import { FiArrowDown, FiArrowUp, FiTrash } from 'react-icons/fi'
 
 
@@ -33,13 +34,11 @@ export default function Post(props){
             if(!isCancelled){     
                 setData(response.data)
                 setDate(new Date(response.data.communityId.date))}
-                return () => {
-                    setLoading(false)
-                    isCancelled = true
-                }
-            } catch (error) {
                 setLoading(false)
+                isCancelled = true
+            } catch (error) {
                 setError(error.message)
+                setLoading(false)
         }
     }, [])
     
@@ -59,24 +58,30 @@ export default function Post(props){
         navigate(`/community/${response.data.id}/1`)
     }
 
-    if(!data || !date) return(<h1>{error}</h1>)
+    
 
     return(
 
         <Container>
 
             {
-                loading ?
+                !loading ?
                 <PostBox>
-                    <div style={{display: 'flex',
-                    justifyContent: 'space-between'
-                    }} >
-                        <h1>{ error ?<span>error</span> : data.title}</h1>
-                        {error ? <span>error</span> : data.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
-                    </div>
-                    <div className='postBody' > {error ? <h1>{error}</h1> : data.url ? <img src={data.url} /> : <span>{data.body}</span> } </div>
-                    <div className='footer'><StyledLink to={`/community/${data.communityId._id}/1`}> {data.communityId.name} </StyledLink> {error ? <span>{error}</span> : <StyledLink  to={`/profile/${data.authorId.user}`} > {data.authorId.user} </StyledLink> }</div>
-                </PostBox> : <h1>Loading...</h1>
+                { !error ?
+                    <div>
+                        <div style={{display: 'flex',
+                        justifyContent: 'space-between'
+                        }} >
+                            <h1>{ data.title}</h1>
+                            {data.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
+                        </div>
+                        <div className='postBody' > {data.url ? <img src={data.url} /> : <span>{data.body}</span> } </div>
+                        <div className='footer'><StyledLink to={`/community/${data.communityId._id}/1`}> {data.communityId.name} </StyledLink> {<StyledLink  to={`/profile/${data.authorId.user}`} > {data.authorId.user} </StyledLink> }</div>
+                    </div> :
+                    <AlertBox><span>{error}</span></AlertBox>
+                }
+                </PostBox> 
+                : <h1>Loading...</h1>
             }
             <CommentsBox>
                 <StyledForm onSubmit={handleSubmit}>
@@ -95,7 +100,7 @@ export default function Post(props){
             </CommentsBox>
             <div className='aside'>
                 {
-                    <InfoBox community={data.communityId}/>
+                    !error ?? <InfoBox community={data.communityId}/>
                 }
             </div>
         </Container> 

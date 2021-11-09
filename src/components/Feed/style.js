@@ -10,7 +10,9 @@ export const Container = styled.div`
     align-items: center;
     justify-items: center;
 `
-
+export const ErrorBox = styled.div`
+    
+`
 
 
 export const PostBox = styled.div`

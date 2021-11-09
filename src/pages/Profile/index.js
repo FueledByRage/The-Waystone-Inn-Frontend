@@ -5,6 +5,7 @@ import { FiCalendar } from 'react-icons/fi'
 import { StyledAvatar } from "../../components/UploadAvatar/StyledAvatar";
 import StyledLink from '../../components/Link/Link'
 import './Profile.css'
+import { AlertBox } from "../../components/Alert";
 
 
 
@@ -13,15 +14,17 @@ export default function ProfilePage(props){
     const { user } = useParams()
     const [ error, setError ] = useState(null)
     const [ data, setData ] = useState(null)
-    const [ loading, setLoading ] = useState(false)
+    const [ loading, setLoading ] = useState(true)
 
-    useEffect(async ()=>{
-
+    useEffect( async ()=>{
         try {
-            const response = await api.get(`/user/get/${user}`)
+            console.log("5")
+            const response = await api.get(`/user/get/${user}`).catch((error) => {throw Error(error.response.data)})
             setData(response.data)
+            setLoading(false)
         } catch (error) {
-            setError('Error reaching data!')   
+            setError(error.message)   
+            setLoading(false)
         }
     }, [])
 
@@ -36,7 +39,7 @@ export default function ProfilePage(props){
         loading ? <h1>Loading...</h1> :
         <div>
             {
-                error || !data ? <h1>{error}</h1> : 
+                error ? <center className='errorBox'> <AlertBox><span>{error}</span></AlertBox> </center>  : 
                 <div className = 'profile'>
                     <StyledAvatar src={data.profileURL}/> 
                     <StyledLink to={`/${data.user}/edit`}><p>Editar</p></StyledLink>

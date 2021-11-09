@@ -8,7 +8,8 @@ import StyledLink from '../../components/Link/Link'
 import Upload from '../../components/Upload'
 import { DropContainer } from '../../components/Upload/DropContainer'
 import  { PostBox }  from '../../components/PostBox'
-import { Container, Main, Aside, Header, Section, StyledForm, StyledInput, PostsContainer, StyledButton } from './style'
+import { Container, Main, Aside, Header, StyledForm, StyledInput, PostsContainer, StyledButton, ErrorBox } from './style'
+import { AlertBox } from '../../components/Alert'
 
 
 
@@ -99,55 +100,66 @@ export default function Community(props){
     }
 
     return(
-        loading ? <span></span> :
+        loading ? <span>Loading...</span> :
         <div>
             <Header>
                 {errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1>}
-                <StyledButton disabled={isLogged()} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
+                <StyledButton disabled={isLogged() || errorData} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
            </Header>
+           {
+            !errorData ?
+            
            <Container>
-            <Main>
-                <StyledForm onSubmit={handleSubmit}>
-                    <StyledInput 
-                    type='text'
-                    placeholder='Title'
-                    onChange = {(e) => setTitle(e.target.value)}
-                    />
 
-                    <StyledInput
-                    rows='5'
-                    placeholder='Body'
-                    onChange = { (e)=>setBody(e.target.value)}
-                    />
-                    
-                    {file ? <DropContainer> { file.name } </DropContainer> : <Upload onUpload={handleFile}/>}
-                    
-                    <StyledButton>Post</StyledButton>
-                </StyledForm>
-                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
-                <PostsContainer>
-                    {
-                        errorData ? <h1>{errorData}</h1> : Array.from(posts).map((post)=>(
-                            <PostBox>
-                                <StyledLink to={`/post/${post._id}`}><span>{post.title}</span></StyledLink>
-                                <div className='postBody' >
-                                    { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
-                                </div>
-                                <div className='footer'>
-                                    <StyledLink to={`/profile/${post.authorId.user}`} > {post.authorId.user } </StyledLink >
-                                    <span>  {getDate(post.date)}</span>
-                                </div>
-                            </PostBox>
-                        )
-                        )
-                    }
-                </PostsContainer>
-                <div className='footerButtons' ><button disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='next' disabled = {lastPage} onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
+            <Main>
+                  <StyledForm onSubmit={handleSubmit}>
+                        <StyledInput 
+                        type='text'
+                        placeholder='Title'
+                        onChange = {(e) => setTitle(e.target.value)}
+                        />
+
+                        <StyledInput
+                        rows='5'
+                        placeholder='Body'
+                        onChange = { (e)=>setBody(e.target.value)}
+                        />
+                        
+                        {file ? <DropContainer> { file.name } </DropContainer> : <Upload onUpload={handleFile}/>}
+                        
+                        <StyledButton>Post</StyledButton>
+                    </StyledForm>
+                    {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
+                    <PostsContainer>
+                        {
+                            errorData ? <h1>{errorData}</h1> : Array.from(posts).map((post)=>(
+                                <PostBox>
+                                    <StyledLink to={`/post/${post._id}`}><span>{post.title}</span></StyledLink>
+                                    <div className='postBody' >
+                                        { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
+                                    </div>
+                                    <div className='footer'>
+                                        <StyledLink to={`/profile/${post.authorId.user}`} > {post.authorId.user } </StyledLink >
+                                        <span>  {getDate(post.date)}</span>
+                                    </div>
+                                </PostBox>
+                            )
+                            )
+                        }
+                    </PostsContainer>
+                    <div className='footerButtons' ><button disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='next' disabled = {lastPage} onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
+
+            
             </Main>
+            
             <Aside>
                 <InfoBox community={data}/>
             </Aside>
-        </Container>
+        </Container> :
+        <ErrorBox>
+            <AlertBox style={{  }}><span>{errorData}</span></AlertBox>
+        </ErrorBox>
+        }
         </div>
     )
 }
