@@ -36,6 +36,7 @@ export default function Login(){
         window.location.reload()
         }catch(error){
             setError(error.response.data)
+            setLoading(false)
         }
     }
     return(
@@ -45,7 +46,6 @@ export default function Login(){
 
             <img src={logo}/>
 
-            
             <input
                 id="email"
                 type="text"

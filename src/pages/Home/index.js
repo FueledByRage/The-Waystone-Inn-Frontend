@@ -15,8 +15,7 @@ export default function HomePage(props){
 
     useEffect(async ()=>{
         try {
-            const token = getToken()
-            const communities = await api.post(`/communities`, { token }).catch((error)=>{
+            const communities = await api.post(`/communities`, {}).catch((error)=>{
                 throw Error(error.response.data)
             })
             const communitiesArray = Array.from(communities.data) 

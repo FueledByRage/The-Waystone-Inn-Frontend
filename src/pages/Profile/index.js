@@ -18,7 +18,6 @@ export default function ProfilePage(props){
 
     useEffect( async ()=>{
         try {
-            console.log("5")
             const response = await api.get(`/user/get/${user}`).catch((error) => {throw Error(error.response.data)})
             setData(response.data)
             setLoading(false)

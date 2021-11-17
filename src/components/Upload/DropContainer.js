@@ -11,8 +11,6 @@ export const DropContainer = styled.div.attrs({
     padding: 5px;
     border-radius: 4px;
     justify-content: center;
-
-
 `
 
 const messageColors = {

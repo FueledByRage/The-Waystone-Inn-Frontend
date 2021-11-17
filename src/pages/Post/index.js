@@ -45,7 +45,7 @@ export default function Post(props){
     async function handleSubmit(){
         
         
-        await api.post('/comment/register', { token, id, comment })
+        await api.post('/comment/register', { id, comment })
         .catch((error) =>{ 
             alert(error.response.data)
         })
@@ -53,8 +53,7 @@ export default function Post(props){
     }
 
     async function handleDelete(){
-
-       const response = await api.post(`/post/deletePost`, {id, token}).catch((error) =>{ setError(error.message)})
+       const response = await api.post(`/post/deletePost`, { id }).catch((error) =>{ setError(error.message)})
         navigate(`/community/${response.data.id}/1`)
     }
 

@@ -73,7 +73,6 @@ export default function Community(props){
         const formData = new FormData()
         formData.append('title', title)
         formData.append('body', body)
-        formData.append('token', token)
         formData.append('id', id)
         formData.append('file', file)
 
@@ -105,7 +104,7 @@ export default function Community(props){
             <Header>
                 {errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1>}
                 <StyledButton disabled={isLogged() || errorData} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
-           </Header>
+            </Header>
            {
             !errorData ?
             

@@ -21,7 +21,7 @@ export default function RegisterCommunity(){
         try {
             setLoading(true)
 
-            const response = await api.post('/register/community', { token, name, description })
+            const response = await api.post('/register/community', { name, description })
             navigate(`/community/${response.data.id}`)
 
 
