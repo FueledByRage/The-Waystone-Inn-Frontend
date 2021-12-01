@@ -9,7 +9,6 @@ import { getToken, getUser } from "../../storage/utils";
 export function EditProfile(props){
 
     const [ file, setFile ] = useState()
-    const token = getToken()
     const navigate = useNavigate()
     const { user } = useParams()
     const [ data, setData ] = useState(null)
@@ -25,10 +24,9 @@ export function EditProfile(props){
         e.preventDefault()
 
         const formData = new FormData()
-        formData.append('token', token)
         formData.append('file', file)
 
-        const response = await api.post('/user/edit', formData).catch((error)=>{
+        await api.post('/user/edit', formData).catch((error)=>{
             setError(error)
         })
         navigate(`/profile/${getUser()}`)

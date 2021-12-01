@@ -26,7 +26,7 @@ export default function Login(){
         
         const response = await api.post('/login', {email, password})
 
-        const { token, user, subs } = response.data
+        const { user, subs, token } = response.data
 
         const subArrays = Array.from(subs)
 

@@ -13,11 +13,11 @@ export const StyledAvatar = styled.div`
     flex-wrap: wrap;    
     flex-direction: column;
     justify-content: center;
-    align-itens: center;   
+    align-items: center;
     :hover{
-        p{
-            opacity: 1;
-        }
+            p{
+                opacity: 1;
+            }
     }
     p{
         margin-left: 42%;

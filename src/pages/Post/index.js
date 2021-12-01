@@ -17,11 +17,9 @@ export default function Post(props){
     const [ data, setData ] = useState(null) 
     const [ error, setError ] = useState(null)
     const [ errorSubmit, setErrorSubmit ] = useState(null)
-    const [ errorComments, setErrorComments ] = useState(null)
     const [ loading, setLoading ] = useState(true)
     const { id } = useParams()
     const [ comment, setComment ] = useState('')
-    const token = getToken()
     const navigate = useNavigate()
     const [date, setDate] = useState(null)
     
@@ -43,11 +41,9 @@ export default function Post(props){
     }, [])
     
     async function handleSubmit(){
-        
-        
         await api.post('/comment/register', { id, comment })
         .catch((error) =>{ 
-            alert(error.response.data)
+            setErrorSubmit(error.response.data)
         })
         
     }
@@ -62,7 +58,6 @@ export default function Post(props){
     return(
 
         <Container>
-
             {
                 !loading ?
                 <PostBox>
@@ -95,6 +90,7 @@ export default function Post(props){
                     />
                     <button className="button" type="submit">Comentar</button>  
                 </StyledForm>
+                {errorSubmit ?? <AlertBox><span>{errorSubmit}</span></AlertBox>}
                 <Comments id={id}/> 
             </CommentsBox>
             <div className='aside'>
