@@ -9,11 +9,8 @@
     top: 20%;
     left: 40vw;
     min-height: 70%;
-
     max-width: 350px;
     text-align: center;
-
-    
 }
 
 button{
@@ -38,7 +35,6 @@ button{
 }
 
 .container form label{
-
     color: #F33850;
     top: 29%;
     left: 45px;

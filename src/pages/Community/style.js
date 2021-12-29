@@ -23,7 +23,7 @@ export const StyledButton = styled.button`
     margin-top: 0;
     margin-left: 20px;
     background-color: #F33850;
-    width: 10%;
+    width: 100px;
 `
 
 export const Container = styled.div`
@@ -37,7 +37,7 @@ export const Main = styled.div`
     width: 60vw;
     align-items: center;
     justify-content: center;
-    padding-top: 20vh;
+    padding-top: 10vh;
 
     .footerButtons{
         display: flex;

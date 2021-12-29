@@ -16,32 +16,58 @@ export const ErrorBox = styled.div`
 
 
 export const PostBox = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 15fr;
+    grid-template-areas: "l b b"
+                        "l b  b"
+                        "l f f";
     margin-top: 10px;
     width: 80%;
     min-width: 400px;
     background-color: whitesmoke;
     padding: 5px;
     border-radius: 5px;
-   
     .postBody{
+        grid-area: b;
         padding: 5px;
         img{    
             max-height: 400px;
             object-fit: contain;
         }
-
     }
     .footer{
+
+        grid-area: f;
+        width: 100%;
         padding: 5px;
         bottom: 0;
         display: flex;
         justify-content: space-between;
         span{
-            font-size: 5px;
+            font-size: 7px;
             font-weight: 600;
         }
     }
 ` 
+export const PostText = styled.div`
+    padding: 5px;
+        img{    
+            max-height: 400px;
+            object-fit: contain;
+        }
+`
+export const PostFooter = styled.div`
+        width: 100%;
+        padding: 5px;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        span{
+            font-size: 7px;
+            font-weight: 600;
+        }
+`
+
 export const StyledFooter = styled.div`
     margin-top: 10px;
     display: flex;

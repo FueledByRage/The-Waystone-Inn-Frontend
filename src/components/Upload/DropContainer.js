@@ -16,7 +16,7 @@ export const DropContainer = styled.div.attrs({
 const messageColors = {
     default: "black",
     error: "#e57878",
-    success: "#78e5d5"
+    success: "#04400a"
   };
 
 export const UploadMessage = styled.p`

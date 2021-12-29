@@ -4,7 +4,9 @@ import api from '../../services/api'
 import { getSubs } from '../../storage/utils'
 import { AlertBox } from '../Alert'
 import StyledLink from '../Link/Link'
-import { Container, PostBox, PostsContainer, StyledFooter } from './style'
+import { Container, PostBox, PostFooter, PostsContainer, PostText, StyledFooter } from './style'
+import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi'
+import { LikeBox } from '../likeBox'
 
 export default function Feed(props){
 
@@ -46,18 +48,20 @@ export default function Feed(props){
             {
                 error ?<AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
                         <PostBox>
-                            <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink>
-                            
-                            <div className='postBody' >
-                                {
-                                    post.url ? <img src={post.url} /> :
-                                    <p>
-                                        { post.body }
-                                    </p>
-                                }
+                            <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
+                            <div className='postBody'>                          
+                                <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink>
+                                    {
+                                        post.url ? <img src={post.url} /> :
+                                        <p>
+                                            { post.body }
+                                        </p>
+                                    }
                             </div>
-
-                            <div className='footer' ><StyledLink to={`/community/${post.communityId._id}/1`}> {post.communityId.name} </StyledLink> <StyledLink  to={`/profile/${post.authorId.user}`} >{post.authorId.user}</StyledLink> </div>
+                            <div className='footer'>
+                                <StyledLink to={`/community/${post.communityId._id}/1`}> {post.communityId.name} </StyledLink> <StyledLink  to={`/profile/${post.authorId.user}`} >{post.authorId.user}</StyledLink> 
+                            </div>
+                            
                         </PostBox>
                 )
             }

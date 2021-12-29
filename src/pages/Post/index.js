@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router'
 import  InfoBox  from '../../components/infoBox'
 import { useParams } from 'react-router-dom'
 import api from '../../services/api'
-import { getToken, getUser } from '../../storage/utils'
+import { getUser } from '../../storage/utils'
 import Comments from '../../components/Comments'
 import  { PostBox }  from '../../components/PostBox'
 import { CommentsBox, Container, StyledLink, StyledForm } from './style'
 import { AlertBox } from '../../components/Alert'
-import { FiArrowDown, FiArrowUp, FiTrash } from 'react-icons/fi'
+import { FiThumbsUp, FiThumbsDown, FiTrash } from 'react-icons/fi'
+import { LikeBox } from '../../components/likeBox'
+import { ErrorBox } from '../Community/style'
 
 
 
@@ -53,29 +55,22 @@ export default function Post(props){
         navigate(`/community/${response.data.id}/1`)
     }
 
-    
+    if(loading) return ( <h1>Loading...</h1> )
 
     return(
 
         <Container>
             {
-                !loading ?
-                <PostBox>
-                { !error ?
-                    <div>
-                        <div style={{display: 'flex',
-                        justifyContent: 'space-between'
-                        }} >
+                error ? <AlertBox><span>{error}</span></AlertBox>  : 
+                    <PostBox>
+                        <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
+                        <div className='title'>
                             <h1>{ data.title}</h1>
                             {data.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
                         </div>
                         <div className='postBody' > {data.url ? <img src={data.url} /> : <span>{data.body}</span> } </div>
                         <div className='footer'><StyledLink to={`/community/${data.communityId._id}/1`}> {data.communityId.name} </StyledLink> {<StyledLink  to={`/profile/${data.authorId.user}`} > {data.authorId.user} </StyledLink> }</div>
-                    </div> :
-                    <AlertBox><span>{error}</span></AlertBox>
-                }
-                </PostBox> 
-                : <h1>Loading...</h1>
+                    </PostBox>
             }
             <CommentsBox>
                 <StyledForm onSubmit={handleSubmit}>
@@ -90,7 +85,7 @@ export default function Post(props){
                     />
                     <button className="button" type="submit">Comentar</button>  
                 </StyledForm>
-                {errorSubmit ?? <AlertBox><span>{errorSubmit}</span></AlertBox>}
+                {errorSubmit && <AlertBox><span>{errorSubmit}</span></AlertBox>}
                 <Comments id={id}/> 
             </CommentsBox>
             <div className='aside'>

@@ -52,7 +52,7 @@ export default function Comments(props){
                                             <FiUser />
                                             <StyledLink to={`/profile/${c.authorId.user}`}> <span>{c.authorId.user}</span> </StyledLink> 
                                         </div>
-                                        {c.authorId.user == getUser() ? <button className='delete' onClick={() => { handleDelete(c._id) }} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
+                                        {c.authorId.user == getUser() ? <button onClick={() => { handleDelete(c._id) }} className='trashButton'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
                                         </div>
                                     <p>{c.comment}</p>
                                 </div>

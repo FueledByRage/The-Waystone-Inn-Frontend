@@ -8,8 +8,11 @@ import StyledLink from '../../components/Link/Link'
 import Upload from '../../components/Upload'
 import { DropContainer } from '../../components/Upload/DropContainer'
 import  { PostBox }  from '../../components/PostBox'
-import { Container, Main, Aside, Header, StyledForm, StyledInput, PostsContainer, StyledButton, ErrorBox } from './style'
+import { Container, Main, Aside, Header, StyledForm, StyledInput,
+     PostsContainer, StyledButton, ErrorBox } from './style'
 import { AlertBox } from '../../components/Alert'
+import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi'
+import { LikeBox } from '../../components/likeBox'
 
 
 
@@ -32,27 +35,19 @@ export default function Community(props){
     let parsePage = parseInt(page)
 
     useEffect(async ()=>{
-        let isCancelled = false
+
         const subs = getSubs()
         
         if(token) setSub(subs.includes(id))
 
-        await api.get(`/community/${id}/${parsePage}`).then((response)=>{
-            
-            if(!isCancelled){
-                setData(response.data['Community'])
-                setPosts(response.data['Posts'])
-                setLastPage(response.data['lastPage'] == parseInt(page))
-                setLoading(false)
-            }
-
-        }).catch((error) =>{
+        const response = await api.get(`/community/${id}/${parsePage}`).catch((error) =>{
             setLoading(false)    
-            setErrorData(error.response.data)}
+            setErrorData(error.response)}
         )
-        return () => {
-            isCancelled = true
-        }
+        setData(response.data['Community'])
+        setPosts(response.data['Posts'])
+        setLastPage(response.data['lastPage'] == parseInt(page))
+        setLoading(false)
     }, [])
 
     async function sub(){
@@ -66,10 +61,10 @@ export default function Community(props){
     }
 
     async function handleSubmit(e){
-
-        if(title == '' || body == '') return setError('Post fields cannot be empty!')
-
         e.preventDefault()
+
+        if(title == '' || body == '' ) return setError('Post fields cannot be empty!')
+
         const formData = new FormData()
         formData.append('title', title)
         formData.append('body', body)
@@ -98,8 +93,9 @@ export default function Community(props){
         window.location.reload()
     }
 
+    if(loading) return(<h1>Loading...</h1>)
+
     return(
-        loading ? <span>Loading...</span> :
         <div>
             <Header>
                 {errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1>}
@@ -128,11 +124,17 @@ export default function Community(props){
                         
                         <StyledButton>Post</StyledButton>
                     </StyledForm>
-                    {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
+                    {error && 
+                    <ErrorBox>
+                        <AlertBox><span>{error}</span></AlertBox>
+                    </ErrorBox>
+                    }
                     <PostsContainer>
                         {
                             errorData ? <h1>{errorData}</h1> : Array.from(posts).map((post)=>(
                                 <PostBox>
+                                    <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
+
                                     <StyledLink to={`/post/${post._id}`}><span>{post.title}</span></StyledLink>
                                     <div className='postBody' >
                                         { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
@@ -156,7 +158,7 @@ export default function Community(props){
             </Aside>
         </Container> :
         <ErrorBox>
-            <AlertBox style={{  }}><span>{errorData}</span></AlertBox>
+            <AlertBox><span>{errorData}</span></AlertBox>
         </ErrorBox>
         }
         </div>
