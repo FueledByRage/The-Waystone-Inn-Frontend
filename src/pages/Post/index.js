@@ -27,13 +27,15 @@ export default function Post(props){
     
     useEffect(async ()=>{
         try {
+            const user = getUser()
             let isCancelled = false
-            const response = await api.get(`/post/${id}`).catch((error)=> {
+            const response = await api.get(`/post/${id}/${user || 'nl'}`).catch((error)=> {
                 throw Error(error.response.data)
-            })                    
+            })
+                              
             if(!isCancelled){     
                 setData(response.data)
-                setDate(new Date(response.data.communityId.date))}
+                setDate(new Date(response.data.post.communityId.date))}
                 setLoading(false)
                 isCancelled = true
             } catch (error) {
@@ -52,7 +54,7 @@ export default function Post(props){
 
     async function handleDelete(){
        const response = await api.post(`/post/deletePost`, { id }).catch((error) =>{ setError(error.message)})
-        navigate(`/community/${response.data.id}/1`)
+        navigate(`/community/${response.data.post.id}/1`)
     }
 
     if(loading) return ( <h1>Loading...</h1> )
@@ -60,16 +62,17 @@ export default function Post(props){
     return(
 
         <Container>
-            {
+            {   
+
                 error ? <AlertBox><span>{error}</span></AlertBox>  : 
                     <PostBox>
                         <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
                         <div className='title'>
-                            <h1>{ data.title}</h1>
-                            {data.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
+                            <h1>{ data.post.title}</h1>
+                            {data.post.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
                         </div>
-                        <div className='postBody' > {data.url ? <img src={data.url} /> : <span>{data.body}</span> } </div>
-                        <div className='footer'><StyledLink to={`/community/${data.communityId._id}/1`}> {data.communityId.name} </StyledLink> {<StyledLink  to={`/profile/${data.authorId.user}`} > {data.authorId.user} </StyledLink> }</div>
+                        <div className='postBody' > {data.post.url ? <img src={data.post.url} /> : <span>{data.post.body}</span> } </div>
+                        <div className='footer'><StyledLink to={`/community/${data.post.communityId._id}/1`}> {data.post.communityId.name} </StyledLink> {<StyledLink  to={`/profile/${data.post.authorId.user}`} > {data.post.authorId.user} </StyledLink> }</div>
                     </PostBox>
             }
             <CommentsBox>
@@ -90,7 +93,7 @@ export default function Post(props){
             </CommentsBox>
             <div className='aside'>
                 {
-                    !error ?? <InfoBox community={data.communityId}/>
+                    !error ?? <InfoBox community={data.post.communityId}/>
                 }
             </div>
         </Container> 
