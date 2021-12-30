@@ -2,7 +2,7 @@ import React, { useEffect, useState }from 'react'
 import { useNavigate } from 'react-router'
 import { useParams, Link } from 'react-router-dom'
 import api from '../../services/api'
-import { getToken, getSubs, isLogged, setSubs } from '../../storage/utils'
+import { getToken, getSubs, isLogged, setSubs, getUser } from '../../storage/utils'
 import InfoBox from '../../components/infoBox'
 import StyledLink from '../../components/Link/Link'
 import Upload from '../../components/Upload'
@@ -22,7 +22,7 @@ export default function Community(props){
     const [ error, setError ] = useState(null)
     const [ errorData, setErrorData ] = useState(null)
     const [ data, setData ] = useState({})
-    const [ posts, setPosts ] = useState({})
+    const [ posts, setPosts ] = useState([])
     const [ subscribed, setSub] = useState(false)
     const { id, page } = useParams()
     const token = getToken()
@@ -35,28 +35,29 @@ export default function Community(props){
     let parsePage = parseInt(page)
 
     useEffect(async ()=>{
-
-        const subs = getSubs()
-        
-        if(token) setSub(subs.includes(id))
-
-        const response = await api.get(`/community/${id}/${parsePage}`).catch((error) =>{
-            setLoading(false)    
-            setErrorData(error.response)}
-        )
-        setData(response.data['Community'])
-        setPosts(response.data['Posts'])
-        setLastPage(response.data['lastPage'] == parseInt(page))
-        setLoading(false)
+        try{
+            const user = getUser() || 'nl'
+            const response = await api.get(`/community/${id}/${parsePage}/${user}`).catch((error) =>{
+                throw new Error(error.response.data)
+            }
+            )
+            const sub = isLogged() ? response.data.sub : false 
+            setSub(sub)
+            setData(response.data['Community'])
+            setPosts(response.data['posts'])
+            setLastPage(response.data['lastPage'] == parseInt(page))
+            setLoading(false)
+        }catch(error){
+            setErrorData(error.message)
+            setLoading(false)
+        }
     }, [])
 
     async function sub(){
-        
         api.post('/community/sub',{ token, id }).then((response) => {
-            setSubs(response.data.subs)
             setSub(!subscribed)
         }).catch((e)=>{
-            alert(e.response.data)
+            setError(e.response.data)
         })        
     }
 
@@ -131,17 +132,17 @@ export default function Community(props){
                     }
                     <PostsContainer>
                         {
-                            errorData ? <h1>{errorData}</h1> : Array.from(posts).map((post)=>(
+                            errorData != null ? <h1>{errorData}</h1> : posts.map((element)=>(
                                 <PostBox>
                                     <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
 
-                                    <StyledLink to={`/post/${post._id}`}><span>{post.title}</span></StyledLink>
+                                    <StyledLink to={`/post/${element.post._id}`}><span>{element.post.title}</span></StyledLink>
                                     <div className='postBody' >
-                                        { !post.url ? <p>{post.body}</p> : <img className='postImg' src={post.url}/>}
+                                        { !element.post.url ? <p>{element.post.body}</p> : <img className='postImg' src={element.post.url}/>}
                                     </div>
                                     <div className='footer'>
-                                        <StyledLink to={`/profile/${post.authorId.user}`} > {post.authorId.user } </StyledLink >
-                                        <span>  {getDate(post.date)}</span>
+                                        <StyledLink to={`/profile/${element.post.authorId.user}`} > {element.post.authorId.user } </StyledLink >
+                                        <span>  {getDate(element.post.date)}</span>
                                     </div>
                                 </PostBox>
                             )

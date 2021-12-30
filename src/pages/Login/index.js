@@ -26,11 +26,10 @@ export default function Login(){
         
         const response = await api.post('/login', {email, password})
 
-        const { user, subs, token } = response.data
+        const { user, token } = response.data
 
-        const subArrays = Array.from(subs)
 
-        setUserSession(token, user, subArrays)
+        setUserSession(token, user)
 
         navigate('/')
         window.location.reload()
