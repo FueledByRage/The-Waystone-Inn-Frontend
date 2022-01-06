@@ -1,6 +1,10 @@
-
-
 .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container{
     border-radius: 20px;
     padding: 20px;
     background-color: white;
@@ -11,6 +15,9 @@
     min-height: 70%;
     max-width: 350px;
     text-align: center;
+    @media(max-width: 800px) {
+        left: 5vw;
+    }
 }
 
 button{
@@ -18,13 +25,13 @@ button{
     height: 40px;
 }
 
-.container div.text{
+.form-container div.text{
     margin-top: 5%;
     margin-bottom: 3%;
     top: 30%;
 }
 
-.container form input{
+.form-container form input{
     width: 90%;
     padding: 14px 10px;
     text-align: left;
@@ -34,7 +41,7 @@ button{
     border-bottom: 2px solid silver;
 }
 
-.container form label{
+.form-container form label{
     color: #F33850;
     top: 29%;
     left: 45px;
@@ -43,7 +50,7 @@ button{
     transform-origin: 0 0;
 }
 
-.container form label.password{
+.form-container form label.password{
 
     color: #F33850;
     position: absolute;
@@ -53,10 +60,10 @@ button{
     left: 45px;
 }
 
-.container form input:focus + label, input:not(:placeholder-shown) + label{
+.form-container form input:focus + label, input:not(:placeholder-shown) + label{
     transform: translateY(-22px) scale(0.8);
 }
 
-.container form input::placeholder{
+.form-container form input::placeholder{
     color: transparent;
 }

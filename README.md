@@ -13,12 +13,12 @@ It's UI is quite poor yet since design is not my comfort zone and it's in a earl
 
 
 # Screens
-![Login screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/login.png)
-![Community screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/community.png)
-![Post screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/post.png)
-![Post with image](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/postImage.png)
-![Profile Screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/profileScreen.png)
-![Home Page Screen](https://github.com/FueledByRage/The-Waystone-Inn-Frontend/blob/master/screens/HomePage.png)
+![Posting](/screens/posting.gif)
+![Login screen](/screens/login.png)
+![Community screen](/screens/community.png)
+![Post screen](/screens/post.png)
+![Profile Screen](/screens/profileScreen.png)
+![Home Page Screen](/screens/HomePage.png)
 
 
 By: [Erik](https://www.linkedin.com/in/erik-natan-moreira-santos-983865195/)

@@ -34,41 +34,45 @@ export default function Login(){
         navigate('/')
         window.location.reload()
         }catch(error){
+            console.log(error)
             setError(error.response.data)
             setLoading(false)
         }
     }
     return(
-            <div className='container'>
+            <div className="container">
+                <div className='form-container'>
 
-            <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
 
-            <img src={logo}/>
+                <img src={logo}/>
 
-            <input
-                id="email"
-                type="text"
-                name="email"
-                placeholder='Email'
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-            />
-            <label for='email'> Email </label>
-            <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-            />
-            <label className='password' for='Senha'> Senha </label>
-            <button className="button" type="submit" disabled={loading}>Login</button>
+                <input
+                    id="email"
+                    type="text"
+                    name="email"
+                    placeholder='Email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                />
+                <label for='email'> Email </label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                />
+                <label className='password' for='Senha'> Senha </label>
+                <button className="button" type="submit" disabled={loading}>Login</button>
 
-            </form>
-            <div className='text'> <Link to='/register' >Register</Link> </div>
+                </form>
+                <div className='text'> <Link to='/register' >Register</Link> </div>
 
-            {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
+                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
+                </div>
+
             </div>
     )
 }

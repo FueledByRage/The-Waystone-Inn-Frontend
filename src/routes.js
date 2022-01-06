@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import HomePage from './pages/Home/'
 import Login from './pages/Login/'
 import PrivateRoute from './services/private'
@@ -13,6 +13,8 @@ import { EditProfile } from './pages/EditProfile'
 import  Header  from './components/Header/index.js'
 import { Search } from './components/SearchBar/styled'
 import SearchBar from './components/SearchBar'
+import { StyledLink } from './pages/Post/style'
+import { getUser } from './storage/utils'
 
 
 
@@ -22,10 +24,13 @@ export default function RoutesList(){
     return(
         <BrowserRouter>
             <Header>
-                <h1>
+                <span className='title'>
                     The Waystone Inn
-                </h1>
+                </span>
                 <SearchBar />
+                <a href='/'>Home</a>
+                <a href={`/profile/${getUser()}`}>Profile</a>
+
             </Header>
             <Routes>
                 <PublicRoute path='/login' element={<Login />}/>

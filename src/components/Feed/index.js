@@ -12,7 +12,7 @@ export default function Feed(props){
 
     const [ posts, setPosts ] = useState({})
     const [ error, setError ] = useState(null)
-    const subs = Array.from(JSON.parse(getSubs()))
+    //const subs = Array.from(JSON.parse(getSubs()))
     const [ lastPage, setLastPage ] = useState(false)
     const { pageCount } = props
     const [ page, setPage ] = useState(parseInt(pageCount))
@@ -20,7 +20,7 @@ export default function Feed(props){
 
     useEffect( async ()=>{
         try {    
-            const response = await api.post(`/posts/`, { subs, page }).catch((error)=>{
+            const response = await api.post(`/posts/`, { page }).catch((error)=>{
                 throw Error(error.response.data)
             })
             setLastPage(response.data['lastPage'])
@@ -34,7 +34,7 @@ export default function Feed(props){
     },[])
 
     async function handlePosts(nextMod){
-        const response = await api.post(`/posts/`, { subs, page, nextMod }).catch((error)=>setError(error.message))
+        const response = await api.post(`/posts/`, { page, nextMod }).catch((error)=>setError(error.message))
         setPosts(response.data['docs'])
         setPage(response.data['page'])
         setLastPage(response.data['lastPage'])
