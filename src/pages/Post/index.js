@@ -66,7 +66,7 @@ export default function Post(props){
 
                 error ? <AlertBox><span>{error}</span></AlertBox>  : 
                     <PostBox>
-                        <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
+                        <LikeBox> <FiThumbsUp /><span>{data.post.likes || 0}</span> <FiThumbsDown /></LikeBox>
                         <div className='title'>
                             <h1>{ data.post.title}</h1>
                             {data.post.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}

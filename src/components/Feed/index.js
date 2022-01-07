@@ -48,7 +48,7 @@ export default function Feed(props){
             {
                 error ?<AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
                         <PostBox>
-                            <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
+                            <LikeBox> <FiThumbsUp /> <span>{PostFooter.likes || 0}</span> <FiThumbsDown /></LikeBox>
                             <div className='postBody'>                          
                                 <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink>
                                     {

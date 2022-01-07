@@ -134,7 +134,7 @@ export default function Community(props){
                         {
                             errorData != null ? <h1>{errorData}</h1> : posts.map((element)=>(
                                 <PostBox>
-                                    <LikeBox> <FiThumbsUp /> <FiThumbsDown /></LikeBox>
+                                    <LikeBox> <FiThumbsUp /> <span>{element.likes || 0}</span> <FiThumbsDown /></LikeBox>
 
                                     <StyledLink to={`/post/${element.post._id}`}><span>{element.post.title}</span></StyledLink>
                                     <div className='postBody' >
