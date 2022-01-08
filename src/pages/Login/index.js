@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import api from "../../services/api"
-import { isLogged, setUserSession } from "../../storage/utils"
+import { setUserSession } from "../../storage/utils"
+import { Container, StyledForm, StyledInput, StyledLabel, StyledLabelPassword, StyledText } from "./style"
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/beerIcon.png'
 import './Login.css'
+import { StyledLink } from "../Post/style"
 
 
 
@@ -34,20 +36,18 @@ export default function Login(){
         navigate('/')
         window.location.reload()
         }catch(error){
-            console.log(error)
-            setError(error.response.data)
+            setError(error.response.data || error.message)
             setLoading(false)
         }
     }
     return(
-            <div className="container">
-                <div className='form-container'>
+                <StyledForm>
+                <img src={logo}/>
 
                 <form onSubmit={handleSubmit}>
 
-                <img src={logo}/>
 
-                <input
+                <StyledInput
                     id="email"
                     type="text"
                     name="email"
@@ -55,24 +55,23 @@ export default function Login(){
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
-                <label for='email'> Email </label>
-                <input
+                <StyledLabel for='email'> Email </StyledLabel>
+                <StyledInput
                     id="password"
                     name="password"
                     type="password"
-                    placeholder="Senha"
+                    placeholder="Password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <label className='password' for='Senha'> Senha </label>
+                <StyledLabelPassword for='Senha'> Password </StyledLabelPassword>
                 <button className="button" type="submit" disabled={loading}>Login</button>
 
                 </form>
-                <div className='text'> <Link to='/register' >Register</Link> </div>
+                <StyledText > <StyledLink to='/register' >Register</StyledLink> </StyledText>
 
                 {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
-                </div>
+                </StyledForm>
 
-            </div>
     )
 }

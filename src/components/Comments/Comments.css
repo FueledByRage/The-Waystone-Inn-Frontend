@@ -3,11 +3,12 @@
     height: auto;
     min-height: 70px;
     padding: 4px;
-    border: 1px solid;
     margin-top: 5px;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
+    background: #dddcdc;
+
 }
 .commentHeader{
     height: auto;

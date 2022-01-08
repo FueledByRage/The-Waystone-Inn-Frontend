@@ -43,4 +43,7 @@ export const PostBox = styled.div`
 
         justify-content: space-between;
     }
+    :hover{
+        border: 1px solid;
+    }
 `

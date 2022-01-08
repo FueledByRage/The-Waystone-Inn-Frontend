@@ -1,0 +1,33 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+
+}
+
+form{
+    padding: 10px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+
+}
+
+button{
+    width: 200px;
+    height: 40px;
+    align-self: flex-end;
+    margin-top: 5px;
+}
+
+textarea{
+    border-radius: 5px;
+    padding: 2px;
+    width: 60vw;
+}
+
+textarea:nth-child(2){
+    margin-top: 20px;
+    
+}

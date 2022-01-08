@@ -2,6 +2,7 @@ import React, { useState,  } from "react"
 import { useNavigate } from "react-router"
 import api from "../../services/api"
 import { getToken } from "../../storage/utils"
+import './community.css'
 
 
 export default function RegisterCommunity(){
@@ -32,9 +33,9 @@ export default function RegisterCommunity(){
     }
 
     return(
-        <div>
+        <div className="container">
         <form onSubmit={handleSubmit}>
-            <input 
+            <textarea 
             id='name'
             name='name'
             type='text'
@@ -42,15 +43,16 @@ export default function RegisterCommunity(){
             value={name}
             onChange={ e => setName(e.target.value)}
             />
-            <input 
+            <textarea 
             id='description'
             name='description'
             type='text'
+            rows="5"
             placeholder='Community description'
             value={description}
             onChange={ e => setDescription(e.target.value) }
             />
-            <button type="submit" disabled={loading}>Create</button>
+            <button className="button" type="submit" disabled={loading}>Create</button>
         </form>
         {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
         </div>

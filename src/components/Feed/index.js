@@ -65,7 +65,7 @@ export default function Feed(props){
                         </PostBox>
                 )
             }
-            <StyledFooter><button disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='next' disabled = { lastPage == page } onClick={() => handlePosts(1)} >Next</button> </StyledFooter>
+            <StyledFooter><button className='button' disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> <button className='button' disabled = { lastPage == page } onClick={() => handlePosts(1)} >Next</button> </StyledFooter>
         </Container> : <h1> 'Loading...' </h1>
 
     )

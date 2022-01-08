@@ -61,7 +61,7 @@ export const Aside = styled.div`
 
     @media(max-width: 800px) {
         margin-left: 45vw;
-  }
+    }
 `
 
 

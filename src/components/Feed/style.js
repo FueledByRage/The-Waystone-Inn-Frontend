@@ -48,6 +48,9 @@ export const PostBox = styled.div`
             font-weight: 600;
         }
     }
+    :hover{
+        border: 1px solid;
+    }
 ` 
 export const PostText = styled.div`
     padding: 5px;

@@ -2,7 +2,7 @@ import React, { useEffect, useState }from 'react'
 import { useNavigate } from 'react-router'
 import { useParams, Link } from 'react-router-dom'
 import api from '../../services/api'
-import { getToken, getSubs, isLogged, setSubs, getUser } from '../../storage/utils'
+import { getToken, isLogged, getUser } from '../../storage/utils'
 import InfoBox from '../../components/infoBox'
 import StyledLink from '../../components/Link/Link'
 import Upload from '../../components/Upload'
@@ -100,7 +100,7 @@ export default function Community(props){
         <div>
             <Header>
                 {errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1>}
-                <StyledButton disabled={isLogged() || errorData} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
+                <StyledButton className='button' disabled={isLogged() || errorData} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
             </Header>
            {
             !errorData ?
@@ -123,7 +123,7 @@ export default function Community(props){
                         
                         {file ? <DropContainer> { file.name } </DropContainer> : <Upload onUpload={handleFile}/>}
                         
-                        <StyledButton>Post</StyledButton>
+                        <StyledButton className='button' >Post</StyledButton>
                     </StyledForm>
                     {error && 
                     <ErrorBox>
@@ -149,7 +149,7 @@ export default function Community(props){
                             )
                         }
                     </PostsContainer>
-                    <div className='footerButtons' ><button disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='next' disabled = {lastPage} onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
+                    <div className='footerButtons' ><button className='button' disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='button' disabled = {lastPage} onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
 
             
             </Main>

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Header = styled.div`
-    background-color: whitesmoke;
     height: 10vh;
     grid-area: h;
     display: flex;
