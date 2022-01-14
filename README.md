@@ -3,7 +3,7 @@
 # About it:
 This is suposed to be a forum reddit based. It's get basic features as create a profile, communities, posts and comments.
 The name and color palett have been choosen afte one of my favourites fantasy literary saga (The Kingkiller Chronicle) and his main character.
-[API](https://github.com/FueledByRage/WaystoneInnApi)
+[API](https://github.com/FueledByRage/Waystone-Inn-API)
 
 # Why:
 Instead of making a simpler CRUD for my portfolio this is my attempt to a more interesting and challeging aplication.
