@@ -14,10 +14,14 @@ export const StyledForm = styled.div`
     height: 400px;
     text-align: center;
 
+    form{
+        background-color: transparent;
+    }
 
     button{
         width: 40%;
         height: 40px;
+        align-self: center;
     }
     @media(max-width: 800px) {
         margin-left: 2px;
@@ -39,7 +43,6 @@ export const StyledInput = styled.input`
     margin: 20px auto;
     border: none;
     border-bottom: 2px solid silver;
-
 `
 export const StyledLabel = styled.label`
     color: #F33850;
@@ -63,5 +66,4 @@ export const StyledText = styled.div`
     margin-top: 10%;
     margin-bottom: 3%;
     top: 30%;
-
 `

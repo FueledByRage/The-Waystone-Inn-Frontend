@@ -10,7 +10,8 @@ import { CommentsBox, Container, StyledLink, StyledForm } from './style'
 import { AlertBox } from '../../components/Alert'
 import { FiThumbsUp, FiThumbsDown, FiTrash } from 'react-icons/fi'
 import { LikeBox } from '../../components/likeBox'
-import { ErrorBox } from '../Community/style'
+import { IconContext } from 'react-icons'
+
 
 
 
@@ -23,25 +24,32 @@ export default function Post(props){
     const { id } = useParams()
     const [ comment, setComment ] = useState('')
     const navigate = useNavigate()
-    const [date, setDate] = useState(null)
+    const [ likesState, setLikes ] = useState({like: false, dislike: false, likes: 0})
     
-    useEffect(async ()=>{
-        try {
-            const user = getUser()
-            let isCancelled = false
-            const response = await api.get(`/post/${id}/${user || 'nl'}`).catch((error)=> {
-                throw Error(error.response.data)
-            })
-                              
-            if(!isCancelled){     
-                setData(response.data)
-                setDate(new Date(response.data.post.communityId.date))}
-                setLoading(false)
-                isCancelled = true
-            } catch (error) {
-                setError(error.message)
-                setLoading(false)
+    
+    useEffect(()=>{
+        
+        async function fetchData(){
+            try {
+                const user = getUser()
+                let isCancelled = false
+                const response = await api.get(`/post/${id}/${user || 'nl'}`).catch((error)=> {
+                    throw Error(error.response.data)
+                })
+                                  
+                if(!isCancelled){     
+                    setData(response.data)
+                    setLikes({like: response.data.like, dislike: response.data.dislike, likes: response.data.post.likes})
+                }
+                    setLoading(false)
+                    isCancelled = true
+                } catch (error) {
+                    setError(error.message)
+                    setLoading(false)
+            }
         }
+        fetchData()
+        
     }, [])
     
     async function handleSubmit(){
@@ -54,22 +62,49 @@ export default function Post(props){
 
     async function handleDelete(){
        const response = await api.post(`/post/deletePost`, { id }).catch((error) =>{ setError(error.message)})
-        navigate(`/community/${response.data.post.id}/1`)
+        navigate(`/community/${response.data.id}/1`)
     }
 
     if(loading) return ( <h1>Loading...</h1> )
+
+    async function handleLike(e){
+        await api.get(`/like/${id}`).catch(e =>{
+            return
+        })
+        setLikes({like: true, dislike: false, likes: ++data.post.likes})
+
+    }
+    async function handleDislike(e){
+        await api.get(`/dislike/${id}`).catch(e =>{
+            return
+        })
+        setLikes({like: false, dislike: true, likes: --data.post.likes})
+    }
 
     return(
 
         <Container>
             {   
-
                 error ? <AlertBox><span>{error}</span></AlertBox>  : 
                     <PostBox>
-                        <LikeBox> <FiThumbsUp /><span>{data.post.likes || 0}</span> <FiThumbsDown /></LikeBox>
+                        <LikeBox> 
+                            <button onClick={ handleLike }>
+                                <IconContext.Provider
+                                    value={{color: likesState.like ? 'red' : 'none'
+                                }}>
+                                    <FiThumbsUp />
+                                </IconContext.Provider>
+                            </button>
+                            <span>{likesState.likes}</span> 
+                            <button onClick={handleDislike}>                                
+                                <IconContext.Provider value={{color: likesState.dislike ? 'red' : 'none'}}>
+                                    <FiThumbsDown />
+                                </IconContext.Provider>
+                            </button>
+                        </LikeBox>
                         <div className='title'>
                             <h1>{ data.post.title}</h1>
-                            {data.post.authorId.user == getUser() ? <button onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
+                            {data.post.authorId.user == getUser() ? <button className='button' onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
                         </div>
                         <div className='postBody' > {data.post.url ? <img src={data.post.url} /> : <span>{data.post.body}</span> } </div>
                         <div className='footer'><StyledLink to={`/community/${data.post.communityId._id}/1`}> {data.post.communityId.name} </StyledLink> {<StyledLink  to={`/profile/${data.post.authorId.user}`} > {data.post.authorId.user} </StyledLink> }</div>

@@ -8,7 +8,6 @@ import './community.css'
 export default function RegisterCommunity(){
 
 
-    const token = getToken()
     const [loading, setLoading] = useState(false)
     const [ error, setError ] = useState(null)
     const [ name, setName ] = useState('')

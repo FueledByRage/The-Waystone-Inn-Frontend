@@ -1,10 +1,9 @@
 import React, { useState } from "react"
 import api from "../../services/api"
 import { setUserSession } from "../../storage/utils"
-import { Container, StyledForm, StyledInput, StyledLabel, StyledLabelPassword, StyledText } from "./style"
-import { Link, useNavigate } from 'react-router-dom'
+import { StyledForm, StyledInput, StyledLabel, StyledLabelPassword, StyledText } from "./style"
+import { useNavigate } from 'react-router-dom'
 import logo from '../../assets/beerIcon.png'
-import './Login.css'
 import { StyledLink } from "../Post/style"
 
 
@@ -20,7 +19,7 @@ export default function Login(){
     async function handleSubmit(event){
         event.preventDefault()
 
-        if(email == '' || password == '') return setError('Missing credentials!')
+        if(email === '' || password === '') return setError('Missing credentials!')
 
         setLoading(true)
 
@@ -45,27 +44,25 @@ export default function Login(){
                 <img src={logo}/>
 
                 <form onSubmit={handleSubmit}>
-
-
-                <StyledInput
-                    id="email"
-                    type="text"
-                    name="email"
-                    placeholder='Email'
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <StyledLabel for='email'> Email </StyledLabel>
-                <StyledInput
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <StyledLabelPassword for='Senha'> Password </StyledLabelPassword>
-                <button className="button" type="submit" disabled={loading}>Login</button>
+                    <StyledInput
+                        id="email"
+                        type="text"
+                        name="email"
+                        placeholder='Email'
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <StyledLabel for='email'> Email </StyledLabel>
+                    <StyledInput
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <StyledLabelPassword for='Senha'> Password </StyledLabelPassword>
+                    <button className="button" type="submit" disabled={loading}>Login</button>
 
                 </form>
                 <StyledText > <StyledLink to='/register' >Register</StyledLink> </StyledText>

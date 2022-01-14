@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PostBox = styled.div`
-    grid-template-columns: 1fr 15fr;
+    grid-template-columns: 1fr 25fr;
     display: grid;
     grid-template-areas: " l t t"
                         "l b b"
@@ -40,7 +40,6 @@ export const PostBox = styled.div`
         grid-area: f;
         margin-top: 5px;
         display: flex;
-
         justify-content: space-between;
     }
     :hover{

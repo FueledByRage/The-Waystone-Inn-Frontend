@@ -27,6 +27,8 @@ export const PostBox = styled.div`
     background-color: whitesmoke;
     padding: 5px;
     border-radius: 5px;
+    
+    
     .postBody{
         grid-area: b;
         padding: 5px;
@@ -46,6 +48,15 @@ export const PostBox = styled.div`
         span{
             font-size: 7px;
             font-weight: 600;
+        }
+        a{
+            :hover{
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    position: absolute;
+                } 
+            }
         }
     }
     :hover{

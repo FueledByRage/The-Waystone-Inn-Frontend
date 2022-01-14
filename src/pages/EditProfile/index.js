@@ -14,9 +14,13 @@ export function EditProfile(props){
     const [ data, setData ] = useState(null)
     const [ error, setError ] = useState(null)
 
-    useEffect(async ()=>{
-        const response = await api.get(`/user/get/${user}`).catch((error)=>{ setError(error) })
-        setData(response.data)
+    useEffect(()=>{
+        async function fetchData(){
+            const response = await api.get(`/user/get/${user}`).catch((error)=>{ setError(error) })
+            .catch(e => setError(error.response.data))
+            setData(response.data)
+        }
+        fetchData()
     },[])
 
     async function handleSubmit(e){

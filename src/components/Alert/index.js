@@ -1,4 +1,3 @@
-import { react } from "react";
 import styled from 'styled-components'
 
 
@@ -12,7 +11,7 @@ export const AlertBox = styled.div`
     opacity: 0.6;
     border-radius: 8px;
     padding: 10px;
-    width: 60vw;
+    width: 60%;
     min-width: 380px;
     margin-left: 10vw;
     

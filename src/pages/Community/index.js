@@ -1,6 +1,6 @@
 import React, { useEffect, useState }from 'react'
 import { useNavigate } from 'react-router'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import api from '../../services/api'
 import { getToken, isLogged, getUser } from '../../storage/utils'
 import InfoBox from '../../components/infoBox'
@@ -34,23 +34,27 @@ export default function Community(props){
     const [lastPage, setLastPage ] = useState(false)
     let parsePage = parseInt(page)
 
-    useEffect(async ()=>{
-        try{
-            const user = getUser() || 'nl'
-            const response = await api.get(`/community/${id}/${parsePage}/${user}`).catch((error) =>{
-                throw new Error(error.response.data)
+    useEffect(()=>{
+        async function fetchData(){
+            try{
+                const user = getUser() || 'nl'
+                const response = await api.get(`/community/${id}/${parsePage}/${user}`).catch((error) =>{
+                    throw new Error(error.response.data)
+                }
+                )
+                const sub = isLogged() ? response.data.sub : false 
+                setSub(sub)
+                setData(response.data['Community'])
+                setPosts(response.data['posts'])
+                setLastPage(response.data['lastPage'] == parseInt(page))
+                setLoading(false)
+            }catch(error){
+                setErrorData(error.message)
+                setLoading(false)
             }
-            )
-            const sub = isLogged() ? response.data.sub : false 
-            setSub(sub)
-            setData(response.data['Community'])
-            setPosts(response.data['posts'])
-            setLastPage(response.data['lastPage'] == parseInt(page))
-            setLoading(false)
-        }catch(error){
-            setErrorData(error.message)
-            setLoading(false)
         }
+        fetchData()
+        
     }, [])
 
     async function sub(){

@@ -12,23 +12,23 @@ export default function Comments(props){
     const [ data, setData ] = useState(null)
     const [loading, setLoading ] = useState(false)
 
-    useEffect(async () =>{
-
-        try {
-            let isCancelled = false
-            const response = await api.get(`/comments/${props.id}`).catch((error) => { 
-                throw Error(error.response.data) })
-            if(!isCancelled) setData(response.data) 
-            return () => {
-                isCancelled = true
+    useEffect(() =>{
+        async function fetchData(){
+            try {
+                let isCancelled = false
+                const response = await api.get(`/comments/${props.id}`).catch((error) => { 
+                    throw Error(error.response.data) })
+                if(!isCancelled) setData(response.data) 
+                return () => {
+                    isCancelled = true
+                    setLoading(false)
+                }
+            } catch (error) {
                 setLoading(false)
+                setError(error.message)
             }
-        } catch (error) {
-            setLoading(false)
-            setError(error.message)
         }
-
-
+        fetchData()
     }, [])
 
     async function handleDelete(id){
@@ -52,7 +52,7 @@ export default function Comments(props){
                                             <FiUser />
                                             <StyledLink to={`/profile/${c.authorId.user}`}> <span>{c.authorId.user}</span> </StyledLink> 
                                         </div>
-                                        {c.authorId.user == getUser() ? <button onClick={() => { handleDelete(c._id) }} className='button'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
+                                        {c.authorId.user === getUser() ? <button onClick={() => { handleDelete(c._id) }} className='button'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
                                         </div>
                                     <p>{c.comment}</p>
                                 </div>
