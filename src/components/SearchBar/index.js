@@ -18,7 +18,6 @@ export default function SearchBar(){
         }
         const response = await api.post('/communities/filter', {name: searchParam})
 
-
         setData(response.data.communities)
     }
 
@@ -40,7 +39,7 @@ export default function SearchBar(){
                                     <a href={`/community/${community._id}/1`}>
                                         <div className="dataIten">
                                             <p>
-                                                    {community.name}
+                                                {community.name}
                                             </p>
                                          </div>
                                     </a>

@@ -13,7 +13,6 @@ const Header = styled.div`
         text-decoration: none;
         :hover{
             color: gray;
-            transform: translate(5px, -5px);
         }
     }
     .title{

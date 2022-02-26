@@ -65,10 +65,9 @@ export default function Login(){
                     <button className="button" type="submit" disabled={loading}>Login</button>
 
                 </form>
+                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
                 <StyledText > <StyledLink to='/register' >Register</StyledLink> </StyledText>
 
-                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
                 </StyledForm>
-
     )
 }

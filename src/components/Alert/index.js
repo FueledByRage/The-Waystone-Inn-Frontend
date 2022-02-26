@@ -14,7 +14,6 @@ export const AlertBox = styled.div`
     width: 60%;
     min-width: 380px;
     margin-left: 10vw;
-    
     span{
         color: white;
     }

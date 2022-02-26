@@ -40,8 +40,7 @@ export default function Community(props){
                 const user = getUser() || 'nl'
                 const response = await api.get(`/community/${id}/${parsePage}/${user}`).catch((error) =>{
                     throw new Error(error.response.data)
-                }
-                )
+                })
                 const sub = isLogged() ? response.data.sub : false 
                 setSub(sub)
                 setData(response.data['Community'])
@@ -76,7 +75,9 @@ export default function Community(props){
         formData.append('id', id)
         formData.append('file', file)
 
-        if(!isLogged()) setError("You must be logged to post something!")
+        
+        if(!token) return setError("You must be logged to post something!");
+
         try {
             const response = await api.post('/post/register', formData).catch((error) =>{ throw error })
             navigate(`/post/${response.data._id}`)

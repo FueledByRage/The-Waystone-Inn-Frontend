@@ -60,10 +60,9 @@ export const StyledLabelPassword = styled.label`
     pointer-events: none;
     transform-origin: 0 0;
     top: 52%;
-    right: 70%;
+    right: 69%;
 `
 export const StyledText = styled.div`
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 3%;
-    top: 30%;
 `
