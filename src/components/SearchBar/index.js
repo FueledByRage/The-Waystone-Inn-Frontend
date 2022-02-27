@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import React, { useState } from "react";
 import api from "../../services/api";
 import { Search } from "./styled";
 

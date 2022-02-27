@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FiCalendar } from 'react-icons/fi'
 import './infoBox.css'
 

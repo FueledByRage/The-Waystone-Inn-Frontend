@@ -41,7 +41,7 @@ export default function Community(props){
                 const response = await api.get(`/community/${id}/${parsePage}/${user}`).catch((error) =>{
                     throw new Error(error.response.data)
                 })
-                const sub = isLogged() ? response.data.sub : false 
+                const sub =  response.data.sub
                 setSub(sub)
                 setData(response.data['Community'])
                 setPosts(response.data['posts'])
@@ -57,11 +57,10 @@ export default function Community(props){
     }, [])
 
     async function sub(){
-        api.post('/community/sub',{ token, id }).then((response) => {
-            setSub(!subscribed)
-        }).catch((e)=>{
-            setError(e.response.data)
+        await api.post('/community/sub',{ token, id }).catch((e)=>{
+            return setError(e.response.data)
         })        
+        setSub(!subscribed)
     }
 
     async function handleSubmit(e){
@@ -105,7 +104,7 @@ export default function Community(props){
         <div>
             <Header>
                 {errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1>}
-                <StyledButton className='button' disabled={isLogged() || errorData} onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
+                <StyledButton className='button' onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
             </Header>
            {
             !errorData ?

@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { StyledAvatar } from "./StyledAvatar";
 import DropZone from 'react-dropzone'
 import { FiCamera, FiCheckCircle, FiXSquare } from "react-icons/fi";
@@ -7,7 +7,6 @@ import { FiCamera, FiCheckCircle, FiXSquare } from "react-icons/fi";
 export default function UploadAvatar(props){
 
     const [ source, setSource ] = useState(props.src)
-    let preview = false
 
     function renderFeedback(isDragActive, isDragReject){
         if(!isDragActive) return <FiCamera />

@@ -19,7 +19,8 @@ export default function HomePage(props){
                 const communities = await api.post(`/communities`, {}).catch((error)=>{
                     throw Error(error.response.data)
                 })
-                const communitiesArray = Array.from(communities.data) 
+                const communitiesArray = Array.from(communities.data)
+                console.log(communitiesArray);
                 if(communitiesArray.length >= 4 )setData(communitiesArray.slice(0, 3))
                 else setData(communitiesArray)
                 setLoading(false)

@@ -4,8 +4,6 @@ import api from '../../services/api'
 import { AlertBox } from '../Alert'
 import StyledLink from '../Link/Link'
 import { Container, PostBox, StyledFooter } from './style'
-import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi'
-import { LikeBox } from '../likeBox'
 import { About, PopUp, Title } from '../communityPopUp'
 
 export default function Feed(props){
@@ -17,10 +15,6 @@ export default function Feed(props){
     const [ page, setPage ] = useState(parseInt(pageCount))
     const [ loading, setLoading ] = useState(true)
     
-    
-    const JQueryCode = () =>{
-
-    }
 
     useEffect(()=>{
         async function fetchData(){
@@ -37,7 +31,6 @@ export default function Feed(props){
             }
         }
         fetchData()
-        JQueryCode() 
     },[])
 
     async function handlePosts(nextMod){

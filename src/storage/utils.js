@@ -30,7 +30,7 @@ export const setUserSession = (token, user, subs) => {
     sessionStorage.setItem('subs', JSON.stringify(subs))
   }
 
-export const isLogged = () => {
+export const isLogged = async () => {
   if(!sessionStorage.getItem('token') === null) return true
   else return false
 }

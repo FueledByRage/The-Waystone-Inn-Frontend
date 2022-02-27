@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 
 import UploadAvatar from '../../components/UploadAvatar'
 import api from "../../services/api";
-import { getToken, getUser } from "../../storage/utils";
+import { getUser } from "../../storage/utils";
 
 
 export function EditProfile(props){

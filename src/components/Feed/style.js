@@ -31,6 +31,8 @@ export const PostBox = styled.div`
     
     .postBody{
         grid-area: b;
+        display:flex;
+        flex-direction: column;
         padding: 5px;
         img{    
             max-height: 400px;
