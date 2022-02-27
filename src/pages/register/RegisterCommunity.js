@@ -1,7 +1,6 @@
 import React, { useState,  } from "react"
 import { useNavigate } from "react-router"
 import api from "../../services/api"
-import { getToken } from "../../storage/utils"
 import './community.css'
 
 

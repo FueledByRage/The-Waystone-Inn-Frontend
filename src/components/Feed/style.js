@@ -92,6 +92,7 @@ export const StyledFooter = styled.div`
     justify-content: space-between;
     button{
         height: 40px;
-        min-width: 100px;
+        width:20vw; 
+        max-width: 90px;
     }
 `

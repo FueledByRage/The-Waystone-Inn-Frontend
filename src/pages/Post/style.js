@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
+    padding: 0px 0px 20px 0px;
     display: grid;
     grid-template: "m a"
                     "c c";

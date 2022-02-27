@@ -11,9 +11,7 @@ import Post from './pages/Post/'
 import ProfilePage from './pages/Profile'
 import { EditProfile } from './pages/EditProfile'
 import  Header  from './components/Header/index.js'
-import { Search } from './components/SearchBar/styled'
 import SearchBar from './components/SearchBar'
-import { StyledLink } from './pages/Post/style'
 import { getUser } from './storage/utils'
 
 

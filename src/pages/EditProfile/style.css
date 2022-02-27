@@ -1,0 +1,30 @@
+.container{
+    position: relative;
+    height: 90vh;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.close-div{
+    width: 100vw;
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-right: 10px;
+}
+.close-div button{
+    width: 40px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    height: 50vh;
+    padding: 15px 10px 10px 20px;
+    border-radius: 20px;
+}
+

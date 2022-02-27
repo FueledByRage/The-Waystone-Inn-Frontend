@@ -7,6 +7,7 @@ export const StyledAvatar = styled.div`
     background-image: url(${props => props.src});
     background-repeat: no-repeat;
     border-radius: 100px;
+    border: 2px solid #bdbcb9;
     background-size: cover; 
     background-position: 50% 50%;
     display: flex;
@@ -14,16 +15,11 @@ export const StyledAvatar = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    :hover{
-            p{
-                opacity: 1;
-            }
-    }
+
     p{
-        margin-left: 42%;
+        margin-left: -4px;
         font-weight: bold;
         font-size: large;
-        opacity: 0.0;
     }
     span{
         margin-left: 25%;

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import UploadAvatar from '../../components/UploadAvatar'
 import api from "../../services/api";
 import { getUser } from "../../storage/utils";
-
+import './style.css'
 
 export function EditProfile(props){
 
@@ -43,10 +43,11 @@ export function EditProfile(props){
 
     return(
         !data || error  ? <h1> { error } </h1> :
-        <div>
+        <div className="container">
+            <div className="close-div"> <button className="button">X</button> </div>
             <form onSubmit={handleSubmit}>
                 <UploadAvatar src={data.profileURL} handleFile={handleFile} />
-                <button>Edit</button>
+                <button className="button" >Edit</button>
             </form>
         </div>
     )
