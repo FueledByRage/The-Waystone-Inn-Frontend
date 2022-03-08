@@ -37,56 +37,56 @@ export default function Community(props){
     useEffect(()=>{
         async function fetchData(){
             try{
-                const user = getUser() || 'nl'
+                const user = getUser() || 'nl';
                 const response = await api.get(`/community/${id}/${parsePage}/${user}`).catch((error) =>{
                     throw new Error(error.response.data)
-                })
-                const sub =  response.data.sub
-                setSub(sub)
-                setData(response.data['Community'])
-                setPosts(response.data['posts'])
-                setLastPage(response.data['lastPage'] == parseInt(page))
-                setLoading(false)
+                });
+                const sub =  response.data.sub;
+                setSub(sub);
+                setData(response.data['Community']);
+                setPosts(response.data['posts']);
+                setLastPage(response.data['lastPage'] == parseInt(page));
+                setLoading(false);
             }catch(error){
-                setErrorData(error.message)
-                setLoading(false)
+                setErrorData(error.message);
+                setLoading(false);
             }
         }
-        fetchData()
+        fetchData();
         
-    }, [])
+    }, []);
 
     async function sub(){
-        await api.post('/community/sub',{ token, id }).catch((e)=>{
-            return setError(e.response.data)
+        await api.get(`/community/${id}`).catch((e)=>{
+            return setError(e.response.data);
         })        
-        setSub(!subscribed)
+        setSub(!subscribed);
     }
 
     async function handleSubmit(e){
-        e.preventDefault()
+        e.preventDefault();
 
-        if(title == '' || body == '' ) return setError('Post fields cannot be empty!')
+        if(title == '' || body == '' ) return setError('Post fields cannot be empty!');
 
-        const formData = new FormData()
-        formData.append('title', title)
-        formData.append('body', body)
-        formData.append('id', id)
-        formData.append('file', file)
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('body', body);
+        formData.append('id', id);
+        formData.append('file', file);
 
         
         if(!token) return setError("You must be logged to post something!");
 
         try {
             const response = await api.post('/post/register', formData).catch((error) =>{ throw error })
-            navigate(`/post/${response.data._id}`)
+            navigate(`/post/${response.data._id}`);
         } catch (error) {
-            setError(error.response)
+            setError(error.response);
         }
     }
 
     function getDate(date){
-        const newDate = new Date(date)
+        const newDate = new Date(date);
 
         return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`
     }
@@ -94,8 +94,8 @@ export default function Community(props){
     function handleFile(files){ setFile(files[0]) }
 
     function handleNavigate(next){
-        navigate(`/community/${id}/${next}`)
-        window.location.reload()
+        navigate(`/community/${id}/${next}`);
+        window.location.reload();
     }
 
     if(loading) return(<h1>Loading...</h1>)
