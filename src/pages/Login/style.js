@@ -51,7 +51,6 @@ export const StyledLabel = styled.label`
     position: absolute;
     pointer-events: none;
     transform-origin: 0 0;
-
 `
 
 export const StyledLabelPassword = styled.label`

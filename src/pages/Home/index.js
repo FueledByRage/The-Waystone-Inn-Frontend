@@ -16,7 +16,7 @@ export default function HomePage(props){
         
         async function fetchData(){
             try {
-                const communities = await api.post(`/communities`, {}).catch((error)=>{
+                const communities = await api.get(`/communities`).catch((error)=>{
                     throw Error(error.response.data)
                 })
                 const communitiesArray = Array.from(communities.data)

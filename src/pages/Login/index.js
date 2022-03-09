@@ -1,27 +1,25 @@
-import React, { useState } from "react"
-import api from "../../services/api"
-import { setUserSession } from "../../storage/utils"
-import { StyledForm, StyledInput, StyledLabel, StyledLabelPassword, StyledText } from "./style"
-import { useNavigate } from 'react-router-dom'
-import logo from '../../assets/beerIcon.png'
-import { StyledLink } from "../Post/style"
-
+import api from "../../services/api";
+import React, { useState } from "react";
+import logo from '../../assets/beerIcon.png';
+import { StyledLink } from "../Post/style";
+import { StyledFormLogin, StyledInputLogin } from "../../components/login/components";
+import { setUserSession } from "../../storage/utils";
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 
 export default function Login(){
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const [ email, setEmail] = useState('')
-    const [ password, setPassword ] = useState('')
-    const [ loading, setLoading ] = useState(false)
-    const [ error, setError ] = useState(null) 
+    const [ email, setEmail] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ loading, setLoading ] = useState(false);
+    const [ error, setError ] = useState(null);
 
     async function handleSubmit(event){
         event.preventDefault()
 
         if(email === '' || password === '') return setError('Missing credentials!')
-
-        setLoading(true)
 
         try{
         
@@ -39,35 +37,36 @@ export default function Login(){
             setLoading(false)
         }
     }
+
+
     return(
-                <StyledForm>
+        <div className="container" >
+            <StyledFormLogin  onSubmit={handleSubmit}>
                 <img src={logo}/>
-
-                <form onSubmit={handleSubmit}>
-                    <StyledInput
-                        id="email"
-                        type="text"
-                        name="email"
-                        placeholder='Email'
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <StyledLabel for='email'> Email </StyledLabel>
-                    <StyledInput
-                        id="password"
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <StyledLabelPassword for='Senha'> Password </StyledLabelPassword>
-                    <button className="button" type="submit" disabled={loading}>Login</button>
-
-                </form>
+                <StyledInputLogin 
+                    id="email"
+                    type="text"
+                    name="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required ='required'
+                />
+                <label id="label-email">Email</label>
+                <StyledInputLogin 
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required ='required'
+                />
+                <label id="label-password">Password</label>
+                <button className="button" type="submit">Login</button>
                 {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
-                <StyledText > <StyledLink to='/register' >Register</StyledLink> </StyledText>
+                <StyledLink to='/register' >Register</StyledLink>
+                <div></div>
+            </StyledFormLogin>
 
-                </StyledForm>
-    )
+        </div>
+    );
 }

@@ -38,7 +38,6 @@ export const CommentsBox = styled.div`
     margin-top: 10px;
     grid-area: c;
     background-color: whitesmoke;
-
     width: 40vw;
     min-width: 400px;
     margin-left: 15vw;
@@ -46,12 +45,12 @@ export const CommentsBox = styled.div`
 `
 
 export const StyledForm = styled.form`
-
-    padding: 5px;
+    width: 100%;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    min-width: 400px;
     align-items: center;
+    height: 200px;
     border-radius: 10px;
     textarea{
         padding: 5px;
@@ -61,7 +60,6 @@ export const StyledForm = styled.form`
     button{
         min-width: 120px;
         height: 35px;
-        margin-top: 10px;
         align-self: flex-end;
     }
 `

@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    height: 100vw;
 }
 
 .form-container{
@@ -21,7 +23,6 @@
 }
 
 
-
 .form-container div.text{
     margin-top: 5%;
     margin-bottom: 3%;
@@ -38,29 +39,33 @@
     border-bottom: 2px solid silver;
 }
 
-.form-container form label{
+label{
     color: #F33850;
-    top: 29%;
+    top: 42%;
     left: 45px;
     position: absolute;
     pointer-events: none;
+    font-size: 25px;
     transform-origin: 0 0;
+    transition: .5s;
 }
-
-.form-container form label.password{
-
-    color: #F33850;
+#label-email{
     position: absolute;
-    pointer-events: none;
-    transform-origin: 0 0;
-    top: 48%;
+    top: 42%;
     left: 45px;
 }
 
-.form-container form input:focus + label, input:not(:placeholder-shown) + label{
-    transform: translateY(-22px) scale(0.8);
+#label-password{
+    position: absolute;
+    top: 65%;
+    left: 45px;
 }
 
-.form-container form input::placeholder{
-    color: transparent;
+#email:focus ~ #label-email,
+#email:valid ~ #label-email{
+    transform: translateY(-50px) scale(.5);
+}
+#password:focus ~ #label-password,
+#password:valid ~ #label-password{
+    transform: translateY(-50px) scale(.5);
 }

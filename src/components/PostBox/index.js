@@ -15,7 +15,6 @@ export const PostBox = styled.div`
     margin-left: 15vw;
     padding: 10px;
     border-radius: 8px;
-    transition: .75s;
     .title{
         display: flex;
         justify-content: space-between;

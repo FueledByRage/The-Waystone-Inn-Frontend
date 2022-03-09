@@ -1,18 +1,18 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import HomePage from './pages/Home/'
-import Login from './pages/Login/'
-import PrivateRoute from './services/private'
-import Register from './pages/register/Register'
-import RegisterCommunity from './pages/register/RegisterCommunity'
-import PublicRoute from './services/public'
-import Community from './pages/Community/'
-import Post from './pages/Post/'
-import ProfilePage from './pages/Profile'
-import { EditProfile } from './pages/EditProfile'
-import  Header  from './components/Header/index.js'
-import SearchBar from './components/SearchBar'
-import { getUser } from './storage/utils'
+import React from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Login from './pages/Login';
+import HomePage from './pages/Home/';
+import PrivateRoute from './services/private';
+import Register from './pages/register/Register';
+import RegisterCommunity from './pages/register/RegisterCommunity';
+import PublicRoute from './services/public';
+import Community from './pages/Community/';
+import Post from './pages/Post/';
+import ProfilePage from './pages/Profile';
+import { EditProfile } from './pages/EditProfile';
+import  Header  from './components/Header/index.js';
+import SearchBar from './components/SearchBar';
+import { getUser } from './storage/utils';
 
 
 

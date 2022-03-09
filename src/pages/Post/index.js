@@ -120,7 +120,7 @@ export default function Post(props){
                     placeholder="Comentário"
                     value={comment}
                     onChange={e => setComment(e.target.value)}
-                    />
+                />
                     <button className="button" type="submit">Comentar</button>  
                 </StyledForm>
                 {errorSubmit && <AlertBox><span>{errorSubmit}</span></AlertBox>}
