@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../../services/api";
-import { FiCalendar } from 'react-icons/fi'
+import { FiCalendar } from 'react-icons/fi';
 import { StyledAvatar } from "../../components/UploadAvatar/StyledAvatar";
-import StyledLink from '../../components/Link/Link'
-import './Profile.css'
+import StyledLink from '../../components/Link/Link';
+import './Profile.css';
 import { AlertBox } from "../../components/Alert";
+import { EditProfile } from "../EditProfile/editProfile";
+import Modal from "../../components/modal";
+import ModalEdit from "../EditProfile";
 
 
 
 export default function ProfilePage(props){
     
-    const { user } = useParams()
-    const [ error, setError ] = useState(null)
-    const [ data, setData ] = useState(null)
-    const [ loading, setLoading ] = useState(true)
+    const { user } = useParams();
+    const [ error, setError ] = useState(null);
+    const [ data, setData ] = useState(null);
+    const [ loading, setLoading ] = useState(true);
+    const [ showModal, setShowModal ] = useState(false);
 
     useEffect( async ()=>{
         try {
@@ -33,6 +37,9 @@ export default function ProfilePage(props){
         return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`
     }
 
+    function closeModal(){
+        setShowModal(false);
+    }
 
     return(
         loading ? <h1>Loading...</h1> :
@@ -40,13 +47,15 @@ export default function ProfilePage(props){
             {
                 error ? <center className='errorBox'> <AlertBox><span>{error}</span></AlertBox> </center>  : 
                 <div className = 'profile'>
-                    <StyledAvatar src={data.profileURL}/> 
-                    <StyledLink to={`/${data.user}/edit`}><p>Editar</p></StyledLink>
+                    <StyledAvatar src={data.profileURL}/>
+                    <div onClick={()=> setShowModal(true)} > <span>Editar</span> </div> 
                     <h1>{data.user}</h1>
                     <h3>{data.name}</h3>
                     <div className = 'created'><span><FiCalendar /> Joined: {getDate(data.date)}</span></div>
                 </div>
             }
+            <ModalEdit profileURL={data.profileURL} show={showModal} close={closeModal} />
+                
         </div>
     )
 

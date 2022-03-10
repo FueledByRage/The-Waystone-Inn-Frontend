@@ -9,7 +9,6 @@ import PublicRoute from './services/public';
 import Community from './pages/Community/';
 import Post from './pages/Post/';
 import ProfilePage from './pages/Profile';
-import { EditProfile } from './pages/EditProfile';
 import  Header  from './components/Header/index.js';
 import SearchBar from './components/SearchBar';
 import { getUser } from './storage/utils';
@@ -38,7 +37,6 @@ export default function RoutesList(){
                 <PrivateRoute path="/register/community" element={<RegisterCommunity />}/>
                 <Route path='/post/:id' element={<Post />}/>
                 <PrivateRoute path='/profile/:user' element={<ProfilePage />}/>
-                <PrivateRoute path='/:user/edit' element={<EditProfile />} />
             </Routes>
         </BrowserRouter>
     )

@@ -1,56 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import Modal from "../../components/modal";
+import { EditProfile } from "./editProfile";
 
-import UploadAvatar from '../../components/UploadAvatar'
-import api from "../../services/api";
-import { getUser } from "../../storage/utils";
-import './style.css'
 
-export function EditProfile(props){
-
-    const [ file, setFile ] = useState()
-    const navigate = useNavigate()
-    const { user } = useParams()
-    const [ data, setData ] = useState(null)
-    const [ error, setError ] = useState(null)
-
-    useEffect(()=>{
-        async function fetchData(){
-            const response = await api.get(`/user/get/${user}`).catch((error)=>{ setError(error) })
-            .catch(e => setError(error.response.data))
-            setData(response.data)
-        }
-        fetchData()
-    },[])
-
-    async function handleSubmit(e){
-
-        e.preventDefault()
-
-        const formData = new FormData()
-        formData.append('file', file)
-
-        await api.post('/user/edit', formData).catch((error)=>{
-            setError(error)
-        })
-        navigate(`/profile/${getUser()}`)
-    }
-
-    function handleFile(files){ 
-        setFile(files[0]) 
-        console.log(files[0])
-    }
-
+export default function ModalEdit(props){
     return(
-        !data || error  ? <h1> { error } </h1> :
-        <div className="container">
-            <div className="close-div"> <button className="button">X</button> </div>
-            <form onSubmit={handleSubmit}>
-                <UploadAvatar src={data.profileURL} handleFile={handleFile} />
-                <button className="button" >Edit</button>
-            </form>
-        </div>
+        <Modal show={props.show} close={props.close}>
+            <EditProfile profileURL={props.profileURL} />
+        </Modal>
     )
-
-
 }
