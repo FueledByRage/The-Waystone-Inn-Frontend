@@ -40,7 +40,7 @@ export const PostBox = styled.div`
         }
     }
     .footer{
-
+        position: relative;
         grid-area: f;
         width: 100%;
         padding: 5px;

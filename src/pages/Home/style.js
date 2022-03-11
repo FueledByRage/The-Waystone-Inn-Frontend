@@ -31,12 +31,10 @@ export const Aside = styled.div`
 `;
 
 export const BoxCommunities = styled.div`
-    
-    width: 200px;
-    height: 120px;
+    width: 220px;
     background-color: whitesmoke;
     padding: 16px;
-
+    border-radius: 10px;
     div{
         display: flex;
         padding: 5px;

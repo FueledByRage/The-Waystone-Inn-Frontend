@@ -17,15 +17,14 @@ export default function HomePage(props){
         async function fetchData(){
             try {
                 const communities = await api.get(`/communities`).catch((error)=>{
-                    throw Error(error.response.data)
-                })
-                const communitiesArray = Array.from(communities.data)
-                if(communitiesArray.length >= 4 )setData(communitiesArray.slice(0, 3))
-                else setData(communitiesArray)
-                setLoading(false)
+                    throw Error(error.response.data);
+                });
+                const communitiesArray = Array.from(communities.data);
+                setData(communitiesArray);
+                setLoading(false);
             } catch (error) {
                 setLoading(false)
-                setError(error.message)
+                setError(error.message);
             }
         }
         fetchData()

@@ -6,23 +6,24 @@ export const PopUp = styled.div`
     position: absolute;
     width: 200px;
     background-color: #dddcdc;
-    height: 100px;
-    padding: 5px;
+    min-height: 100px;
+    padding: 10px;
+    top: -100px;
     border-radius: 5px;
     font-weight: bold;
     border: white 1px solid;
 `
 
 export const Title = styled.div`
-    position: absolute;
     width: 95%;
     border-bottom: 1px solid silver;
 `
 
 export const About = styled.div`
-    position: absolute;
+    padding: 5px;
     top: 30px;
     width: 100%;
+    font-size: 1rem;
 `
 
 export const Footer = styled.div`

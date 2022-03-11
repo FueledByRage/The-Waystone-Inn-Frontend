@@ -57,7 +57,8 @@ export default function Community(props){
     }, []);
 
     async function sub(){
-        await api.get(`/community/${id}`).catch((e)=>{
+        console.log(id);
+        await api.get(`/community/sub/${id}`).catch((e)=>{
             return setError(e.response.data);
         })        
         setSub(!subscribed);
