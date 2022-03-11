@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import  Feed  from '../../components/Feed'
 import { FiArrowRight } from 'react-icons/fi'
 import api from '../../services/api'
-import { Aside, BoxCommunities, Container, Main, StyledLink } from "./style";
+import { Aside, BoxCommunities, BoxItem, Container, Main, StyledLink } from "./style";
 
 
 
@@ -20,7 +20,6 @@ export default function HomePage(props){
                     throw Error(error.response.data)
                 })
                 const communitiesArray = Array.from(communities.data)
-                console.log(communitiesArray);
                 if(communitiesArray.length >= 4 )setData(communitiesArray.slice(0, 3))
                 else setData(communitiesArray)
                 setLoading(false)
@@ -38,18 +37,15 @@ export default function HomePage(props){
                 <Feed pageCount={1} />
             </Main>
             <Aside>
-
                 {
                     !loading ?
                         <BoxCommunities>
-                        
                             <h3>Communities:</h3>
                                 {   !error ?
                                     data.map(community => (
-                                    <div> <div className='icon'><FiArrowRight /></div> <StyledLink to={`/community/${community._id}/1`}><h3> {community.name}</h3> </StyledLink>  </div>
+                                    <BoxItem> <div className='icon'><FiArrowRight /></div> <StyledLink to={`/community/${community._id}/1`}><h3> {community.name}</h3> </StyledLink>  </BoxItem>
                                     )) : <h2>{error}</h2> 
                                 }
-    
                         </BoxCommunities> : 
                     <div>
                         <h1>Loading...</h1>

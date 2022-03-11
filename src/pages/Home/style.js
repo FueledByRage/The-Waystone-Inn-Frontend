@@ -14,7 +14,7 @@ export const Container = styled.div`
                             "a a"
                             "m m";
     }
-`
+`;
 
 export const Main = styled.div`
     grid-area: m;
@@ -23,12 +23,12 @@ export const Main = styled.div`
     justify-content: start;
     align-items: center;
 
-`
+`;
 export const Aside = styled.div`
     //background-color: brown;
     grid-area: a;
 
-`
+`;
 
 export const BoxCommunities = styled.div`
     
@@ -47,7 +47,7 @@ export const BoxCommunities = styled.div`
         margin-left: 10vw;
     }
 
-`
+`;
 export const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 16px;
@@ -55,4 +55,12 @@ export const StyledLink = styled(Link)`
     :hover{
         color: #262627;
     }
-`
+`;
+
+export const BoxItem = styled.div`
+    width: 100%;
+    border-bottom: 2px solid silver;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;

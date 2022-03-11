@@ -1,13 +1,10 @@
+import './Profile.css';
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../../services/api";
 import { FiCalendar } from 'react-icons/fi';
 import { StyledAvatar } from "../../components/UploadAvatar/StyledAvatar";
-import StyledLink from '../../components/Link/Link';
-import './Profile.css';
 import { AlertBox } from "../../components/Alert";
-import { EditProfile } from "../EditProfile/editProfile";
-import Modal from "../../components/modal";
 import ModalEdit from "../EditProfile";
 
 
