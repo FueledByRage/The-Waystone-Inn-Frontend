@@ -6,7 +6,7 @@ The name and color palett have been choosen afte one of my favourites fantasy li
 [API](https://github.com/FueledByRage/Waystone-Inn-API)
 
 # Why:
-Instead of making a simpler CRUD for my portfolio this is my attempt to a more interesting and challeging aplication.
+Instead of making a simple CRUD for my portfolio this is my attempt to a more interesting and challeging aplication.
 
 # Observation
 It's UI is quite poor yet since design is not my comfort zone and it's in a early development stage.
