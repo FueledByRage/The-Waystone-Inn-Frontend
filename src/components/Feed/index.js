@@ -1,61 +1,67 @@
 import React, { useEffect, useState } from 'react'
-import 'react-jquery-plugin'
 import api from '../../services/api'
 import { AlertBox } from '../Alert'
 import StyledLink from '../Link/Link'
-import { Container, PostBox, StyledFooter } from './style'
-import { About, PopUp, Title } from '../communityPopUp'
+import { ContainerFeed, PostFeed, StyledFooter, PostFeedFooter, PostFeedBody, PostFeedTitle } from './style'
+import { About, PopUp, Title } from './CommunityPopUp'
 
 export default function Feed(props){
 
-    const [ posts, setPosts ] = useState({})
-    const [ error, setError ] = useState(null)
-    const [ lastPage, setLastPage ] = useState(false)
-    const { pageCount } = props
-    const [ page, setPage ] = useState(parseInt(pageCount))
-    const [ loading, setLoading ] = useState(true)
+    const [ posts, setPosts ] = useState({});
+    const [ error, setError ] = useState(null);
+    const [ lastPage, setLastPage ] = useState(false);
+    const { pageCount } = props;
+    const [ page, setPage ] = useState(parseInt(pageCount));
+    const [ loading, setLoading ] = useState(true);
     
 
     useEffect(()=>{
         async function fetchData(){
             try {    
-                const response = await api.post(`/posts/`, { page }).catch((error)=>{
+                const response = await api.get(`/posts/feed/${page}/3`).catch((error)=>{
                     throw Error(error.response.data)
                 })
-                setLastPage(response.data['lastPage'])
-                setPosts(response.data['docs'])
-                setLoading(false)
+                console.log(response);
+                setLastPage(response.data['lastPage']);
+                setPosts(response.data['docs']);
+                setLoading(false);
             } catch (error) {
-                setError(error.message)
-                setLoading(false)
+                setError(error.message);
+                setLoading(false);
             }
         }
-        fetchData()
-    },[])
+        fetchData();
+    },[]);
 
-    async function handlePosts(nextMod){
-        const response = await api.post(`/posts/`, { page, nextMod }).catch((error)=>setError(error.message))
-        setPosts(response.data['docs'])
-        setPage(response.data['page'])
-        setLastPage(response.data['lastPage'])
+    async function handlePosts(next){
+        const response = await api.get(`/posts/feed/${page + next}/3`)
+        .catch((error)=>setError(error.message));
+        
+        setPosts(response.data['docs']);
+        setPage(page + next);
+        setLastPage(response.data['lastPage']);
     }
 
     return(
         !loading ?
-        <Container>
+        <ContainerFeed>
             {
-                error ?<AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
-                        <PostBox>
-                            <div className='postBody'>                          
-                            <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink> 
+                error ? <AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
+                        <PostFeed>
+                            <PostFeedTitle>
+                                <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink> 
+                            </PostFeedTitle>
+
+                            <PostFeedBody className='postBody'>                          
                                     {
                                         post.url ? <img src={post.url} /> :
                                         <p>
                                             { post.body }
                                         </p>
                                     }
-                            </div>
-                            <div className='footer'>
+                            </PostFeedBody>
+
+                            <PostFeedFooter>
                                 <StyledLink to={`/community/${post.communityId._id}/1`}> {post.communityId.name}
                                     <PopUp>
                                         <Title>{post.communityId.name}</Title>
@@ -63,16 +69,17 @@ export default function Feed(props){
                                     </PopUp>
                                 </StyledLink> 
                                 <StyledLink  to={`/profile/${post.authorId.user}`} >{post.authorId.user}</StyledLink> 
-                            </div>
+                            </PostFeedFooter>
                             
-                        </PostBox>
+                        </PostFeed>
                 )
             }
-            {!error && <StyledFooter>
-                <button className='button' disabled = { page == 1 } onClick={() => handlePosts(-1)} >Previous</button> 
-                <button className='button' disabled = { lastPage } onClick={() => handlePosts(1)} >Next</button> 
-            </StyledFooter>}
-        </Container> : <h1> 'Loading...' </h1>
+            
+            <StyledFooter>
+                <button className='button' disabled = { page == 1 || error } onClick={() => handlePosts(-1)} >Previous</button> 
+                <button className='button' disabled = { lastPage || error } onClick={() => handlePosts(1)} >Next</button> 
+            </StyledFooter>
+        </ContainerFeed> : <h1> 'Loading...' </h1>
 
     )
 }

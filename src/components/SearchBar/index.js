@@ -15,7 +15,9 @@ export default function SearchBar(){
             setData([])
             return
         }
-        const response = await api.post('/communities/filter', {name: searchParam})
+        const response = await api.get(`communitie/${searchParam}`, {name: searchParam})
+
+        console.log(response.data.communities);
 
         setData(response.data.communities)
     }

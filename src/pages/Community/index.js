@@ -1,18 +1,18 @@
-import React, { useEffect, useState }from 'react'
-import { useNavigate } from 'react-router'
-import { useParams } from 'react-router-dom'
-import api from '../../services/api'
-import { getToken, isLogged, getUser } from '../../storage/utils'
-import InfoBox from '../../components/infoBox'
-import StyledLink from '../../components/Link/Link'
-import Upload from '../../components/Upload'
-import { DropContainer } from '../../components/Upload/DropContainer'
-import  { PostBox }  from '../../components/PostBox'
+import React, { useEffect, useState }from 'react';
+import { useNavigate } from 'react-router';
+import { useParams } from 'react-router-dom';
+import api from '../../services/api';
+import { getToken } from '../../storage/utils';
+import InfoBox from '../../components/infoBox';
+import StyledLink from '../../components/Link/Link';
+import Upload from '../../components/Upload';
+import { DropContainer } from '../../components/Upload/DropContainer';
+import  { PostBody, PostBox, PostFooter }  from '../../components/PostComponets';
 import { Container, Main, Aside, Header, StyledForm, StyledInput,
-     PostsContainer, StyledButton, ErrorBox } from './style'
-import { AlertBox } from '../../components/Alert'
-import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi'
-import { LikeBox } from '../../components/likeBox'
+     PostsContainer, StyledButton, ErrorBox } from './style';
+import { AlertBox } from '../../components/Alert';
+import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi';
+import { LikeBox } from '../../components/PostComponets';
 
 
 
@@ -37,15 +37,16 @@ export default function Community(props){
     useEffect(()=>{
         async function fetchData(){
             try{
-                const user = getUser() || 'nl';
-                const response = await api.get(`/community/${id}/${parsePage}/${user}`).catch((error) =>{
+                const response = await api.get(`/community/${id}/${parsePage}`)
+                .catch((error) =>{
                     throw new Error(error.response.data)
                 });
-                const sub =  response.data.sub;
+                const { sub, posts, lastPage, Community } =  response.data;
+
                 setSub(sub);
-                setData(response.data['Community']);
-                setPosts(response.data['posts']);
-                setLastPage(response.data['lastPage'] == parseInt(page));
+                setData(Community);
+                setPosts(posts);
+                setLastPage(lastPage);
                 setLoading(false);
             }catch(error){
                 setErrorData(error.message);
@@ -57,7 +58,6 @@ export default function Community(props){
     }, []);
 
     async function sub(){
-        console.log(id);
         await api.get(`/community/sub/${id}`).catch((e)=>{
             return setError(e.response.data);
         })        
@@ -141,14 +141,14 @@ export default function Community(props){
                                 <PostBox>
                                     <LikeBox> <FiThumbsUp /> <span>{element.likes || 0}</span> <FiThumbsDown /></LikeBox>
 
-                                    <StyledLink to={`/post/${element.post._id}`}><span>{element.post.title}</span></StyledLink>
-                                    <div className='postBody' >
-                                        { !element.post.url ? <p>{element.post.body}</p> : <img className='postImg' src={element.post.url}/>}
-                                    </div>
-                                    <div className='footer'>
-                                        <StyledLink to={`/profile/${element.post.authorId.user}`} > {element.post.authorId.user } </StyledLink >
-                                        <span>  {getDate(element.post.date)}</span>
-                                    </div>
+                                    <StyledLink to={`/post/${element._id}`}><span>{element.title}</span></StyledLink>
+                                    <PostBody className='postBody' >
+                                        { !element.url ? <p>{element.body}</p> : <img className='postImg' src={element.url}/>}
+                                    </PostBody>
+                                    <PostFooter className='footer'>
+                                        <StyledLink to={`/profile/${element.authorId.user}`} > {element.authorId.user } </StyledLink >
+                                        <span>  {getDate(element.date)}</span>
+                                    </PostFooter>
                                 </PostBox>
                             )
                             )

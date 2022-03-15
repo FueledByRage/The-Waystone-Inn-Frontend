@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 
-export const Container = styled.div`
-    width: 40vw;
-    max-width: 400;
+export const ContainerFeed = styled.div`
+    width: 50vw;
+    min-width: 400px;
     display: grid;
-    
     margin-left: 10vw;
     align-items: center;
     justify-items: center;
@@ -15,74 +14,63 @@ export const ErrorBox = styled.div`
 `
 
 
-export const PostBox = styled.div`
+export const PostFeed = styled.div`
     display: grid;
     grid-template-columns: 1fr 15fr;
-    grid-template-areas: "l b b"
-                        "l b  b"
-                        "l f f";
+    grid-template-areas: "t t"
+                        "b  b"
+                        "f f";
     margin-top: 10px;
     width: 80%;
+    min-height: 150px;
     min-width: 400px;
     background-color: whitesmoke;
     padding: 5px;
     border-radius: 5px;
-    
-    
-    .postBody{
-        grid-area: b;
-        display:flex;
-        flex-direction: column;
-        padding: 5px;
-        img{    
-            max-height: 400px;
-            object-fit: contain;
-        }
-    }
-    .footer{
-        position: relative;
-        grid-area: f;
-        width: 100%;
-        padding: 5px;
-        bottom: 0;
-        display: flex;
-        justify-content: space-between;
-        span{
-            font-size: 7px;
-            font-weight: 600;
-        }
-        a{
-            :hover{
-                div{
-                    display: flex;
-                    flex-direction: column;
-                    position: absolute;
-                } 
-            }
-        }
-    }
+    transition: .5s;
+    padding: 5px;
     :hover{
         border: 1px solid;
     }
 ` 
-export const PostText = styled.div`
+
+export const PostFeedTitle = styled.div`
+    grid-area: t;
+`;
+export const PostFeedBody = styled.div`
+    grid-area: b;
+    display:flex;
+    flex-direction: column;
     padding: 5px;
-        img{    
-            max-height: 400px;
-            object-fit: contain;
-        }
-`
-export const PostFooter = styled.div`
-        width: 100%;
-        padding: 5px;
-        bottom: 0;
-        display: flex;
-        justify-content: space-between;
-        span{
-            font-size: 7px;
-            font-weight: 600;
-        }
-`
+    img{
+        max-height: 400px;
+        object-fit: contain;
+    }
+`;
+
+export const PostFeedFooter = styled.div`
+    position: relative;
+    grid-area: f;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    span{
+        font-size: 7px;
+        font-weight: 600;
+    }
+
+    a:nth-child(1):hover{
+
+        div{
+
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+        } 
+    }
+`;
+
 
 export const StyledFooter = styled.div`
     margin-top: 10px;
