@@ -1,8 +1,8 @@
 import api from "../../services/api";
 import React, { useState } from "react";
 import logo from '../../assets/beerIcon.png';
-import { StyledLink } from "../Post/style";
-import { StyledFormLogin, StyledInputLogin } from "../../components/login/components";
+import { StyledLink } from "../Post/components";
+import { StyledFormLogin, StyledInputLogin } from "./components";
 import { setUserSession } from "../../storage/utils";
 import { useNavigate } from 'react-router-dom';
 import './Login.css';

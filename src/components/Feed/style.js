@@ -61,7 +61,6 @@ export const PostFeedFooter = styled.div`
     }
 
     a:nth-child(1):hover{
-
         div{
 
             display: flex;

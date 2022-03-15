@@ -24,6 +24,5 @@ export const StyledAvatar = styled.div`
     span{
         margin-left: 25%;
         font-weight: bold;
-        
     }
 `

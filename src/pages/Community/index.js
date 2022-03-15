@@ -7,12 +7,12 @@ import InfoBox from '../../components/infoBox';
 import StyledLink from '../../components/Link/Link';
 import Upload from '../../components/Upload';
 import { DropContainer } from '../../components/Upload/DropContainer';
-import  { PostBody, PostBox, PostFooter }  from '../../components/PostComponets';
+import  { PostBody, PostBox, PostFooter }  from '../../components/PostComponents';
 import { Container, Main, Aside, Header, StyledForm, StyledInput,
-     PostsContainer, StyledButton, ErrorBox } from './style';
+     PostsContainer, StyledButton, ErrorBox } from './components';
 import { AlertBox } from '../../components/Alert';
 import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi';
-import { LikeBox } from '../../components/PostComponets';
+import { LikeBox } from '../../components/PostComponents';
 
 
 

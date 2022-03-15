@@ -1,5 +1,6 @@
-.comment{
+import styled from "styled-components";
 
+export const Comment = styled.div`
     height: auto;
     min-height: 70px;
     padding: 4px;
@@ -9,30 +10,25 @@
     border-bottom-left-radius: 6px;
     background: #dddcdc;
 
-}
-.commentHeader{
+    p{
+        margin-top: 5px;
+    }
+`;
+
+export const CommentHeader = styled.div`
     height: auto;
     font-weight: bold;
     padding: 3px 3px;
     display: flex;
     justify-content: space-between;
-}
 
-.commentHeader button{
-    width: 30px;
-    height: 30px;
-}
+    button{
+        width: 30px;
+        height: 30px;
+    }
 
-.commentHeader span{
-    margin-top: -2;
-    margin-left: 5px;
-}
-.comment p{
-    margin-top: 5px;
-}
-
-.delete{
-    width: 20px;
-    height: 20px;
-}
-
+    span{
+        margin-top: -2;
+        margin-left: 5px;
+    }
+`;

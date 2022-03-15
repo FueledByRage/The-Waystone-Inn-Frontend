@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import HomePage from './pages/Home/';
 import PrivateRoute from './services/private';
 import Register from './pages/register/Register';
-import RegisterCommunity from './pages/register/RegisterCommunity';
+import RegisterCommunity from './pages/register/Community/RegisterCommunity';
 import PublicRoute from './services/public';
 import Community from './pages/Community/';
 import Post from './pages/Post/';

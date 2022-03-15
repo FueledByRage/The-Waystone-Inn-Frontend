@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import api from '../../services/api'
-import { FiUser } from 'react-icons/fi'
-import { getToken, getUser } from '../../storage/utils'
-import { FiTrash } from 'react-icons/fi'
-import StyledLink from '../Link/Link'
-import './Comments.css'
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
+import { FiUser } from 'react-icons/fi';
+import { getToken, getUser } from '../../storage/utils';
+import { FiTrash } from 'react-icons/fi';
+import StyledLink from '../Link/Link';
+import { Comment, CommentHeader } from './components';
 
 
 export default function Comments(props){
     const [ error, setError ] = useState(null) 
     const [ data, setData ] = useState(null)
-    const [loading, setLoading ] = useState(false)
+    const [ loading, setLoading ] = useState(false)
 
     useEffect(() =>{
         async function fetchData(){
@@ -46,16 +46,21 @@ export default function Comments(props){
                     {
                         Array.from(data).map(
                             c => (
-                                <div key={c._id} className = 'comment'>
-                                    <div className = 'commentHeader'>
+                                <Comment key={c._id}>
+                                    <CommentHeader>
                                         <div>
                                             <FiUser />
                                             <StyledLink to={`/profile/${c.authorId.user}`}> <span>{c.authorId.user}</span> </StyledLink> 
                                         </div>
-                                        {c.authorId.user === getUser() ? <button onClick={() => { handleDelete(c._id) }} className='button'> <FiTrash /> </button> : <span>{data.authorId.user}</span>}
-                                        </div>
+                                        {
+                                        c.authorId.user === getUser() ? 
+                                        <button onClick={() => { handleDelete(c._id) }} className='button'> 
+                                            <FiTrash /> 
+                                        </button> : <span>{data.authorId.user}</span>
+                                        }
+                                    </CommentHeader>
                                     <p>{c.comment}</p>
-                                </div>
+                                </Comment>
                              )
                         )
                     }

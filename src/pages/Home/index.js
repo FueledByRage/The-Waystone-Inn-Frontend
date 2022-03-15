@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import  Feed  from '../../components/Feed'
 import { FiArrowRight } from 'react-icons/fi'
 import api from '../../services/api'
-import { Aside, BoxCommunities, BoxItem, Container, Main, StyledLink } from "./style";
+import { Aside, BoxCommunities, BoxItem, Container, Main, StyledLink } from "./components";
 
 
 

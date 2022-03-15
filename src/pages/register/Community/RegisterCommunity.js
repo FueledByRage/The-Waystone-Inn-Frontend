@@ -1,7 +1,7 @@
-import React, { useState,  } from "react"
-import { useNavigate } from "react-router"
-import api from "../../services/api"
-import './community.css'
+import React, { useState,  } from "react";
+import { useNavigate } from "react-router";
+import api from "../../../services/api";
+import './community.css';
 
 
 export default function RegisterCommunity(){
