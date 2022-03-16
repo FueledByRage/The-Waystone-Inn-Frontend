@@ -47,20 +47,21 @@ export default function Post(props){
             }
         }
         fetchData();
-        
-    }, [])
+    }, []);
     
-    async function handleSubmit(){
+    async function handleSubmit(e){
+        e.preventDefault();
         await api.post('/comment/register', { id, comment })
         .catch((error) =>{ 
-            setErrorSubmit(error.response.data)
+            setErrorSubmit(error.response.data);
         });
+        document.location.reload();
         
     }
 
     async function handleDelete(){
-       const response = await api.post(`/post/deletePost`, { id }).catch((error) =>{ setError(error.message)})
-        navigate(`/community/${response.data.id}/1`)
+       const response = await api.delete(`/post/${id}`).catch((error) =>{ setError(error.message)});
+         navigate(`/community/${response.data.id}/1`);
     }
 
     if(loading) return ( <h1>Loading...</h1> )

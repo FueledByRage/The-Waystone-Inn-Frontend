@@ -2,7 +2,7 @@ import api from "../../services/api";
 import React, { useState } from "react";
 import logo from '../../assets/beerIcon.png';
 import { StyledLink } from "../Post/components";
-import { StyledFormLogin, StyledInputLogin } from "./components";
+import { ContainerLogin, StyledFormLogin, StyledInputLogin } from "./components";
 import { setUserSession } from "../../storage/utils";
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
@@ -40,7 +40,7 @@ export default function Login(){
 
 
     return(
-        <div className="container" >
+        <ContainerLogin>
             <StyledFormLogin  onSubmit={handleSubmit}>
                 <img src={logo}/>
                 <StyledInputLogin 
@@ -61,12 +61,15 @@ export default function Login(){
                     required ='required'
                 />
                 <label id="label-password">Password</label>
+
                 <button className="button" type="submit">Login</button>
+
                 {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
+                
                 <StyledLink to='/register' >Register</StyledLink>
                 <div></div>
             </StyledFormLogin>
 
-        </div>
+        </ContainerLogin>
     );
 }

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import api from '../../services/api'
-import { AlertBox } from '../Alert'
-import StyledLink from '../Link/Link'
-import { ContainerFeed, PostFeed, StyledFooter, PostFeedFooter, PostFeedBody, PostFeedTitle } from './style'
-import { About, PopUp, Title } from './CommunityPopUp'
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
+import { AlertBox } from '../Alert';
+import StyledLink from '../Link/Link';
+import { ContainerFeed, PostFeed, StyledFooter, PostFeedFooter, 
+    PostFeedBody, PostFeedTitle } from './style';
+import { About, PopUp, Title } from './CommunityPopUp';
+import InfoBox from '../infoBox';
 
 export default function Feed(props){
 

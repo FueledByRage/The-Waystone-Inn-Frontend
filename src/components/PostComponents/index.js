@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const PostBox = styled.div`
     grid-template-columns: 1fr 25fr;
+    grid-template-rows: 1fr 2fr 1fr;
     display: grid;
     grid-template-areas: " l t t"
                         "l b b"
@@ -46,6 +47,7 @@ export const PostFooter = styled.div`
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
+    align-items: end;
 `;
 
 export const LikeBox = styled.div`

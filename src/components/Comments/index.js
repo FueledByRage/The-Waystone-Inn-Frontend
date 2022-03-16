@@ -33,7 +33,7 @@ export default function Comments(props){
 
     async function handleDelete(id){
             console.log(id)
-            await api.post(`/comment/deleteComment`,{ id, token: getToken() }).catch((error) =>{
+            await api.delete(`/comment/${id}`,{ id, token: getToken() }).catch((error) =>{
                 setError(error.message)
             })
             window.location.reload()
