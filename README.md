@@ -19,6 +19,7 @@ It's UI is quite poor yet since design is not my comfort zone and it's in a earl
 ![Post screen](/screens/post.png)
 ![Profile Screen](/screens/profileScreen.png)
 ![Home Page Screen](/screens/HomePage.png)
+![Edit Modal](/screens/edit_modal.png)
 ![Commenting](/screens//comment.gif)
 
 

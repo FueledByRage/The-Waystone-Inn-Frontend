@@ -2,14 +2,12 @@ import styled from "styled-components";
 
 export const PostBox = styled.div`
     grid-template-columns: 1fr 25fr;
-    grid-template-rows: 1fr 2fr 1fr;
     display: grid;
     grid-template-areas: " l t t"
                         "l b b"
                         "l f f";
     width: 40vw;
     min-width: 400px;
-    height: auto;
     background-color: whitesmoke;
     grid-area: m;
     margin-top: 10vh;
@@ -30,7 +28,9 @@ export const PostTitle = styled.div`
     display: flex;
     justify-content: space-between;
     grid-area: t;
-
+    button{
+        align-self: start;
+    }
 `;
 
 export const PostBody = styled.div`

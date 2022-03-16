@@ -151,7 +151,7 @@ export default function Community(props){
                                     </PostFooter>
                                 </PostBox>
                             )
-                            )
+                        )
                         }
                     </PostsContainer>
                     <div className='footerButtons' ><button className='button' disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='button' disabled = {lastPage} onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >

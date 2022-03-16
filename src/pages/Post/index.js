@@ -4,7 +4,7 @@ import  InfoBox  from '../../components/infoBox';
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
 import { getUser } from '../../storage/utils';
-import Comments from '../../components/Comments';
+import Comments from './Comments';
 import  { PostBody, PostBox, PostFooter, PostTitle, LikeBox }  from '../../components/PostComponents';
 import { CommentsBox, ContainerPost, StyledLink, StyledFormComment } from './components';
 import { AlertBox } from '../../components/Alert';
@@ -106,7 +106,7 @@ export default function Post(props){
 
                         <PostTitle>
                             <h1>{ data.post.title}</h1>
-                            {data.post.authorId.user == getUser() ? <button className='button' onClick={handleDelete} style={{width: '80px',}} ><FiTrash/></button> : <span></span>}
+                            {data.post.authorId.user == getUser() ? <button className='button' onClick={handleDelete} style={{width: '80px'}} ><FiTrash/></button> : <span></span>}
                         </PostTitle>
 
                         <PostBody > 

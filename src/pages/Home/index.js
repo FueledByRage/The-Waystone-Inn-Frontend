@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import  Feed  from '../../components/Feed'
+import  Feed  from './Feed'
 import { FiArrowRight } from 'react-icons/fi'
 import api from '../../services/api'
 import { Aside, BoxCommunities, BoxItem, Container, Main, StyledLink } from "./components";
