@@ -21,14 +21,26 @@ export const CommentHeader = styled.div`
     padding: 3px 3px;
     display: flex;
     justify-content: space-between;
-
     button{
         width: 30px;
         height: 30px;
+        align-self: center;
     }
 
     span{
         margin-top: -2;
         margin-left: 5px;
     }
+`;
+
+export const CommentAvatar = styled.img`
+    border-radius: 20px;
+    border: 2px solid;
+    width: 40px;
+    height: 40px;
+`;
+
+export const UserData = styled.div`
+    display: flex;
+    align-items: center;
 `;

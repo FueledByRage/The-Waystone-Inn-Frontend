@@ -6,7 +6,7 @@ export const ContainerLogin = styled.div`
     align-items: center;
     max-width: 100vw;
     width: 100%;
-    height: 100vh;
+    height: 80vh;
 `;
 
 export const StyledFormLogin = styled.form`

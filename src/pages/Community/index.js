@@ -41,6 +41,7 @@ export default function Community(props){
                 .catch((error) =>{
                     throw new Error(error.response.data)
                 });
+
                 const { sub, posts, lastPage, Community } =  response.data;
 
                 setSub(sub);
@@ -104,7 +105,7 @@ export default function Community(props){
     return(
         <div>
             <Header>
-                {errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1>}
+                { errorData ? <h1>{errorData}</h1> : <h1>{data.name}</h1> }
                 <StyledButton className='button' onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
             </Header>
            {
@@ -155,8 +156,6 @@ export default function Community(props){
                         }
                     </PostsContainer>
                     <div className='footerButtons' ><button className='button' disabled = { page == '1' } onClick={() => handleNavigate(parseInt(page) - 1)} >Previous</button> <button className='button' disabled = {lastPage} onClick={() => handleNavigate(parseInt(page) + 1)} >Next</button> </div >
-
-            
             </Main>
             
             <Aside>

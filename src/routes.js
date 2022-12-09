@@ -12,6 +12,7 @@ import ProfilePage from './pages/Profile';
 import  Header  from './components/Header/index.js';
 import SearchBar from './components/SearchBar';
 import { getUser } from './storage/utils';
+import CommunityDashboard  from './pages/CommunityDashboard';
 
 
 
@@ -30,13 +31,14 @@ export default function RoutesList(){
 
             </Header>
             <Routes>
-                <PublicRoute path='/login' element={<Login />}/>
-                <PrivateRoute path='/' element={<HomePage />} />              
+                <Route path='/login' element={<Login />}/>
+                <Route path='/' element={<HomePage />} />              
                 <Route path='/community/:id/:page' element={<Community/>}/>
                 <Route path="/register" element={<Register />}/>
-                <PrivateRoute path="/register/community" element={<RegisterCommunity />}/>
+                <Route path="/register/community" element={<RegisterCommunity />}/>
                 <Route path='/post/:id' element={<Post />}/>
-                <PrivateRoute path='/profile/:user' element={<ProfilePage />}/>
+                <Route path='/profile/:user' element={<ProfilePage />}/>
+                <Route path='/dashboard' element={<CommunityDashboard />} />
             </Routes>
         </BrowserRouter>
     )

@@ -21,5 +21,6 @@ body {
     font-weight: 700;   
     color: white;
     outline: none;
+    cursor: pointer;
 }
 

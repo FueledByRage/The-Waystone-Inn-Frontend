@@ -22,7 +22,6 @@ export default function Feed(props){
                 const response = await api.get(`/posts/feed/${page}/3`).catch((error)=>{
                     throw Error(error.response.data)
                 })
-                console.log(response);
                 setLastPage(response.data['lastPage']);
                 setPosts(response.data['docs']);
                 setLoading(false);

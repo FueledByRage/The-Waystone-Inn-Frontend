@@ -4,7 +4,7 @@ import { FiUser } from 'react-icons/fi';
 import { getToken, getUser } from '../../../storage/utils';
 import { FiTrash } from 'react-icons/fi';
 import StyledLink from '../../../components/Link/Link';
-import { Comment, CommentHeader } from './components';
+import { Comment, CommentAvatar, CommentHeader, UserData } from './components';
 
 
 export default function Comments(props){
@@ -15,24 +15,24 @@ export default function Comments(props){
     useEffect(() =>{
         async function fetchData(){
             try {
-                let isCancelled = false
+                let isCancelled = false;
                 const response = await api.get(`/comments/${props.id}`).catch((error) => { 
-                    throw Error(error.response.data) })
-                if(!isCancelled) setData(response.data) 
+                    throw Error(error.response.data) });
+                console.log(response.data);
+                if(!isCancelled) setData(response.data);
                 return () => {
-                    isCancelled = true
-                    setLoading(false)
+                    isCancelled = true;
+                    setLoading(false);
                 }
             } catch (error) {
-                setLoading(false)
-                setError(error.message)
+                setLoading(false);
+                setError(error.message);
             }
         }
         fetchData()
     }, [])
 
     async function handleDelete(id){
-            console.log(id)
             await api.delete(`/comment/${id}`,{ id, token: getToken() }).catch((error) =>{
                 setError(error.message)
             })
@@ -45,21 +45,26 @@ export default function Comments(props){
         <div>
                     {
                         Array.from(data).map(
-                            c => (
-                                <Comment key={c._id}>
+                            comment => (
+                                <Comment key={comment._id}>
                                     <CommentHeader>
-                                        <div>
+                                        <UserData>
+                                            { comment.authorId.profileURL ? 
+                                            <CommentAvatar src={comment.authorId.profileURL} /> : 
                                             <FiUser />
-                                            <StyledLink to={`/profile/${c.authorId.user}`}> <span>{c.authorId.user}</span> </StyledLink> 
-                                        </div>
+                                            }
+                                            <StyledLink to={`/profile/${comment.authorId.user}`}> 
+                                                <span>{comment.authorId.user}</span> 
+                                            </StyledLink> 
+                                        </UserData>
                                         {
-                                        c.authorId.user === getUser() ? 
-                                        <button onClick={() => { handleDelete(c._id) }} className='button'> 
+                                        comment.authorId.user === getUser() ? 
+                                        <button onClick={() => { handleDelete(comment._id) }} className='button'> 
                                             <FiTrash /> 
                                         </button> : <span>{data.authorId.user}</span>
                                         }
                                     </CommentHeader>
-                                    <p>{c.comment}</p>
+                                    <p>{comment.comment}</p>
                                 </Comment>
                              )
                         )

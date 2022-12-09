@@ -3,6 +3,7 @@ import api from "../../services/api"
 import { setUserSession } from "../../storage/utils"
 import { Link, useNavigate } from 'react-router-dom'
 import './Register.css'
+import { RegisterContainer, RegisterInput, RegisterLabel, StyledForm } from "../../components/Register"
 
 
 
@@ -43,63 +44,59 @@ export default function Register(){
 
     
     return(
-        <div className='register-div'>
-        <form onSubmit={handleSubmit}>
-            <input 
-            id='name'
-            name='name'
-            type='text'
-            placeholder='Name'
-            onChange = { e => setName(e.target.value)}
-            value = {name}
-            />
-            <label className='name' > Name </label>
-            <input 
-            id='user'
-            name='user'
-            type='text'
-            placeholder='User'
-            value={user}
-            onChange = { e => setUser(e.target.value) }
-            />
-            <label className='user'> User </label>
-            <input 
-            id='email'
-            name='email'
-            type='text'
-            placeholder='Email'
-            value = {email}
-            onChange = { e => setEmail(e.target.value) }            
-            />
-            <label className='email'> Email </label>
-            <input 
-            id='password'
-            name='password'
-            type='text'
-            placeholder='Password'
-            value = {password}  
-            onChange = { e => setPassword(e.target.value) }          
-            />
-            <label className='password'> Password </label>
-            <input 
-            id='confirmPassword'
-            name='confirmPassword'
-            type='text'
-            placeholder='Confirm Password'     
-            value = {confirmPassword}
-            onChange = { e => setConfirmPassword(e.target.value) }       
-            />
-            <label className='confirmPassword' > Confirm Password </label>
+        <>
+            <RegisterContainer>
+                <StyledForm onSubmit={handleSubmit}>
+                    <RegisterInput
+                        placeholder={'Name'}
+                        type={'text'}
+                        onChange={e=> setName(e.target.value) }
+                    />
+                    <RegisterLabel
+                        id={'name'}
+                    >Name</RegisterLabel>
+                    <RegisterInput
+                        placeholder={'Email'}
+                        type={'text'}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <RegisterLabel
+                        id={'email'}
+                    >E-mail</RegisterLabel>
+                    <RegisterInput
+                        placeholder={'Username'}
+                        type={'text'}
+                        onChange={e => setUser(e.target.value)}
+                    />
+                    <RegisterLabel
+                        id={'user'}
+                    >Username</RegisterLabel>
 
-            <button className='button' type="submit" disabled={loading}>Cadastrar</button>
+                    <RegisterInput
+                        placeholder={'Password'}
+                        type={'text'}
+                        onChange={e => setPassword(e.target.value)}
 
-            
-        </form>
-        {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
-        </div>
+                    />
+                    <RegisterLabel
+                        id={'password'}
+                    >Password</RegisterLabel>
 
+                    <RegisterInput
+                        placeholder={'Confirm Password'}
+                        type={'text'}
+                        onChange={e => setConfirmPassword(e.target.value)}
+
+                    />
+                    <RegisterLabel
+                        id={'confirmPassword'}
+                    >Confirm Password</RegisterLabel>
+                    <button className="button" type="submit" disabled={loading} >
+                        Registrar
+                    </button>
+                </StyledForm>
+                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
+            </RegisterContainer>
+        </>
     )
-
-
-
 }

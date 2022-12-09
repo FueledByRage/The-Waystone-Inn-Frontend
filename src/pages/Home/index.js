@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import  Feed  from './Feed'
 import { FiArrowRight } from 'react-icons/fi'
 import api from '../../services/api'
+import { Navigate } from "react-router-dom";
 import { Aside, BoxCommunities, BoxItem, Container, Main, StyledLink } from "./components";
+import { getToken } from "../../storage/utils";
 
 
 
@@ -29,6 +31,8 @@ export default function HomePage(props){
         }
         fetchData()
     },[])
+
+    if(!getToken()) return <Navigate to="/login" replace/>
 
     return(
         <Container>

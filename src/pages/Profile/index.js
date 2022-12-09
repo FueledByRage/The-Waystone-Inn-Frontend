@@ -20,9 +20,10 @@ export default function ProfilePage(props){
         async function fetchData(){
             try {
                 const response = await api.get(`/user/get/${user}`)
-                .catch((error) => {throw Error(error.response.data)})
-                setData(response.data)
-                setLoading(false)
+                .catch((error) => {throw Error(error.response.data)});
+
+                setData(response.data);
+                setLoading(false);
             } catch (error) {
                 setError(error.message)   
                 setLoading(false)

@@ -32,7 +32,7 @@ export default function RegisterCommunity(){
 
     return(
         <div className="container">
-        <form onSubmit={handleSubmit}>
+        <form className="registerCommunity" onSubmit={handleSubmit}>
             <textarea 
             id='name'
             name='name'

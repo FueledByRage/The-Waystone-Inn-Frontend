@@ -1,63 +1,31 @@
-
-
-.register-div {
-    width: 100%;
-    align-items: center;
-    background-color: white;
-    min-width: 400px;
-    top: 80px;
-    left: 35vw;
-    position: absolute;
-    height: 590px;
-    max-width: 500px;
-    text-align: center;
-    justify-content: space-around;
+#name{
+    top: 25px;
 }
 
-.register-div  form input{
-    width: 90%;
-    padding: 14px 10px;
-    margin: 20px auto;
-
-    border: none;
-    border-bottom: 2px solid silver;
+#user{
+    top: 175px;
 }
 
-
-
-.register-div  form label.name, label.user, label.email, label.password, label.confirmPassword{
-    color: #F33850;
-    position: absolute;
-    pointer-events: none;
-    transform-origin: 0 0;
-    left: 30px;
-    font-size: 15px;
+#email{
+    top: 100px;
 }
 
-.register-div  form label.name{
-    top: 45px;
+#password{
+    top: 250px;
 }
 
-.register-div  form label.user{
-    top: 135px;
+#confirmPassword{
+    top: 325px;
 }
 
-.register-div  form label.email{
-    top: 225px;
+form input:focus + label, input:not(:placeholder-shown) + label{
+    transform: translateY(-30px) scale(0.6);
 }
 
-.register-div  form label.password{
-    top: 315px;
-}
-
-.register-div  form label.confirmPassword{
-    top: 405px;
-}
-
-.register-div  form input:focus + label, input:not(:placeholder-shown) + label{
-    transform: translateY(-25px) scale(0.6);
-}
-
-.register-div  form input::placeholder{
+form input::placeholder{
     color: transparent;
+}
+
+.button{
+    align-self: center;
 }
