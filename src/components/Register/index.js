@@ -15,8 +15,9 @@ export const StyledForm = styled.form`
     position: relative;
     display: flex;
     width: 35vw;
+    min-width: 350px;
     padding: 10px 10px;
-    height: 70vh;
+    min-height: 440px;
     justify-content: space-between;
     background-color: white;
 `;

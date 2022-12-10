@@ -19,6 +19,7 @@ export const StyledFormLogin = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     img{
         width: 100px;
         height: 100px;

@@ -6,8 +6,10 @@
     position: absolute;
     top: 20%;
     left: 40vw;
+    justify-content: space-between;
     min-height: 70%;
     max-width: 350px;
+    flex-direction: column;
     text-align: center;
     @media(max-width: 800px) {
         left: 5vw;
@@ -43,13 +45,13 @@ label{
 }
 #label-email{
     position: absolute;
-    top: 42%;
+    top: 45%;
     left: 45px;
 }
 
 #label-password{
     position: absolute;
-    top: 65%;
+    top: 68%;
     left: 45px;
 }
 
