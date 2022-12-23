@@ -19,13 +19,12 @@ export default function ProfilePage(props){
     useEffect(()=>{
         async function fetchData(){
             try {
-                const response = await api.get(`/user/get/${user}`)
-                .catch((error) => {throw Error(error.response.data)});
-
+                const response = await api.get(`/user/${user}`)
+                .catch((error) => { throw Error(error.response.data) });
                 setData(response.data);
                 setLoading(false);
             } catch (error) {
-                setError(error.message)   
+                setError(error.message || 'Something went wrong')   
                 setLoading(false)
             }
         }
@@ -55,7 +54,7 @@ export default function ProfilePage(props){
                     <Created><span><FiCalendar /> Joined: {getDate(data.date)}</span></Created>
                 </Profile>
             }
-            <ModalEdit profileURL={data.profileURL} show={showModal} close={closeModal} />
+            {(!error && !loading ) && <ModalEdit profileURL={data.profileURL} show={showModal} close={closeModal} />}
                 
         </div>
     )

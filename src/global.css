@@ -23,4 +23,7 @@ body {
     outline: none;
     cursor: pointer;
 }
+.button:disabled{
+    background: gray;
+}
 

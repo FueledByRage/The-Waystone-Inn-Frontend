@@ -28,7 +28,7 @@ export default function Register(){
         try {
             if(email == '' || user == '' || email == '' || password == '' || confirmPassword == '') return setError('Missing data!')
             
-            const response = await api.post('/user/register', {name, user, email, password})
+            const response = await api.post('/user/register', { name, user, email, password })
 
             const { username, token, subs } = response.data
     

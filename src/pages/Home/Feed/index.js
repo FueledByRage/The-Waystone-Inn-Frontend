@@ -19,11 +19,11 @@ export default function Feed(props){
     useEffect(()=>{
         async function fetchData(){
             try {    
-                const response = await api.get(`/posts/feed/${page}/3`).catch((error)=>{
+                const response = await api.get(`/feed/${page}/3`).catch((error)=>{
                     throw Error(error.response.data)
                 })
                 setLastPage(response.data['lastPage']);
-                setPosts(response.data['docs']);
+                setPosts(response.data['posts']);
                 setLoading(false);
             } catch (error) {
                 setError(error.message);
@@ -34,10 +34,10 @@ export default function Feed(props){
     },[]);
 
     async function handlePosts(next){
-        const response = await api.get(`/posts/feed/${page + next}/3`)
+        const response = await api.get(`/feed/${page + next}/3`)
         .catch((error)=>setError(error.message));
         
-        setPosts(response.data['docs']);
+        setPosts(response.data['posts']);
         setPage(page + next);
         setLastPage(response.data['lastPage']);
     }

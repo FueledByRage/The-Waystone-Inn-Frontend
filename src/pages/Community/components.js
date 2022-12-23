@@ -4,7 +4,8 @@ import styled from 'styled-components';
 export const Header = styled.div`
     padding: 16px;
     display: flex;
-    
+    max-width: 100vw;
+    width: 100%;
     align-items: center;
     background-color: white;
 
@@ -26,45 +27,40 @@ export const StyledButton = styled.button`
 
 export const Container = styled.div`
     display: flex;
-    
-    @media(max-width: 800px) {        
+    width: 100%;
+    height: 400px;
+    max-width: 100vw;
+    @media(max-width: 830px) { 
+        flex-direction: column;       
         display: block;
-  }
-`
-export const Main = styled.div`
-    width: 60vw;
-    align-items: center;
-    justify-content: center;
-    padding-top: 10vh;
-
-    .footerButtons{
-        display: flex;
-        justify-content: space-between;
-        margin-left: 14.5vw;
-        width: 40vw;
-        min-width: 400px;
-        button{
-            max-width: 100px;
-        }
     }
+    `
+    export const Main = styled.div`
+        display: flex;
+        width: 70%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @media(max-width: 820px) {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
 `
 export const Aside = styled.div`
-
     display: flex;
-    padding: 16px;
-    justify-content: end;
-    align-content: flex-end;
-    width: 40vw;
-    margin-right: 0px;
+    flex-direction : column;
+    align-items:center;
+    width: 30%;
 
-    @media(max-width: 800px) {
-        margin-left: 45vw;
+    @media(max-width: 820px) {
+        width: 100%;
+        justify-content: center;
     }
 `
 
 
 export const StyledForm = styled.form`
-    margin-left: 15vw;
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -107,3 +103,13 @@ export const ErrorBox = styled.div`
     margin-top: 20px;
     margin-left: 5vw;
 `
+export const FooterButtons = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-left: 14.5vw;
+    width: 40vw;
+    min-width: 400px;
+    button{
+        max-width: 100px;
+    }
+`;

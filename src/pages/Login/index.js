@@ -23,7 +23,7 @@ export default function Login(){
 
         try{
         
-        const response = await api.post('/login', {email, password})
+        const response = await api.post('/user/login', {email, password})
 
         const { user, token } = response.data
 
@@ -64,11 +64,11 @@ export default function Login(){
 
                 <button className="button" type="submit">Login</button>
 
-                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
                 
                 <StyledLink to='/register' >Register</StyledLink>
                 <div></div>
             </StyledFormLogin>
+            {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}
 
         </ContainerLogin>
     );

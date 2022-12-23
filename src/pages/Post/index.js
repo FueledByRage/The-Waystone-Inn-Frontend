@@ -27,17 +27,15 @@ export default function Post(props){
     
     
     useEffect(()=>{
-        
         async function fetchData(){
             try {
                 let isCancelled = false;
                 const response = await api.get(`/post/${id}`).catch((error)=> {
                     throw Error(error.response.data);
                 });
-                                  
                 if(!isCancelled){     
                     setData(response.data);
-                    setLikes({like: response.data.like, dislike: response.data.dislike, likes: response.data.post.likes})
+                    setLikes({like: response.data.like, dislike: response.data.dislike, likes: response.data.likes})
                 }
                     setLoading(false);
                     isCancelled = true;
@@ -55,8 +53,7 @@ export default function Post(props){
         .catch((error) =>{ 
             setErrorSubmit(error.response.data);
         });
-        document.location.reload();
-        
+        document.location.reload(); 
     }
 
     async function handleDelete(){
@@ -70,14 +67,14 @@ export default function Post(props){
         await api.get(`/like/${id}`).catch(e =>{
             return
         })
-        setLikes({like: true, dislike: false, likes: ++data.post.likes})
+        setLikes({like: true, dislike: false, likes: ++data.likes})
 
     }
     async function handleDislike(e){
         await api.get(`/dislike/${id}`).catch(e =>{
             return
         })
-        setLikes({like: false, dislike: true, likes: --data.post.likes})
+        setLikes({like: false, dislike: true, likes: --data.likes})
     }
 
     return(
@@ -97,28 +94,29 @@ export default function Post(props){
 
                             <span>{likesState.likes}</span>
 
-                            <button onClick={handleDislike}>                                
+                            <div></div>    
+                            {/*<button onClick={handleDislike}>                                
                                 <IconContext.Provider value={{color: likesState.dislike ? 'red' : 'none'}}>
                                     <FiThumbsDown />
                                 </IconContext.Provider>
-                            </button>
+                            </button>*/}
                         </LikeBox>
 
                         <PostTitle>
-                            <h1>{ data.post.title}</h1>
-                            {data.post.authorId.user == getUser() ? <button className='button' onClick={handleDelete} style={{width: '80px'}} ><FiTrash/></button> : <span></span>}
+                            <h1>{ data.title}</h1>
+                            {data.authorId.user == getUser() ? <button className='button' onClick={handleDelete} style={{width: '80px'}} ><FiTrash/></button> : <span></span>}
                         </PostTitle>
 
                         <PostBody > 
-                            {data.post.url ? <img src={data.post.url} /> : <span>{data.post.body}</span> }
+                            {data.url ? <img src={data.url} /> : <span>{data.body}</span> }
                         </PostBody>
 
                         <PostFooter>
-                            <StyledLink to={`/community/${data.post.communityId._id}/1`}> 
-                                {data.post.communityId.name} 
+                            <StyledLink to={`/community/${data.communityId._id}/1`}> 
+                                {data.communityId.name} 
                             </StyledLink> 
-                            <StyledLink  to={`/profile/${data.post.authorId.user}`} > 
-                                {data.post.authorId.user} 
+                            <StyledLink  to={`/profile/${data.authorId.user}`} > 
+                                {data.authorId.user} 
                             </StyledLink> 
                         </PostFooter>
                     </PostBox>
@@ -143,7 +141,7 @@ export default function Post(props){
             </CommentsBox>
             <div className='aside'>
                 {
-                    !error && <InfoBox community={data.post.communityId}/>
+                    !error && <InfoBox community={data.communityId}/>
                 }
             </div>
         </ContainerPost> 

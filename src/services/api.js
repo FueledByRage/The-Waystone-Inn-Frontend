@@ -3,12 +3,12 @@ import { getToken } from '../storage/utils'
 
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000/inn'
+    baseURL: 'http://localhost:3333/inn'
 });
 
 api.interceptors.request.use(async config => {
     const token =  getToken();
-    if(token) config.headers.Authorization = token;
+    if(token) config.headers.token = token;
 
     return config;
 });

@@ -29,7 +29,7 @@ export default function HomePage(props){
                 setError(error.message);
             }
         }
-        fetchData()
+        if(getToken()) fetchData();
     },[])
 
     if(!getToken()) return <Navigate to="/login" replace/>
