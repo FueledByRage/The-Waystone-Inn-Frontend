@@ -11,7 +11,7 @@ export const PostBox = styled.div`
     background-color: whitesmoke;
     grid-area: m;
     margin-top: 10vh;
-    margin-left: 15vw;
+    cursor: pointer;
     padding: 10px;
     border-radius: 8px;
 

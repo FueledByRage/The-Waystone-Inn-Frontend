@@ -19,7 +19,7 @@ export default function Feed(props){
     useEffect(()=>{
         async function fetchData(){
             try {    
-                const response = await api.get(`/feed/${page}/3`).catch((error)=>{
+                const response = await api.get(`/feed/${page}/4`).catch((error)=>{
                     throw Error(error.response.data)
                 })
                 setLastPage(response.data['lastPage']);
@@ -34,7 +34,7 @@ export default function Feed(props){
     },[]);
 
     async function handlePosts(next){
-        const response = await api.get(`/feed/${page + next}/3`)
+        const response = await api.get(`/feed/${page + next}/4`)
         .catch((error)=>setError(error.message));
         
         setPosts(response.data['posts']);
@@ -62,15 +62,15 @@ export default function Feed(props){
                             </PostFeedBody>
 
                             <PostFeedFooter>
-                                <StyledLink to={`/community/${post.communityId._id}/1`}> {post.communityId.name}
+                                <StyledLink to={`/community/${post.communityId?._id}/1`}> {post.communityId?.name}
                                     <PopUp>
-                                        <Title>{post.communityId.name}</Title>
-                                        <About>{post.communityId.description}</About>
+                                        <Title>{post.communityId?.name}</Title>
+                                        <About>{post.communityId?.description}</About>
                                     </PopUp>
                                 </StyledLink> 
-                                <StyledLink  to={`/profile/${post.authorId.user}`} >{post.authorId.user}</StyledLink> 
+                                <StyledLink  to={`/profile/${post.authorId?.user}`} >{post.authorId?.user}</StyledLink> 
+                                
                             </PostFeedFooter>
-                            
                         </PostFeed>
                 )
             }

@@ -28,7 +28,6 @@ export const StyledButton = styled.button`
 export const Container = styled.div`
     display: flex;
     width: 100%;
-    height: 400px;
     max-width: 100vw;
     @media(max-width: 830px) { 
         flex-direction: column;       
@@ -68,6 +67,7 @@ export const StyledForm = styled.form`
     min-width: 400px;
     background-color: whitesmoke;
     align-items: center;
+    margin-top: 25px;
     border-radius: 10px;
     button{
         margin-top: 10px;
@@ -78,16 +78,13 @@ export const StyledForm = styled.form`
 
 export const PostsContainer = styled.div`
     margin-top: 15px;
-    margin-left: 15vw;
     padding: 5px;
     display: flex;
     flex-direction: column;
     width: 40vw;
     min-width: 400px;
     align-items: center;
-    margin-left: 7vw;
 `
-
 
 
 export const StyledInput = styled.textarea`
@@ -106,8 +103,8 @@ export const ErrorBox = styled.div`
 export const FooterButtons = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-left: 14.5vw;
     width: 40vw;
+    margin-top: 25px;
     min-width: 400px;
     button{
         max-width: 100px;

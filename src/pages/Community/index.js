@@ -43,7 +43,7 @@ export default function Community(props){
     }, []);
 
     async function sub(){
-        await api.get(`/community/sub/${id}`).catch((e)=>{
+        await api.get(`/sub/${id}`).catch((e)=>{
             return setError(e.response.data);
         })        
         setSub(!subscribed);
@@ -68,7 +68,7 @@ export default function Community(props){
                                 <AlertBox><span>{error}</span></AlertBox>
                             </ErrorBox>
                     }
-                    <Posts register={1}/>
+                    <Posts register={3}/>
                 </Main>
                 {
                     !loading && <Aside>

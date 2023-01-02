@@ -23,6 +23,7 @@ export default function Posts( props ) {
         const fetchData = async () =>{
             try {                
                 const response = await api.get(`/posts/${id}/${page}/${props.register}`);
+                console.log(response);
                 if(response.data) {
                     setData(response.data);
                     setLoading(false);
@@ -61,14 +62,14 @@ export default function Posts( props ) {
                             <span>  {getDate(post.date)}</span>
                         </PostFooter>
                     </PostBox>
-                    <FooterButtons>
-                        <button className='button' disabled = { page == 1 } onClick={() => setPage(parseInt(page) - 1)} >Previous</button> 
-                        <button className='button' disabled = {data.lastPage} onClick={() => setPage(parseInt(page) + 1)} >Next</button>     
-                    </FooterButtons>
                 </>
             )
         )
         }
+        <FooterButtons>            
+            <button className='button' disabled = { page == 1 } onClick={() => setPage(parseInt(page) - 1)} >Previous</button> 
+            <button className='button' disabled = { data?.lastPage } onClick={() => setPage(parseInt(page) + 1)} >Next</button>     
+        </FooterButtons>
     </PostsContainer>
     )
 }

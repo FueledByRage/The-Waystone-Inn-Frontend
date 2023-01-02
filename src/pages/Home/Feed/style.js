@@ -22,7 +22,7 @@ export const PostFeed = styled.div`
                         "f f";
     margin-top: 10px;
     width: 80%;
-    min-height: 150px;
+    min-height: 100px;
     min-width: 400px;
     background-color: whitesmoke;
     padding: 5px;
