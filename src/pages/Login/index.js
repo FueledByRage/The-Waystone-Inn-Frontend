@@ -25,10 +25,10 @@ export default function Login(){
         
         const response = await api.post('/user/login', {email, password})
 
-        const { user, token } = response.data
+        const { username, token } = response.data
+        
 
-
-        setUserSession(token, user)
+        setUserSession(token, username)
 
         navigate('/')
         window.location.reload()

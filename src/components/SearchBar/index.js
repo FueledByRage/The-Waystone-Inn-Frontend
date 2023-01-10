@@ -1,25 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import api from "../../services/api";
-import { Search } from "./styled";
+import { DataResult, Search } from "./styled";
 
 
 export default function SearchBar(){
 
-    const [ word, setWord ] = useState('')
-    const [ data, setData] = useState([])
+    const [ word, setWord ] = useState('');
+    const [ data, setData] = useState([]);
+    const ref = useRef();
 
+    
     async function handleSearch(event){
+        document.body.addEventListener('click', handleClick);
         const searchParam = event.target.value
         setWord(searchParam)
         if(searchParam === '') {
             setData([])
             return
         }
-        const response = await api.get(`communitie/${searchParam}`, {name: searchParam})
+        const response = await api.get(`communities/${searchParam}`, {name: searchParam})
 
-        console.log(response.data.communities);
 
-        setData(response.data.communities)
+        setData(response.data)
+    }
+
+    const handleClick = (event) =>{
+        event.stopPropagation();
+
+        if(event.target == ref) return
+
+        setWord('');
+        setData([]);
+        document.body.removeEventListener('click', handleClick);
     }
 
     return(
@@ -31,23 +43,23 @@ export default function SearchBar(){
                 onChange={handleSearch}
             />
             {
-                data.length != 0 && (
-                    <div className="dataResult">
+                (data && data.length != 0) && (
+                    <DataResult className="dataResult">
                         {
-                            data.slice(0, 3).map((community)=>{
+                            data.slice(0, 3).map((community, index)=>{
                                 return(
                             
-                                    <a href={`/community/${community._id}/1`}>
+                                    <a ref={ref} key={index} href={`/community/${community._id}/1`}>
                                         <div className="dataIten">
                                             <p>
-                                                {community.name}
+                                                { community.name }
                                             </p>
                                          </div>
                                     </a>
                                 )
                             })
                         }
-                    </div>
+                    </DataResult>
                 )
             }
         </Search>

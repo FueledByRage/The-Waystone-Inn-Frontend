@@ -23,7 +23,6 @@ export default function Posts( props ) {
         const fetchData = async () =>{
             try {                
                 const response = await api.get(`/posts/${id}/${page}/${props.register}`);
-                console.log(response);
                 if(response.data) {
                     setData(response.data);
                     setLoading(false);

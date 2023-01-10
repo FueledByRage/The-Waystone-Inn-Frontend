@@ -17,11 +17,11 @@ export function EditProfile({ profileURL }){
 
     useEffect(()=>{
         async function fetchData(){
-            const response = await api.get(`/user/get/${user}`).catch((error)=>{ setError(error) })
+            const response = await api.get(`/user/${user}`).catch((error)=>{ setError(error) })
             .catch(e => setError(e.response.data))
             setData(response.data)
         }
-        fetchData();
+        //fetchData();
     },[]);
 
     async function handleSubmit(e){
@@ -46,7 +46,7 @@ export function EditProfile({ profileURL }){
     return(
         <div className="container">
             <form onSubmit={handleSubmit}>
-                    <UploadAvatar src={profileURL} handleFile={handleFile} />
+                { <UploadAvatar src={profileURL} handleFile={handleFile} /> }
                 <button className="button" >Edit</button>
             </form>
         </div>

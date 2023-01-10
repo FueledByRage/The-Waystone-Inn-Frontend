@@ -4,7 +4,8 @@ import api from "../../services/api";
 import { FiCalendar } from 'react-icons/fi';
 import { StyledAvatar } from "../../components/UploadAvatar/StyledAvatar";
 import { AlertBox } from "../../components/Alert";
-import ModalEdit from "../EditProfile";
+import Modal from "../../components/modal";
+import { EditProfile } from "../EditProfile/editProfile";
 import { Created, Profile } from './components';
 
 
@@ -19,8 +20,7 @@ export default function ProfilePage(props){
     useEffect(()=>{
         async function fetchData(){
             try {
-                const response = await api.get(`/user/${user}`)
-                .catch((error) => { throw Error(error.response.data) });
+                const response = await api.get(`/user/${user}`);
                 setData(response.data);
                 setLoading(false);
             } catch (error) {
@@ -54,7 +54,11 @@ export default function ProfilePage(props){
                     <Created><span><FiCalendar /> Joined: {getDate(data.date)}</span></Created>
                 </Profile>
             }
-            {(!error && !loading ) && <ModalEdit profileURL={data.profileURL} show={showModal} close={closeModal} />}
+            {(!error && !loading && showModal ) &&         
+                <Modal show={showModal} close={closeModal}>
+                    <EditProfile profileURL={props.profileURL} />
+                </Modal> 
+            }
                 
         </div>
     )

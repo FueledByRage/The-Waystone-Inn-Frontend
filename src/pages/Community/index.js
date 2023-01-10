@@ -43,10 +43,15 @@ export default function Community(props){
     }, []);
 
     async function sub(){
-        await api.get(`/sub/${id}`).catch((e)=>{
-            return setError(e.response.data);
-        })        
-        setSub(!subscribed);
+        try {
+            if( !subscribed ){
+                await api.get(`/sub/${id}`);      
+            }
+            await api.delete(`/sub/delete/${id}`);
+            setSub(!subscribed);
+        } catch (error) {
+            setError('Error handling you subscribe request');
+        }
     }
 
     if(loading) return(<h1>Loading...</h1>)
@@ -54,7 +59,9 @@ export default function Community(props){
         <>
             <Header>
                 { errorData ? <h1>{errorData}</h1> : <h1>{data.community.name}</h1> }
-                <StyledButton className='button' onClick={sub}>{ subscribed ? 'unsub' : 'sub'}</StyledButton>
+                <StyledButton className='button' onClick={sub}> 
+                    { subscribed ? 'unsub' : 'sub'}
+                </StyledButton>
             </Header>
            {
             !errorData ?
@@ -70,11 +77,13 @@ export default function Community(props){
                     }
                     <Posts register={3}/>
                 </Main>
-                {
-                    !loading && <Aside>
-                        <InfoBox community={data.community}/>
-                    </Aside>
-                }
+                
+                <Aside>
+                    {
+                        !loading && <InfoBox community={data.community}/>
+                    }
+                </Aside>
+                
             </Container> :
             <ErrorBox>
                 <AlertBox><span>{errorData}</span></AlertBox>

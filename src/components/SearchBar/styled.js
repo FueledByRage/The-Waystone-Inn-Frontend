@@ -13,25 +13,25 @@ export const Search = styled.div`
         border-color: white;
         color: white;
     }
+`;
 
-    .dataResult{
-        background-color: white;
-        align-content: center;
-        position: absolute;
-        z-index: 5;
-        width: 25vw;
-        .dataIten{
-            height: 40px;
-            :hover{
-                background-color: gray;
-            }
-            padding-top: 10px;
+export const DataResult = styled.div`
+    background-color: white;
+    align-content: center;
+    position: absolute;
+    z-index: 5;
+    width: 25vw;
+    .dataIten{
+        height: 40px;
+        :hover{
+            background-color: gray;
+        }
+        padding-top: 10px;
 
-            border-top: 0.01rem solid black;
-            a{
-                text-decoration: none;
-            }
+        border-top: 0.01rem solid black;
+        p{
+            color: red;
+            padding-left: 10px;
         }
     }
-
 `
