@@ -1,9 +1,11 @@
 .communityInfo{
+    display:  flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: white;
     padding: 15px;
     margin-top: 5%;
     height: 120px;
-    min-width: 200px;
 }
 
 .date{

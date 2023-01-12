@@ -18,7 +18,6 @@ export default function Comments(props){
                 let isCancelled = false;
                 const response = await api.get(`/comments/${props.id}`).catch((error) => { 
                     throw Error(error.response.data) });
-                console.log(response.data);
                 if(!isCancelled) setData(response.data);
                 return () => {
                     isCancelled = true;

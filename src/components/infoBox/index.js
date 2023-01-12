@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FiCalendar } from 'react-icons/fi'
 import api from '../../services/api';
+import Loading from '../Loading';
 import './infoBox.css'
 
 
@@ -13,13 +14,13 @@ export default function InfoBox(props){
     useEffect(()=>{
         const fetchData = async () =>{
             try {
-                const response = await api.get(`/community/read/${props.community._id}`);
+                const response = await api.get(`/community/read/${props.communityId}`);
                 if(response.data) {
                     setCommunityData(response.data.community);
                     setLoading(false);
                 }
             } catch (error) {
-                
+                console.error(error)
             }
         }
         fetchData();
@@ -34,7 +35,7 @@ export default function InfoBox(props){
         <div className='communityInfo'>
             {
                 loading ? <h1>
-                    Loading...
+                    <Loading />
                 </h1> :
             <>
                 <h2>{communityData.name}</h2>

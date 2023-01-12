@@ -5,6 +5,7 @@ import StyledLink from '../../../components/Link/Link';
 import { ContainerFeed, PostFeed, StyledFooter, PostFeedFooter, 
     PostFeedBody, PostFeedTitle } from './style';
 import { About, PopUp, Title } from './CommunityPopUp';
+import Loading from '../../../components/Loading';
 
 export default function Feed(props){
 
@@ -43,10 +44,9 @@ export default function Feed(props){
     }
 
     return(
-        !loading ?
         <ContainerFeed>
-            {
-                error ? <AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
+            { 
+                !loading ? error ? <AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
                         <PostFeed>
                             <PostFeedTitle>
                                 <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink> 
@@ -72,14 +72,14 @@ export default function Feed(props){
                                 
                             </PostFeedFooter>
                         </PostFeed>
-                )
+                ) : <Loading />
             }
             
             <StyledFooter>
-                <button className='button' disabled = { page == 1 || error } onClick={() => handlePosts(-1)} >Previous</button> 
-                <button className='button' disabled = { lastPage || error } onClick={() => handlePosts(1)} >Next</button> 
+                <button className='button' disabled = { page == 1 || error || loading } onClick={() => handlePosts(-1)} >Previous</button> 
+                <button className='button' disabled = { lastPage || error || loading } onClick={() => handlePosts(1)} >Next</button> 
             </StyledFooter>
-        </ContainerFeed> : <h1> 'Loading...' </h1>
+        </ContainerFeed>
 
     )
 }

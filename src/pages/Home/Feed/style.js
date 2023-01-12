@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const ContainerFeed = styled.div`
     width: 50vw;
     min-width: 400px;
+    min-height: 80vh;
     display: grid;
     margin-left: 10vw;
     align-items: center;

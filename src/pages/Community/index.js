@@ -28,6 +28,7 @@ export default function Community(props){
                 });
 
                 if(response.data){
+                    console.log(response.data);
                     setData(response.data);
                     setLoading(false);
                     setSub(response.data.sub);  
@@ -80,7 +81,7 @@ export default function Community(props){
                 
                 <Aside>
                     {
-                        !loading && <InfoBox community={data.community}/>
+                        !loading && <InfoBox communityId={data.community._id}/>
                     }
                 </Aside>
                 

@@ -31,7 +31,7 @@ export function EditProfile({ profileURL }){
         const formData = new FormData();
         formData.append('file', file);
 
-        await api.post('/user/edit', formData).catch((error)=>{
+        await api.put('/user/edit', formData).catch((error)=>{
             setError(error)
         });
     }
@@ -47,6 +47,7 @@ export function EditProfile({ profileURL }){
         <div className="container">
             <form onSubmit={handleSubmit}>
                 { <UploadAvatar src={profileURL} handleFile={handleFile} /> }
+                
                 <button className="button" >Edit</button>
             </form>
         </div>

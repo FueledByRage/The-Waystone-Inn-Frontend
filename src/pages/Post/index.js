@@ -34,6 +34,7 @@ export default function Post(props){
                     throw Error(error.response.data);
                 });
                 if(!isCancelled){     
+                    console.log(response.data);
                     setData(response.data);
                     setLikes({like: response.data.like, dislike: response.data.dislike, likes: response.data.likes})
                 }
@@ -141,7 +142,7 @@ export default function Post(props){
             </CommentsBox>
             <div className='aside'>
                 {
-                    !error && <InfoBox community={data.communityId}/>
+                    !error && <InfoBox communityId={ data.communityId }/>
                 }
             </div>
         </ContainerPost> 
