@@ -18,6 +18,10 @@ export const ContainerPost = styled.div`
             max-width: 900px;
         }
     }
+
+    .postBox{
+        margin-left: 27%;
+    }
     @media(max-width: 800px) {
         justify-content: center;
         .aside{
@@ -27,11 +31,29 @@ export const ContainerPost = styled.div`
         div{
             margin: 5px 0 0;
         }
+        .postBox{
+            margin-left: 0px;
+        }
         grid-template-areas: "a a"
                             "m m"
                             "c c";
     }
 `;
+
+export const Aside = styled.div`
+    grid-area: a;
+    width: 20vw;
+    height: 250px;
+    margin-left: 10vw;
+    margin-top: 8vh;
+    @media(max-width: 800px) {
+        justify-items: center;
+        width: 30vw;
+        height: 10rem;
+        margin-left: 50vw;
+        align-self: center;
+    }
+`
 
 
 export const StyledLink = styled(Link)`

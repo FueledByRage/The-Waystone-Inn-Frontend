@@ -50,7 +50,7 @@ export default function Posts( props ) {
             error != null ? <ErrorBox><AlertBox> {error} </AlertBox></ErrorBox> : data.posts.map((post)=>(
                 <>
                     <PostBox>
-                        <LikeBox> <FiThumbsUp /> <span>{post.likes || 0}</span> <FiThumbsDown /></LikeBox>
+                        <LikeBox> <FiThumbsUp /> <span>{post.likes || 0}</span> <div></div> </LikeBox>
 
                         <StyledLink to={`/post/${post._id}`}><span>{post.title}</span></StyledLink>
                         <PostBody className='postBody' >

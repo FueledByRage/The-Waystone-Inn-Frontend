@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../../services/api';
+import api from '../../services/api';
 import { FiUser } from 'react-icons/fi';
-import { getToken, getUser } from '../../../storage/utils';
+import { getToken, getUser } from '../../storage/utils';
 import { FiTrash } from 'react-icons/fi';
-import StyledLink from '../../../components/Link/Link';
+import StyledLink from '../Link/Link';
 import { Comment, CommentAvatar, CommentHeader, UserData } from './components';
 
 

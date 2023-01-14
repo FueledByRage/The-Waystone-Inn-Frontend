@@ -3,6 +3,7 @@ import { FiCalendar } from 'react-icons/fi'
 import api from '../../services/api';
 import Loading from '../Loading';
 import './infoBox.css'
+import { CommunityBox, CommunityBoxDate } from './styles';
 
 
 
@@ -32,7 +33,7 @@ export default function InfoBox(props){
         return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`
     }
     return(
-        <div className='communityInfo'>
+        <CommunityBox>
             {
                 loading ? <h1>
                     <Loading />
@@ -40,14 +41,14 @@ export default function InfoBox(props){
             <>
                 <h2>{communityData.name}</h2>
                 <p>{communityData.description}</p>
-                <div className='date'>
+                <CommunityBoxDate>
                     <FiCalendar/>
                     <span>Created: </span>
                     <span>{ getDate(communityData.date)}</span>
-                </div>
+                </CommunityBoxDate>
             
             </>}
-        </div>
+        </CommunityBox>
     )
 
 

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const PostBox = styled.div`
-    background: red;
     grid-template-columns: 1fr 25fr;
     display: grid;
     grid-template-areas: " l t t"
@@ -12,7 +11,6 @@ export const PostBox = styled.div`
     background-color: whitesmoke;
     grid-area: m;
     margin-top: 10vh;
-    margin-left: 27%;
     cursor: pointer;
     padding: 10px;
     border-radius: 8px;

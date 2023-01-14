@@ -4,9 +4,9 @@ import  InfoBox  from '../../components/infoBox';
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
 import { getUser } from '../../storage/utils';
-import Comments from './Comments';
+import Comments from '../../components/Comments';
 import  { PostBody, PostBox, PostFooter, PostTitle, LikeBox }  from '../../components/PostComponents';
-import { CommentsBox, ContainerPost, StyledLink, StyledFormComment } from './components';
+import { CommentsBox, ContainerPost, StyledLink, StyledFormComment, Aside } from './components';
 import { AlertBox } from '../../components/Alert';
 import { FiThumbsUp, FiThumbsDown, FiTrash } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
@@ -34,7 +34,6 @@ export default function Post(props){
                     throw Error(error.response.data);
                 });
                 if(!isCancelled){     
-                    console.log(response.data);
                     setData(response.data);
                     setLikes({like: response.data.like, dislike: response.data.dislike, likes: response.data.likes})
                 }
@@ -50,11 +49,16 @@ export default function Post(props){
     
     async function handleSubmit(e){
         e.preventDefault();
-        await api.post('/comment/register', { id, comment })
-        .catch((error) =>{ 
-            setErrorSubmit(error.response.data);
-        });
-        document.location.reload(); 
+        try {
+            await api.post('/comment/register', { id, comment });
+            document.location.reload(); 
+            
+        } catch (error) {
+
+            const { data : message  } = error.response;
+
+            message ? setErrorSubmit(message) : setErrorSubmit('Error submiting comment');
+        }
     }
 
     async function handleDelete(){
@@ -83,7 +87,7 @@ export default function Post(props){
         <ContainerPost>
             {   
                 error ? <AlertBox><span>{error}</span></AlertBox>  : 
-                    <PostBox>
+                    <PostBox className='postBox' >
                         <LikeBox> 
                             <button onClick={ handleLike }>
                                 <IconContext.Provider
@@ -140,11 +144,11 @@ export default function Post(props){
 
                 <Comments id={id}/> 
             </CommentsBox>
-            <div className='aside'>
+            <Aside>
                 {
                     !error && <InfoBox communityId={ data.communityId }/>
                 }
-            </div>
+            </Aside>
         </ContainerPost> 
 
     )
