@@ -7,7 +7,9 @@ import { AlertBox } from "../../components/Alert";
 import Modal from "../../components/modal";
 import { EditProfile } from "../EditProfile/editProfile";
 import { Created, Profile } from './components';
-
+import Loading from "../../components/Loading";
+import { getToken } from "../../storage/utils";
+import { Navigate } from "react-router";
 
 export default function ProfilePage(props){
     
@@ -41,8 +43,13 @@ export default function ProfilePage(props){
         setShowModal(false);
     }
 
+    if(!getToken()) return <Navigate to="/login" replace/>
+
+
     return(
-        loading ? <h1>Loading...</h1> :
+        loading ? <div className ="container-loading">
+            <Loading />
+        </div> :
         <div>
             {
                 error ? <div> <AlertBox><span>{error}</span></AlertBox> </div>  : 

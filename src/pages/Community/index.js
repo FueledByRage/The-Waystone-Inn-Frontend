@@ -6,7 +6,9 @@ import { Container, Main, Aside, Header, StyledButton, ErrorBox } from './compon
 import { AlertBox } from '../../components/Alert';
 import Posts from './posts';
 import FormPost from './formPost';
-
+import Loading from '../../components/Loading';
+import { getToken } from '../../storage/utils';
+import { Navigate } from 'react-router-dom';
 
 
 
@@ -17,7 +19,7 @@ export default function Community(props){
     const [ data, setData ] = useState({})
     const [ subscribed, setSub] = useState(false)
     const { id } = useParams()
-    const [loading, setLoading ] = useState(true)
+    const [ loading, setLoading ] = useState(true)
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -28,12 +30,12 @@ export default function Community(props){
                 });
 
                 if(response.data){
-                    console.log(response.data);
                     setData(response.data);
                     setLoading(false);
-                    setSub(response.data.sub);  
+                    setSub(response.data.sub);
+                    return  
                 }
-                
+                throw new Error('Something went wrong.')
             }catch(error){
                 setErrorData(error.message);
                 setLoading(false);
@@ -45,21 +47,29 @@ export default function Community(props){
 
     async function sub(){
         try {
+            setSub(!subscribed);
             if( !subscribed ){
                 await api.get(`/sub/${id}`);      
             }
             await api.delete(`/sub/delete/${id}`);
             setSub(!subscribed);
         } catch (error) {
+            setSub(!subscribed);
             setError('Error handling you subscribe request');
         }
     }
 
-    if(loading) return(<h1>Loading...</h1>)
+    if(!getToken()) return <Navigate to="/login" replace/>
+
+    if(loading) return(
+        <div className='loading-container' >
+            <Loading />
+        </div>
+    )
     return(
         <>
             <Header>
-                { errorData ? <h1>{errorData}</h1> : <h1>{data.community.name}</h1> }
+                { !errorData ?  <h1>{data.community.name}  </h1> : <></> }
                 <StyledButton className='button' onClick={sub}> 
                     { subscribed ? 'unsub' : 'sub'}
                 </StyledButton>

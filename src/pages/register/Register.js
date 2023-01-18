@@ -31,7 +31,7 @@ export default function Register(){
             const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
             if(!emailRegex.test(email)) return setError('Invalid email');
-
+            setLoading(true);
             const response = await api.post('/user/register', { name, user, email, password })
 
             const { username, token, subs } = response.data
@@ -41,6 +41,7 @@ export default function Register(){
             navigate('/')
         } catch (error) {
             setError(error.response.data)
+            setLoading(false);
         }
 
 

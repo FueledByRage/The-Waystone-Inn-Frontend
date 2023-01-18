@@ -35,18 +35,22 @@ export default function Feed(props){
     },[]);
 
     async function handlePosts(next){
-        const response = await api.get(`/feed/${page + next}/4`)
-        .catch((error)=>setError(error.message));
-        
-        setPosts(response.data['posts']);
-        setPage(page + next);
-        setLastPage(response.data['lastPage']);
+        try {
+            const response = await api.get(`/feed/${page + next}/4`);
+            
+            setPosts(response.data['posts']);
+            setPage(page + next);
+            setLastPage(response.data['lastPage']);            
+        } catch (error) {
+            setError('Error reaching requested data');
+        }
     }
+
 
     return(
         <ContainerFeed>
             { 
-                !loading ? error ? <AlertBox><span>{error}</span></AlertBox> : Array.from(posts).map((post) => 
+                !loading ? error ? <AlertBox><span>{ error }</span></AlertBox> : Array.from(posts).map((post) => 
                         <PostFeed>
                             <PostFeedTitle>
                                 <StyledLink  to={`/post/${post._id}`} >{post.title}</StyledLink> 

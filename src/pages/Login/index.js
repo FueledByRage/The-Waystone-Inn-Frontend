@@ -18,20 +18,19 @@ export default function Login(){
 
     async function handleSubmit(event){
         event.preventDefault()
-
+        
         if(email === '' || password === '') return setError('Missing credentials!')
 
         try{
-        
-        const response = await api.post('/user/login', {email, password})
+            setLoading(true);
+            const response = await api.post('/user/login', {email, password})
 
-        const { username, token } = response.data
-        
+            const { username, token } = response.data
+            
+            setUserSession(token, username)
 
-        setUserSession(token, username)
-
-        navigate('/')
-        window.location.reload()
+            navigate('/')
+            window.location.reload()
         }catch(error){
             setError(error.response.data || error.message)
             setLoading(false)
@@ -62,7 +61,7 @@ export default function Login(){
                 />
                 <label id="label-password">Password</label>
 
-                <button className="button" type="submit">Login</button>
+                <button disabled={loading} className="button" type="submit">Login</button>
 
                 
                 <StyledLink to='/register' >Register</StyledLink>

@@ -14,7 +14,7 @@ export const AlertBox = styled.div`
     padding: 10px;
     width: 60%;
     min-width: 380px;
-    margin-left: 10vw;
+    margin: auto;
     span{
         color: white;
     }

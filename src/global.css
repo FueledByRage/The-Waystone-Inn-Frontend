@@ -27,3 +27,13 @@ body {
     background: gray;
 }
 
+
+
+.loading-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100vw;
+}

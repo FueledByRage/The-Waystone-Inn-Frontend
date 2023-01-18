@@ -17,9 +17,13 @@ export function EditProfile({ profileURL }){
 
     useEffect(()=>{
         async function fetchData(){
-            const response = await api.get(`/user/${user}`).catch((error)=>{ setError(error) })
-            .catch(e => setError(e.response.data))
-            setData(response.data)
+            try {
+                const response = await api.get(`/user/${user}`);
+                setData(response.data)
+                
+            } catch (error) {
+                setError('Error reaching user data');
+            }
         }
         //fetchData();
     },[]);

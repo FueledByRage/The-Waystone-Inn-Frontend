@@ -10,6 +10,7 @@ import { CommentsBox, ContainerPost, StyledLink, StyledFormComment, Aside } from
 import { AlertBox } from '../../components/Alert';
 import { FiThumbsUp, FiThumbsDown, FiTrash } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
+import Loading from '../../components/Loading';
 
 
 
@@ -66,7 +67,10 @@ export default function Post(props){
          navigate(`/community/${response.data.id}/1`);
     }
 
-    if(loading) return ( <h1>Loading...</h1> )
+
+    if(loading) return ( <div className='loading-container' >
+        <Loading />
+    </div> )
 
     async function handleLike(e){
         await api.get(`/like/${id}`).catch(e =>{
