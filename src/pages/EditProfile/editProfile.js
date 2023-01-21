@@ -7,7 +7,7 @@ import { getUser } from "../../storage/utils";
 import { getToken } from "../../storage/utils";
 import './style.css'
 
-export function EditProfile({ profileURL }){
+export function EditProfile({ profileURL, close }){
 
     const [ file, setFile ] = useState();
     const navigate = useNavigate();
@@ -29,13 +29,12 @@ export function EditProfile({ profileURL }){
     },[]);
 
     async function handleSubmit(e){
-
         e.preventDefault();
 
         const formData = new FormData();
         formData.append('file', file);
 
-        await api.put('/user/edit', formData).catch((error)=>{
+        await api.put('/user/update', formData).catch((error)=>{
             setError(error)
         });
     }
