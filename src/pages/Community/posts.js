@@ -24,7 +24,6 @@ export default function Posts( props ) {
             try {                
                 const response = await api.get(`/posts/${id}/${page}/${props.register}`);
 
-
                 if(response.data) {
                     setData(response.data);
                     setLoading(false);
@@ -44,6 +43,9 @@ export default function Posts( props ) {
 
         return `${newDate.getDay()}/${newDate.getMonth()}/${newDate.getFullYear()}`
     }
+
+    
+
     return (
         <PostsContainer>
 
